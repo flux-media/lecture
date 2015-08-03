@@ -1,10 +1,13 @@
-<h1>Signup!</h1>
-
-<%= form_for :user, url: '/users' do |f| %>
-
-  Name: <%= f.text_field :name %>
-  Email: <%= f.text_field :email %>
-  Password: <%= f.password_field :password %>
-  <%= f.submit "Submit" %>
-
+<% content_for :banner do %>
+<div class="form-center">
+<%= form_for :user, url: users_path, html: {class: 'pure-form pure-form-stacked'} do %>
+	<fieldset>
+		<legend>Sign up</legend>
+		Name: <%= text_field_tag :name %>
+	  Email: <%= text_field_tag :email %>
+	  Password: <%= password_field_tag :password %>
+  </fieldset>
+	<%= submit_tag 'Submit', class: 'pure-button pure-button-primary' %>
+<% end %>
+</div>
 <% end %>

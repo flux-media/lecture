@@ -1,0 +1,12 @@
+<% content_for :banner do %>
+<div class="form-center">
+<%= form_tag login_path, class: 'pure-form pure-form-stacked' do %>
+	<fieldset>
+		<legend>Log in</legend>
+		Email: <%= text_field_tag :email %>
+	  Password: <%= password_field_tag :password %>		
+	</fieldset>
+  <%= submit_tag 'Submit', class: 'pure-button pure-button-primary' %>
+<% end %>
+</div>
+<% end %>

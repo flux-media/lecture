@@ -2,7 +2,13 @@ class WelcomeController < ApplicationController
 	def index
 		@programs = Program.all
 
-		@programs.each do |program|
+		@programs.each_with_index do |program, index|
+			if index % 2 === 0
+				program.style_class = 'pricing-table-free'
+			else
+				program.style_class = 'pricing-table-biz'
+			end
+
 			program.courses.each do |course|
 				teachers_array = Array.new
 
