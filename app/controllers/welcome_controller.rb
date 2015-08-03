@@ -25,7 +25,7 @@ class WelcomeController < ApplicationController
 				end
 
 				course.teachers = teachers_array
-				
+
 			end
 		end
 	end
