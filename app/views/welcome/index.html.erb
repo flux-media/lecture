@@ -1,0 +1,19 @@
+<% unless @programs == nil %>
+	<% @programs.each do |program| %>
+		<h1><%= program.name %></h1>
+
+		<% program.courses.each do |course| %>
+			<h2><%= course.name %></h2>
+
+			<p>
+			<% course.teachers.each do |teacher| %>
+				<%= teacher.user.name %>
+			<% end %>
+			</p>
+
+			<% course.lessons.each do |lesson| %>
+				<h3><%= lesson.name %></h3>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
