@@ -15,3 +15,8 @@
 /log/*
 !/log/.keep
 /tmp
+
+# For RubyMine
+/.idea/workspace.xml
+/.idea/tasks.xml
+*.iws
