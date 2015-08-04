@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
 	def new
+    @is_banner_visible = true
   end
 
   def create

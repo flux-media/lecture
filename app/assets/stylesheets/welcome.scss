@@ -49,28 +49,23 @@ p {
  */
 
 .banner {
-    background: transparent url('http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg') 0 0 no-repeat fixed;
     background-size: cover;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg', sizingMethod='scale');
-
     height: 200px;
     width: 100%;
     margin-bottom: 3em;
     display: table;
 }
 
-    .banner-head {
-        display: table-cell;
-        text-align: center;
-        vertical-align: middle;
-        margin-bottom: 0;
-        font-size: 2em;
-        color: white;
-        font-weight: 500;
-        text-shadow: 0 1px 1px black;
-    }
-
-
+.banner-head {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 0;
+    font-size: 2em;
+    color: white;
+    font-weight: 500;
+    text-shadow: 0 1px 1px black;
+}
 
 /*
  * -- PRICING TABLE WRAPPER --
@@ -168,22 +163,11 @@ p {
     border-bottom: 1px solid #e7e7e7;
 }
 
-
 /*
  * -- PRICING TABLE BUTTON --
  * Styles for the "Choose" button at the bottom of a pricing table.
  * This inherits from Pure Button.
  */
-.button-choose {
-    border: 1px solid #ccc;
-    background: #fff;
-    color: #333;
-    border-radius: 2em;
-    font-weight: bold;
-    position: relative;
-    bottom: -1.5em;
-}
-
 .information-head {
     color: black;
     font-weight: 500;
@@ -193,12 +177,11 @@ p {
     background: #111;
     color: #888;
     text-align: center;
-}
-    .footer a {
+
+    a {
         color: #ddd;
     }
-
-
+}
 
 /*
  * -- TABLET MEDIA QUERIES --

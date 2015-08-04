@@ -19,8 +19,8 @@
     <li class="pure-menu-item"><a href="#" class="pure-menu-link">Pricing</a></li>
     <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
     <% if current_user %>
-    <li class="pure-menu-item">Signed in as <%= current_user.name %></li>
-    <li class="pure-menu-item"><%= link_to "Logout", '/logout', {:class => 'pure-menu-link'} %></li>
+    <li class="pure-menu-item float-right"><%= link_to 'Signed in as ' + current_user.name, '#', {:class => 'pure-menu-link'} %></li>
+    <li class="pure-menu-item float-right"><%= link_to 'Logout', logout_path, {:class => 'pure-menu-link'} %></li>
     <% else %>
     <li class="pure-menu-item float-right"><%= link_to 'Sign up', signup_path, {:class => 'pure-menu-link'} %></li>
     <li class="pure-menu-item float-right"><%= link_to 'Log in', login_path, {:class => 'pure-menu-link'} %></li>
@@ -28,9 +28,12 @@
   </ul>
 </div>
 
-<div class="banner">
+<% if @is_banner_visible %>
+<div class="banner" style="background: transparent url('<%= content_for?(:thumbnail_url) ? content_for(:thumbnail_url) : 'http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg' %>') 0 0 no-repeat fixed;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= content_for?(:thumbnail_url) || 'http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg' %>', sizingMethod='scale');">
   <%= content_for :banner %>
 </div>
+<% end %>
 
 <div class="l-content">
   <%= yield %>

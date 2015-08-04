@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def new
-
+    @is_banner_visible = true
   end
 
   private

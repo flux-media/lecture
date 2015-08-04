@@ -13,13 +13,13 @@
 
 	      <ul class="pricing-table-list">
 	      <% program.courses.each do |course| %>
-					<li><span class="span-bold">Course <%= course.id %>: <%= course.name %></span>
+					<li><a href="<%= course_path course.id %>"><span class="span-bold">Course <%= course.id %>: <%= course.name %></span>
 						<span class="span-small">(Teacher: 
 						<% course.teachers.each do |teacher| %>
 							<%= teacher.user.name %>
 						<% end %>
 						)</span>
-					</li>
+					</a></li>
 
 					<% course.lessons.each do |lesson| %>
 						<li>Lesson <%= lesson.id %>: <%= lesson.name %> <span class="span-small"><%=lesson.held_at.strftime("%m/%d/%Y") %></span></li>
@@ -27,7 +27,7 @@
 				<% end %>
         </ul>
 
-				<button class="button-choose pure-button">Choose</button>
+				<button class="pure-button">Choose</button>
 			</div>
 		</div>
 	<% end %>

@@ -1,5 +1,7 @@
 class WelcomeController < ApplicationController
 	def index
+		@is_banner_visible = true
+
 		@programs = Program.all
 
 		@programs.each_with_index do |program, index|
