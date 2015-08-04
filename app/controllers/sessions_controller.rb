@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 	def new
     @is_banner_visible = true
+    @target = params[:target]
   end
 
   def create
@@ -10,7 +11,7 @@ class SessionsController < ApplicationController
       # Save the user id inside the browser cookie. This is how we keep the user 
       # logged in when they navigate around our website.
       session[:user_id] = user.id
-      redirect_to root_path
+      redirect_to root_url + params[:target]
     else
     # If user's login doesn't work, send them back to the login form.
       redirect_to login_path
