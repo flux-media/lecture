@@ -1,0 +1,16 @@
+<h1><%= @user.name %></h1>
+
+<h2>Courses registered</h2>
+<ul>
+  <% unless @user.student.nil? %>
+      <% @user.student.registrations.each do |registration| %>
+          <%= registration.course.name %>
+
+          <% if !current_user.nil? && current_user.id === @user.id %>
+              <%= form_tag delete_registration_path(registration.course.id), class: 'pure-form', method: 'delete' do %>
+                  <%= submit_tag 'Cancel registration', class: 'button-warning pure-button' %>
+              <% end %>
+          <% end %>
+      <% end %>
+  <% end %>
+</ul>

@@ -11,14 +11,13 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
 
   get '/signup' => 'users#new'
-  post '/users' => 'users#create'
 
   get '/courses/:course_id' => 'courses#show', as: :course
   post '/courses/:course_id/register' => 'registration#create', as: :new_registration
   delete '/courses/:course_id/cancel' => 'registration#delete', as: :delete_registration
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  get '/users/:user_id' => 'users#show', as: :show_user
+  post '/users' => 'users#create', as: :new_user
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

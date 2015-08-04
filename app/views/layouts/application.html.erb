@@ -6,7 +6,7 @@
   <title>Lecture</title>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -15,33 +15,38 @@
 <div class="pure-menu pure-menu-horizontal">
   <a href="<%= root_path %>" class="pure-menu-heading"><%= image_tag 'logo.png', {:class => 'logo'} %></a>
   <ul class="pure-menu-list custom-pure-menu-list">
-    <li class="pure-menu-item pure-menu-selected"><a href="<%= root_path %>" class="pure-menu-link">Home</a></li>
-    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Pricing</a></li>
-    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
+    <li class="pure-menu-item pure-menu-selected">
+      <a href="<%= root_path %>" class="pure-menu-link">Home</a></li>
+    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Pricing</a>
+    </li>
+    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a>
+    </li>
     <% if current_user %>
-    <li class="pure-menu-item float-right"><%= link_to 'Signed in as ' + current_user.name, '#', {:class => 'pure-menu-link'} %></li>
-    <li class="pure-menu-item float-right"><%= link_to 'Logout', logout_path, {:class => 'pure-menu-link'} %></li>
+        <li class="pure-menu-item float-right"><%= link_to 'Signed in as ' + current_user.name, show_user_path(current_user.id), {:class => 'pure-menu-link'} %></li>
+        <li class="pure-menu-item float-right"><%= link_to 'Logout', logout_path, {:class => 'pure-menu-link'} %></li>
     <% else %>
-    <li class="pure-menu-item float-right"><%= link_to 'Sign up', signup_path, {:class => 'pure-menu-link'} %></li>
-    <li class="pure-menu-item float-right"><%= link_to 'Log in', login_path, {:class => 'pure-menu-link'} %></li>
+        <li class="pure-menu-item float-right"><%= link_to 'Sign up', signup_path, {:class => 'pure-menu-link'} %></li>
+        <li class="pure-menu-item float-right"><%= link_to 'Log in', login_path, {:class => 'pure-menu-link'} %></li>
     <% end %>
   </ul>
 </div>
 
 <% if @is_banner_visible %>
-<div class="banner" style="background: transparent url('<%= content_for?(:thumbnail_url) ? content_for(:thumbnail_url) : 'http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg' %>') 0 0 no-repeat fixed;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= content_for?(:thumbnail_url) || 'http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg' %>', sizingMethod='scale');">
-  <%= content_for :banner %>
-</div>
+    <div class="banner" style="background: transparent url('<%= content_for?(:thumbnail_url) ? content_for(:thumbnail_url) : 'http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg' %>') 0 0 no-repeat fixed;
+            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= content_for?(:thumbnail_url) || 'http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg' %>', sizingMethod='scale');">
+      <%= content_for :banner %>
+    </div>
 <% end %>
 
 <div class="l-content">
   <%= yield %>
-</div> <!-- end l-content -->
+</div>
+<!-- end l-content -->
 
 <div class="footer l-box">
   <p>
-    <a href="#">Try now</a> for 14 days. No credit card required. Header image courtesy of <a href='http://unsplash.com/'>Unsplash</a>.
+    <a href="#">Try now</a> for 14 days. No credit card required. Header image
+    courtesy of <a href='http://unsplash.com/'>Unsplash</a>.
   </p>
 </div>
 

@@ -1,6 +1,7 @@
 <% content_for :banner do %>
 <div class="form-center">
-<%= form_for :user, url: users_path, html: {class: 'pure-form pure-form-stacked'} do %>
+<%= form_for :user, url: new_user_path, html: {class: 'pure-form
+pure-form-stacked'} do %>
 	<fieldset>
 		<legend>Sign up</legend>
 		Name: <%= text_field_tag :name %>

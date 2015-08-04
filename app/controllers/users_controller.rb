@@ -15,6 +15,10 @@ class UsersController < ApplicationController
     @is_banner_visible = true
   end
 
+  def show
+    @user = User.find(params[:user_id])
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password)
