@@ -22,6 +22,9 @@
     <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a>
     </li>
     <% if current_user %>
+        <% if is_admin %>
+            <li class="pure-menu-item float-right"><%= link_to 'Admin', admin_path, {:class => 'pure-menu-link'} %></li>
+        <% end %>
         <li class="pure-menu-item float-right"><%= link_to 'Signed in as ' + current_user.name, show_user_path(current_user.id), {:class => 'pure-menu-link'} %></li>
         <li class="pure-menu-item float-right"><%= link_to 'Logout', logout_path, {:class => 'pure-menu-link'} %></li>
     <% else %>

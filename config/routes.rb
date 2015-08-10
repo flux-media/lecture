@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'admin/index'
+
   get 'registration/new'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -18,6 +20,8 @@ Rails.application.routes.draw do
 
   get '/users/:user_id' => 'users#show', as: :show_user
   post '/users' => 'users#create', as: :new_user
+
+  get '/admin' => 'admin#index', as: :admin
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

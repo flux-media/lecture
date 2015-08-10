@@ -2,7 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 User.create(email: 'test1@test.com', password: 'test1', name: 'Teacher1')
-User.create(email: 'test2@test.com', password: 'test2', name: 'Student1')
+User.create(email: 'test2@test.com', password: 'test2', name: 'Student1', is_admin: true)
 Teacher.create(description: 'I\'m a teacher.', user_id: 1)
 Student.create(user_id: 2)
 
