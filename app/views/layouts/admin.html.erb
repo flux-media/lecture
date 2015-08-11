@@ -25,6 +25,7 @@
       <ul class="pure-menu-list">
         <% if is_admin %>
             <li class="pure-menu-item"><%= link_to 'Home', admin_path, {class: 'pure-menu-link'} %></li>
+            <li class="pure-menu-item"><%= link_to 'Programs', admin_program_path, {class: 'pure-menu-link'} %></li>
             <li class="pure-menu-item"><%= link_to 'Logout', logout_path, {:class => 'pure-menu-link'} %></li>
         <% end %>
       </ul>

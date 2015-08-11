@@ -22,6 +22,12 @@ Rails.application.routes.draw do
   post '/users' => 'users#create', as: :new_user
 
   get '/admin' => 'admin#index', as: :admin
+  get '/admin/programs' => 'program#index', as: :admin_program
+  get '/admin/programs/new' => 'program#new'
+  get '/admin/programs/edit/:id' => 'program#edit', as: :admin_edit_program
+  post '/admin/programs/new' => 'program#create'
+  delete '/admin/programs/:id' => 'program#delete', as: :admin_delete_program
+  patch '/admin/programs/new' => 'program#update'
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
