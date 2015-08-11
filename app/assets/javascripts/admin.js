@@ -1,7 +1,10 @@
-(function (window, document) {
+//= require jquery
 
-    var layout   = document.getElementById('layout'),
-        menu     = document.getElementById('menu'),
+var ready;
+ready = function () {
+
+    var layout = document.getElementById('layout'),
+        menu = document.getElementById('menu'),
         menuLink = document.getElementById('menuLink');
 
     function toggleClass(element, className) {
@@ -9,7 +12,7 @@
             length = classes.length,
             i = 0;
 
-        for(; i < length; i++) {
+        for (; i < length; i++) {
             if (classes[i] === className) {
                 classes.splice(i, 1);
                 break;
@@ -31,5 +34,7 @@
         toggleClass(menu, active);
         toggleClass(menuLink, active);
     };
+};
 
-}(this, this.document));
+$(document).ready(ready);
+$(document).on('page:load', ready);

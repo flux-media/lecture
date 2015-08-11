@@ -1,0 +1,15 @@
+<%= form_for @user,
+             url: {action: action},
+             html: {class: 'pure-form pure-form-stacked'} do |f| %>
+    <fieldset>
+      <legend><%= action %></legend>
+      <%= f.hidden_field :id %>
+      Name: <%= f.text_field :name %>
+      Email: <%= f.text_field :email %>
+      Password: <%= password_field_tag :password %>
+      <label for="is_admin" class="pure-checkbox">
+        <%= f.check_box :is_admin, {}, 'true', 'false' %> Admin
+      </label>
+    </fieldset>
+    <%= submit_tag 'Submit', class: 'pure-button pure-button-primary' %>
+<% end %>

@@ -52,6 +52,15 @@ Rails.application.routes.draw do
          as: :admin_delete_lesson
   patch '/admin/lessons/new' => 'lessons#update'
 
+  get '/admin/users' => 'users#index', as: :admin_user
+  get '/admin/users/new' => 'users#new'
+  get '/admin/users/edit/:id' => 'users#edit',
+      as: :admin_edit_user
+  post '/admin/users/new' => 'users#create'
+  delete '/admin/users/:id' => 'users#delete',
+         as: :admin_delete_user
+  patch '/admin/users/new' => 'users#update'
+
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 

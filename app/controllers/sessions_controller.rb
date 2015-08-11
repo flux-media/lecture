@@ -18,7 +18,11 @@ class SessionsController < ApplicationController
       end
     else
       # If user's login doesn't work, send them back to the login form.
-      redirect_to login_path
+      if request.referer.to_s.include? 'admin'
+        redirect_to admin_path
+      else
+        redirect_to login_path
+      end
     end
   end
 
