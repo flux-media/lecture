@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
 
   get '/courses/:course_id' => 'courses#show', as: :course
-  post '/courses/:course_id/register' => 'registration#create', as: :new_registration
-  delete '/courses/:course_id/cancel' => 'registration#delete', as: :delete_registration
+  post '/courses/:course_id/register' => 'registrations#create',
+       as: :new_registration
+  delete '/courses/:course_id/cancel' => 'registrations#delete',
+         as: :delete_registration
 
   get '/users/:user_id' => 'users#show', as: :show_user
   post '/users' => 'users#create', as: :new_user

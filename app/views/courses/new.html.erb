@@ -8,3 +8,35 @@
     </fieldset>
     <%= submit_tag action, class: 'pure-button pure-button-primary' %>
 <% end %>
+
+<table class="pure-table">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>User</th>
+    <th>Date</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if @course.registrations.count > 0 %>
+      <% @course.registrations.each do |registration| %>
+          <tr>
+            <td><%= registration.id %></td>
+            <td><%= link_to registration.student.user.name, admin_edit_user_path(registration.student.user.id) %></td>
+            <td><%= registration.created_at %></td>
+            <td>
+              <%= form_tag delete_registration_path(@course.id), class: 'pure-form', method: 'delete' do %>
+                  <%= submit_tag 'Cancel registration', class: 'button-warning pure-button' %>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+  <% else %>
+      <tr>
+        <td colspan="4">No registration yet.</td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

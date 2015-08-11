@@ -30,6 +30,10 @@ class RegistrationsController < ApplicationController
       end
     end
 
-    redirect_to course_path course_id
+    if is_admin
+      redirect_to admin_edit_course_path course_id
+    else
+      redirect_to course_path course_id
+    end
   end
 end
