@@ -1,0 +1,10 @@
+<%= form_for @course, url: {action: 'create'}, html: {class: 'pure-form pure-form-stacked'} do |f| %>
+    <fieldset>
+      <legend>
+        <%= action %> course
+      </legend>
+      Name: <%= f.text_field :name %>
+      <%= f.hidden_field :id %>
+    </fieldset>
+    <%= submit_tag action, class: 'pure-button pure-button-primary' %>
+<% end %>

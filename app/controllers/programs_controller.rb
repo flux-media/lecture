@@ -1,9 +1,9 @@
-class ProgramController < ApplicationController
+class ProgramsController < ApplicationController
   before_action :check_admin
 
   def create
     program = Program.new
-    program.name = params[:name]
+    program.name = params[:program][:name]
     if program.save
       redirect_to admin_program_path
     end
@@ -20,17 +20,18 @@ class ProgramController < ApplicationController
 
   def edit
     @program = Program.find(params[:id])
-    render template: 'program/new',
+    render template: 'programs/new',
            :layout => 'admin',
            :locals => {:action => 'Update'}
   end
 
   def index
     @programs = Program.all
-    render template: 'program/index', :layout => 'admin'
+    render template: 'programs/index', :layout => 'admin'
   end
 
   def new
+    @program = Program.new
     render :layout => 'admin',
            :locals => {:action => 'Create'}
   end
@@ -40,13 +41,6 @@ class ProgramController < ApplicationController
     program.name = params[:program][:name]
     if program.save
       redirect_to admin_edit_program_path program.id
-    end
-  end
-
-  private
-  def check_admin
-    unless is_admin
-      redirect_to root_path
     end
   end
 end

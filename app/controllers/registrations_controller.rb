@@ -1,4 +1,4 @@
-class RegistrationController < ApplicationController
+class RegistrationsController < ApplicationController
   def create
     course_id = params[:course_id]
 

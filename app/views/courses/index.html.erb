@@ -1,0 +1,25 @@
+<%= link_to 'New', admin_courses_new_path, {class: 'pure-button'} %>
+
+<table class="pure-table">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.id %></td>
+        <td><%= link_to course.name, admin_edit_course_path(course.id) %></td>
+        <td>
+          <%= form_tag admin_delete_course_path(course.id), {method: 'delete'} do %>
+              <%= submit_tag 'Delete', {class: 'pure-button'} %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

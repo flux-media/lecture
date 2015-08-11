@@ -12,5 +12,11 @@ class ApplicationController < ActionController::Base
     current_user != nil && current_user.is_admin === true
   end
 
+  def check_admin
+    unless is_admin
+      redirect_to root_path
+    end
+  end
+
   helper_method :current_user, :is_admin
 end

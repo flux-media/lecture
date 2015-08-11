@@ -21,13 +21,27 @@ Rails.application.routes.draw do
   get '/users/:user_id' => 'users#show', as: :show_user
   post '/users' => 'users#create', as: :new_user
 
+  # Paths related to admin
+
   get '/admin' => 'admin#index', as: :admin
-  get '/admin/programs' => 'program#index', as: :admin_program
-  get '/admin/programs/new' => 'program#new'
-  get '/admin/programs/edit/:id' => 'program#edit', as: :admin_edit_program
-  post '/admin/programs/new' => 'program#create'
-  delete '/admin/programs/:id' => 'program#delete', as: :admin_delete_program
-  patch '/admin/programs/new' => 'program#update'
+
+  get '/admin/programs' => 'programs#index', as: :admin_program
+  get '/admin/programs/new' => 'programs#new'
+  get '/admin/programs/edit/:id' => 'programs#edit',
+      as: :admin_edit_program
+  post '/admin/programs/new' => 'programs#create'
+  delete '/admin/programs/:id' => 'programs#delete',
+         as: :admin_delete_program
+  patch '/admin/programs/new' => 'programs#update'
+
+  get '/admin/courses' => 'courses#index', as: :admin_course
+  get '/admin/courses/new' => 'courses#new'
+  get '/admin/courses/edit/:id' => 'courses#edit',
+      as: :admin_edit_course
+  post '/admin/courses/new' => 'courses#create'
+  delete '/admin/courses/:id' => 'courses#delete',
+         as: :admin_delete_course
+  patch '/admin/courses/new' => 'courses#update'
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
