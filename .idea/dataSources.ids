@@ -36,6 +36,7 @@
     <table name="programs" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="name" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="is_public" sqlType="BOOLEAN" precision="2000000000" scale="10" nullable="true" jdbcType="4" def="J2Yn"/>
       <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
@@ -80,6 +81,7 @@
       <column name="email" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="password_digest" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="name" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="is_admin" sqlType="BOOLEAN" precision="2000000000" scale="10" nullable="true" jdbcType="4" def="J2Yn"/>
       <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>

@@ -10,10 +10,14 @@ Program.create(name: 'Do something valuable.')
 Program.create(name: 'Don\'t do something bad.')
 
 # TODO: Update thumbnail with the uploaded image
-Course.create(name: 'Write something.', detail: 'Blah blah blah', thumbnail: 'http://flux-media.github.io/assets/background.jpg')
-Course.create(name: 'Ride something.', detail: 'Blah blah blah', thumbnail: 'http://flux-media.github.io/assets/background.jpg')
-Course.create(name: 'Stop smoking.', detail: 'Blah blah blah', thumbnail: 'http://flux-media.github.io/assets/background.jpg')
-Course.create(name: 'Stop drinking.', detail: 'Blah blah blah', thumbnail: 'http://flux-media.github.io/assets/background.jpg')
+Course.create(name: 'Write something.', detail: 'Blah blah blah',
+              thumbnail: 'http://flux-media.github.io/assets/background.jpg')
+Course.create(name: 'Ride something.', detail: 'Blah blah blah',
+              thumbnail: 'http://flux-media.github.io/assets/background.jpg')
+Course.create(name: 'Stop smoking.', detail: 'Blah blah blah',
+              thumbnail: 'http://flux-media.github.io/assets/background.jpg')
+Course.create(name: 'Stop drinking.', detail: 'Blah blah blah',
+              thumbnail: 'http://flux-media.github.io/assets/background.jpg')
 
 CoursesProgram.create(program_id: 1, course_id: 1)
 CoursesProgram.create(program_id: 1, course_id: 2)
