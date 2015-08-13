@@ -16,10 +16,10 @@
   <a href="<%= root_path %>" class="pure-menu-heading"><%= image_tag 'logo.png', {:class => 'logo'} %></a>
   <ul class="pure-menu-list custom-pure-menu-list">
     <li class="pure-menu-item pure-menu-selected">
-      <a href="<%= root_path %>" class="pure-menu-link">Home</a></li>
-    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Pricing</a>
+      <%= link_to 'Home', root_path, {class: 'pure-menu-link'} %>
     </li>
-    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a>
+    <li class="pure-menu-item">
+      <%= link_to 'Courses', courses_path, {class: 'pure-menu-link'} %>
     </li>
     <% if current_user %>
         <% if is_admin %>

@@ -1,25 +1,44 @@
-<%= link_to 'New', admin_courses_new_path, {class: 'pure-button'} %>
-
 <table class="pure-table">
   <thead>
   <tr>
-    <th>#</th>
-    <th>Name</th>
-    <th></th>
+    <th>카테고리</th>
+    <th>대주제</th>
+    <th>번호</th>
+    <th>소주제</th>
+    <th>강연자</th>
+    <th>강연자 이력</th>
   </tr>
   </thead>
 
   <tbody>
-  <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.id %></td>
-        <td><%= link_to course.name, admin_edit_course_path(course.id) %></td>
-        <td>
-          <%= form_tag admin_delete_course_path(course.id), {method: 'delete'} do %>
-              <%= submit_tag 'Delete', {class: 'pure-button'} %>
+  <% last_category_id = -1 %>
+  <% last_program_id = -1 %>
+  <% @categories.each do |category| %>
+      <% category.programs.each do |program| %>
+          <% program.courses.each do |course| %>
+              <tr>
+                <% if last_category_id != category.id %>
+                    <% last_category_id = category.id %>
+                    <td rowspan="<%= category.courses_count %>"><%= category.name %></td>
+                <% end %>
+                <% if last_program_id != program.id %>
+                    <% last_program_id = program.id %>
+                    <td rowspan="<%= program.courses.count %>"><%= program.name %></td>
+                <% end %>
+                <td><%= course.id %></td>
+                <td><%= course.name %></td>
+                <td>
+                  <% course.teachers.each do |teacher| %><%= teacher.user.name %>
+                  <% end %>
+                </td>
+                <td>
+                  <% course.teachers.each do |teacher| %><%= teacher.description %>
+                  <% end %>
+                </td>
+              </tr>
           <% end %>
-        </td>
-      </tr>
+      <% end %>
+
   <% end %>
   </tbody>
 </table>

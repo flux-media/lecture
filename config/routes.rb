@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get '/signup' => 'users#new'
 
+  get '/courses' => 'courses#index', as: :courses
   get '/courses/:course_id' => 'courses#show', as: :course
   post '/courses/:course_id/register' => 'registrations#create',
        as: :new_registration

@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :check_admin, :only => :index
+  before_action :check_admin, :only => [:create, :delete, :edit, :new, :update]
 
   def create
     course = Course.new
@@ -26,8 +26,44 @@ class CoursesController < ApplicationController
   end
 
   def index
-    @courses = Course.all
-    render template: 'courses/index', :layout => 'admin'
+    if is_admin
+      @courses = Course.all
+      render template: 'courses/admin_index', :layout => 'admin'
+    else
+      @categories = Category.all
+
+      @categories.each do |category|
+        courses_count = 0
+        category.programs.each do |program|
+          program.courses.each do |course|
+            courses_count += 1
+            teachers_array = Array.new
+
+            course.lessons.each do |lesson|
+              lesson.teachers.each do |teacher|
+                is_in_array = false
+
+                teachers_array.each do |teacher_in_array|
+                  if teacher_in_array.id === teacher.id
+                    is_in_array = true
+                  end
+                end
+
+                unless is_in_array
+                  teachers_array.push(teacher)
+                end
+              end
+            end
+
+            course.teachers = teachers_array
+          end
+        end
+
+        category.courses_count = courses_count
+      end
+
+      render template: 'courses/index'
+    end
   end
 
   def new

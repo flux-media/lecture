@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804113858) do
+ActiveRecord::Schema.define(version: 20150813005834) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string   "name",       null: false
@@ -46,11 +52,14 @@ ActiveRecord::Schema.define(version: 20150804113858) do
   add_index "lessons_teachers", ["lesson_id", "teacher_id"], name: "index_lessons_teachers_on_lesson_id_and_teacher_id"
 
   create_table "programs", force: :cascade do |t|
-    t.string   "name",                       null: false
-    t.boolean  "is_public",  default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "name",                        null: false
+    t.boolean  "is_public",   default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "category_id",                 null: false
   end
+
+  add_index "programs", ["category_id"], name: "index_programs_on_category_id"
 
   create_table "registrations", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -80,8 +89,8 @@ ActiveRecord::Schema.define(version: 20150804113858) do
   add_index "teachers", ["user_id"], name: "index_teachers_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                           null: false
-    t.string   "password_digest",                 null: false
+    t.string   "email"
+    t.string   "password_digest"
     t.string   "name",                            null: false
     t.boolean  "is_admin",        default: false
     t.datetime "created_at",                      null: false

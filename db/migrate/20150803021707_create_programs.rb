@@ -6,5 +6,8 @@ class CreatePrograms < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_reference :programs, :category, index: true, foreign_key: true
+    change_column :programs, :category_id, :integer, :null => false
   end
 end
