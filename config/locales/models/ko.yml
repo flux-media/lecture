@@ -1,0 +1,16 @@
+ko:
+  activerecord:
+    models:
+      teacher: '강사'
+      user: '회원'
+    attributes:
+      user:
+        name: '이름'
+        email: '이메일'
+        password: '비밀번호'
+        is_admin: '관리자'
+        is_student: '학생'
+        is_teacher: '강사'
+
+      teacher:
+        description: '소개'

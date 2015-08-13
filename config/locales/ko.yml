@@ -6,10 +6,6 @@
 #
 #     I18n.t 'hello'
 #
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
 # To use a different locale, set it with `I18n.locale`:
 #
 #     I18n.locale = :es
@@ -19,5 +15,24 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+ko:
+  site_name: "어벤저스쿨"
+
+  admin_main: "처음"
+  users: "회원"
+  programs: "소주제"
+  courses: "강의"
+  lessons: "소강의"
+  logout: "로그아웃"
+  list: "목록"
+  add_new_user: "새 회원 추가"
+  email: "이메일"
+  name: "이름"
+  teacher: "강사"
+  student: "학생"
+  joined_at: "가입일"
+  manage: "관리"
+  update: "수정"
+  delete: "삭제"
+  create: "추가"
+  submit: "제출"

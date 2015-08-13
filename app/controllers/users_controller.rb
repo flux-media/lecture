@@ -90,6 +90,40 @@ class UsersController < ApplicationController
       user.is_admin = params[:user][:is_admin]
     end
 
+    if params[:user][:is_teacher] == 'true'
+      if user.teacher.nil?
+        user.teacher = Teacher.new
+      end
+
+      user.teacher.description = params[:teacher_description]
+
+      if user.teacher.save
+        # Good!
+      end
+    else
+      unless user.teacher.nil?
+        if user.teacher.destroy
+          # Good!
+        end
+      end
+    end
+
+    if params[:user][:is_student] == 'true'
+      if user.student.nil?
+        user.student = Student.new
+      end
+
+      if user.student.save
+        # Good!
+      end
+    else
+      unless user.student.nil?
+        if user.student.destroy
+          # Good!
+        end
+      end
+    end
+
     if user.save
       redirect_to admin_edit_user_path user.id
     end

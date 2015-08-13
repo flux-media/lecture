@@ -1,11 +1,20 @@
-<%= link_to 'New', admin_users_new_path, {class: 'pure-button'} %>
+<% admin_title(t('users')) %>
+<% admin_subtitle(t('list')) %>
+
+<div class="new-entry-wrapper">
+  <%= link_to t('add_new_user'), admin_users_new_path, {class: 'pure-button'} %>
+</div>
 
 <table class="pure-table">
   <thead>
   <tr>
     <th>#</th>
-    <th>Name</th>
-    <th></th>
+    <th><%= t('email') %></th>
+    <th><%= t('name') %></th>
+    <th><%= t('teacher') %></th>
+    <th><%= t('student') %></th>
+    <th><%= t('joined_at') %></th>
+    <th><%= t('manage') %></th>
   </tr>
   </thead>
 
@@ -13,10 +22,16 @@
   <% @users.each do |user| %>
       <tr>
         <td><%= user.id %></td>
-        <td><%= link_to user.name, admin_edit_user_path(user.id) %></td>
+        <td><%= mail_to user.email %></td>
+        <!-- TODO: Move to "public" individual user page -->
+        <td><%= user.name %></td>
+        <td><%= user.teacher.nil? ? 'X' : 'O' %></td>
+        <td><%= user.student.nil? ? 'X' : 'O' %></td>
+        <td><%= user.created_at.strftime("%m/%d/%Y") %></td>
         <td>
-          <%= form_tag admin_delete_user_path(user.id), {method: 'delete'} do %>
-              <%= submit_tag 'Delete', {class: 'pure-button'} %>
+          <%= link_to t('update'), admin_edit_user_path(user.id), {class: 'pure-button'} %>
+          <%= form_tag admin_delete_user_path(user.id), {method: 'delete', class: 'inline-form'} do %>
+              <%= submit_tag t('delete'), {class: 'pure-button'} %>
           <% end %>
         </td>
       </tr>
