@@ -7,5 +7,8 @@ class CreateCourses < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_reference :courses, :program, index: true, foreign_key: true
+    change_column :courses, :program_id, :integer, :null => false
   end
 end

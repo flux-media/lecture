@@ -2,11 +2,15 @@ ko:
   activerecord:
     models:
       category: '대주제'
+      course: '강연'
       program: '소주제'
       teacher: '강사'
       user: '회원'
     attributes:
       category:
+        name: '제목'
+
+      course:
         name: '제목'
 
       program:

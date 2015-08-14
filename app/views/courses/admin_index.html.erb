@@ -1,11 +1,18 @@
-<%= link_to 'New', admin_courses_new_path, {class: 'pure-button'} %>
+<% admin_title(Course.model_name.human) %>
+<% admin_subtitle(t('list')) %>
+
+<div class="new-entry-wrapper">
+  <%= link_to t('add_new_course'), admin_courses_new_path, {class: 'pure-button'} %>
+</div>
 
 <table class="pure-table">
   <thead>
   <tr>
     <th>#</th>
-    <th>Name</th>
-    <th></th>
+    <th><%= Course.human_attribute_name('name') %></th>
+    <th><%= Teacher.model_name.human %></th>
+    <th><%= Program.model_name.human %></th>
+    <th><%= t('manage') %></th>
   </tr>
   </thead>
 
@@ -13,10 +20,23 @@
   <% @courses.each do |course| %>
       <tr>
         <td><%= course.id %></td>
-        <td><%= link_to course.name, admin_edit_course_path(course.id) %></td>
+        <td><%= course.name %></td>
         <td>
-          <%= form_tag admin_delete_course_path(course.id), {method: 'delete'} do %>
-              <%= submit_tag 'Delete', {class: 'pure-button'} %>
+          <% unless course.teachers.nil? %>
+              <% course.teachers.each do |teacher| %>
+                  <%= teacher.user.name %>
+              <% end %>
+          <% end %>
+        </td>
+        <td><%= course.program.name %></td>
+        <td>
+          <%= link_to t('update'),
+                      admin_edit_course_path(course.id),
+                      {class: 'pure-button'} %>
+          <%= form_tag admin_delete_course_path(course.id),
+                       {method: 'delete',
+                        class: 'inline-form'} do %>
+              <%= submit_tag t('delete'), {class: 'pure-button'} %>
           <% end %>
         </td>
       </tr>

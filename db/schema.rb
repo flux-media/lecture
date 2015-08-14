@@ -25,14 +25,10 @@ ActiveRecord::Schema.define(version: 20150813005834) do
     t.string   "thumbnail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "program_id", null: false
   end
 
-  create_table "courses_programs", id: false, force: :cascade do |t|
-    t.integer "program_id"
-    t.integer "course_id"
-  end
-
-  add_index "courses_programs", ["course_id", "program_id"], name: "index_courses_programs_on_course_id_and_program_id"
+  add_index "courses", ["program_id"], name: "index_courses_on_program_id"
 
   create_table "lessons", force: :cascade do |t|
     t.string   "name",       null: false

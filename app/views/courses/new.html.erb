@@ -1,42 +1,60 @@
-<%= form_for @course, url: {action: 'create'}, html: {class: 'pure-form pure-form-stacked'} do |f| %>
+<% admin_title(Course.model_name.human) %>
+<% admin_subtitle(t(action)) %>
+
+<%= form_for @course,
+             url: {action: action},
+             html: {class: 'pure-form pure-form-stacked'} do |f| %>
     <fieldset>
-      <legend>
-        <%= action %> course
-      </legend>
-      Name: <%= f.text_field :name %>
       <%= f.hidden_field :id %>
+
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= Course.human_attribute_name('name') %>
+          <%= f.text_field :name %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= Program.model_name.human %>
+          <%= select_tag :program,
+                         options_from_collection_for_select(
+                                 programs, 'id', 'name',
+                                 @course.program.nil? ? programs.first.id :
+                                         @course.program.id) %>
+        </div>
+      </div>
     </fieldset>
-    <%= submit_tag action, class: 'pure-button pure-button-primary' %>
+    <%= submit_tag t('submit'), class: 'pure-button pure-button-primary' %>
 <% end %>
 
-<table class="pure-table">
-  <thead>
-  <tr>
-    <th>#</th>
-    <th>User</th>
-    <th>Date</th>
-    <th></th>
-  </tr>
-  </thead>
+<% if action.equal? 'update' %>
+    <table class="pure-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>User</th>
+        <th>Date</th>
+        <th></th>
+      </tr>
+      </thead>
 
-  <tbody>
-  <% if @course.registrations.count > 0 %>
-      <% @course.registrations.each do |registration| %>
+      <tbody>
+      <% if @course.registrations.count > 0 %>
+          <% @course.registrations.each do |registration| %>
+              <tr>
+                <td><%= registration.id %></td>
+                <td><%= link_to registration.student.user.name, admin_edit_user_path(registration.student.user.id) %></td>
+                <td><%= registration.created_at %></td>
+                <td>
+                  <%= form_tag delete_registration_path(@course.id), class: 'pure-form', method: 'delete' do %>
+                      <%= submit_tag 'Cancel registration', class: 'button-warning pure-button' %>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+      <% else %>
           <tr>
-            <td><%= registration.id %></td>
-            <td><%= link_to registration.student.user.name, admin_edit_user_path(registration.student.user.id) %></td>
-            <td><%= registration.created_at %></td>
-            <td>
-              <%= form_tag delete_registration_path(@course.id), class: 'pure-form', method: 'delete' do %>
-                  <%= submit_tag 'Cancel registration', class: 'button-warning pure-button' %>
-              <% end %>
-            </td>
+            <td colspan="4">No registration yet.</td>
           </tr>
       <% end %>
-  <% else %>
-      <tr>
-        <td colspan="4">No registration yet.</td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+<% end %>

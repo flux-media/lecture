@@ -4,6 +4,8 @@ class CoursesController < ApplicationController
   def create
     course = Course.new
     course.name = params[:course][:name]
+    course.program = Program.find(params[:program])
+    
     if course.save
       redirect_to admin_course_path
     end
@@ -22,12 +24,37 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     render template: 'courses/new',
            :layout => 'admin',
-           :locals => {:action => 'Update'}
+           :locals => {:action => 'create',
+                       :programs => Program.all}
   end
 
   def index
     if is_admin
       @courses = Course.all
+
+      @courses.each do |course|
+        teachers_array = Array.new
+        course.lessons.each do |lesson|
+          lesson.teachers.each do |teacher|
+
+            is_in_array = false
+
+            teachers_array.each do |teacher_in_array|
+              if teacher_in_array.id === teacher.id
+                is_in_array = true
+              end
+            end
+
+            unless is_in_array
+              teachers_array.push(teacher)
+            end
+
+          end
+        end
+
+        course.teachers = teachers_array
+      end
+
       render template: 'courses/admin_index', :layout => 'admin'
     else
       @categories = Category.all
@@ -69,7 +96,8 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
     render :layout => 'admin',
-           :locals => {:action => 'Create'}
+           :locals => {:action => 'create',
+                       :programs => Program.all}
   end
 
   def show
@@ -112,6 +140,8 @@ class CoursesController < ApplicationController
   def update
     course = Course.find(params[:course][:id])
     course.name = params[:course][:name]
+    course.program = Program.find(params[:program])
+
     if course.save
       redirect_to admin_edit_course_path course.id
     end
