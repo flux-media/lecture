@@ -4,6 +4,13 @@
     <database-info product="SQLite" version="3.8.9" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
     <schema name="" catalog=""/>
+    <table name="categories" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
     <table name="courses" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="name" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
@@ -39,7 +46,9 @@
       <column name="is_public" sqlType="BOOLEAN" precision="2000000000" scale="10" nullable="true" jdbcType="4" def="J2Yn"/>
       <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="category_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
+      <index name="index_programs_on_category_id" unique="true" columns="category_id"/>
     </table>
     <table name="registrations" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -78,8 +87,8 @@
     </table>
     <table name="users" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="email" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="password_digest" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="password_digest" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <column name="name" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="is_admin" sqlType="BOOLEAN" precision="2000000000" scale="10" nullable="true" jdbcType="4" def="J2Yn"/>
       <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>

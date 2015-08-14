@@ -1,11 +1,16 @@
-<%= link_to 'New', admin_programs_new_path, {class: 'pure-button'} %>
+<% admin_title(Program.model_name.human) %>
+<% admin_subtitle(t('list')) %>
+
+<div class="new-entry-wrapper">
+  <%= link_to t('add_new_program'), admin_programs_new_path, {class: 'pure-button'} %>
+</div>
 
 <table class="pure-table">
   <thead>
   <tr>
     <th>#</th>
-    <th>Name</th>
-    <th></th>
+    <th><%= Program.human_attribute_name('name') %></th>
+    <th><%= t('manage') %></th>
   </tr>
   </thead>
 
@@ -13,10 +18,11 @@
   <% @programs.each do |program| %>
       <tr>
         <td><%= program.id %></td>
-        <td><%= link_to program.name, admin_edit_program_path(program.id) %></td>
+        <td><%= program.name %></td>
         <td>
-          <%= form_tag admin_delete_program_path(program.id), {method: 'delete'} do %>
-              <%= submit_tag 'Delete', {class: 'pure-button'} %>
+          <%= link_to t('update'), admin_edit_program_path(program.id), {class: 'pure-button'} %>
+          <%= form_tag admin_delete_program_path(program.id), {method: 'delete', class:'inline-form'} do %>
+              <%= submit_tag t('delete'), {class: 'pure-button'} %>
           <% end %>
         </td>
       </tr>

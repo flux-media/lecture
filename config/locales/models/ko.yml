@@ -1,9 +1,17 @@
 ko:
   activerecord:
     models:
+      category: '대주제'
+      program: '소주제'
       teacher: '강사'
       user: '회원'
     attributes:
+      program:
+        name: '제목'
+
+      teacher:
+        description: '소개'
+
       user:
         name: '이름'
         email: '이메일'
@@ -11,6 +19,5 @@ ko:
         is_admin: '관리자'
         is_student: '학생'
         is_teacher: '강사'
+        created_at: '가입일'
 
-      teacher:
-        description: '소개'

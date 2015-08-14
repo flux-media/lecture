@@ -4,6 +4,7 @@ class ProgramsController < ApplicationController
   def create
     program = Program.new
     program.name = params[:program][:name]
+    program.category = Category.find(params[:category])
     if program.save
       redirect_to admin_program_path
     end
@@ -22,7 +23,8 @@ class ProgramsController < ApplicationController
     @program = Program.find(params[:id])
     render template: 'programs/new',
            :layout => 'admin',
-           :locals => {:action => 'Update'}
+           :locals => {:action => 'update',
+                       :categories => Category.all}
   end
 
   def index
@@ -33,12 +35,14 @@ class ProgramsController < ApplicationController
   def new
     @program = Program.new
     render :layout => 'admin',
-           :locals => {:action => 'Create'}
+           :locals => {:action => 'create',
+                       :categories => Category.all}
   end
 
   def update
     program = Program.find(params[:program][:id])
     program.name = params[:program][:name]
+    program.category = Category.find(params[:category])
     if program.save
       redirect_to admin_edit_program_path program.id
     end
