@@ -35,3 +35,4 @@ ko:
   add_new_program: "새 소주제 추가"
   add_new_category: "새 대주제 추가"
   add_new_course: "새 강연 추가"
+  no_lessons: "등록된 소강연이 없습니다."

@@ -3,6 +3,7 @@ ko:
     models:
       category: '대주제'
       course: '강연'
+      lesson: '소강연'
       program: '소주제'
       teacher: '강사'
       user: '회원'
@@ -12,6 +13,10 @@ ko:
 
       course:
         name: '제목'
+
+      lesson:
+        name: '제목'
+        order: '순서'
 
       program:
         name: '제목'

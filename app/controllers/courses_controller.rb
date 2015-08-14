@@ -1,11 +1,12 @@
 class CoursesController < ApplicationController
-  before_action :check_admin, :only => [:create, :delete, :edit, :new, :update]
+  before_action :check_admin,
+                :only => [:create, :delete, :edit, :new, :update]
 
   def create
     course = Course.new
     course.name = params[:course][:name]
     course.program = Program.find(params[:program])
-    
+
     if course.save
       redirect_to admin_course_path
     end
@@ -22,9 +23,32 @@ class CoursesController < ApplicationController
 
   def edit
     @course = Course.find(params[:id])
+    teachers = Teacher.all
+    teachers_options = Array.new
+    orders_array = Array.new
+    (0..@course.lessons.size - 1).each { |i|
+      orders_array.push(i)
+    }
+
+    @course.lessons.each do |lesson|
+      teachers_option = ''
+      teachers.each do |teacher|
+        if lesson.teacher.id === teacher.id
+          selected = ' selected="selected"'
+        else
+          selected = ''
+        end
+        teachers_option += '<option value="' + teacher.id.to_s + '"' + selected + '>' +
+            teacher.user.name + '('+ teacher.user.email + ')</option>'
+      end
+      teachers_options.push(teachers_option)
+    end
+
     render template: 'courses/new',
            :layout => 'admin',
-           :locals => {:action => 'create',
+           :locals => {:action => 'update',
+                       :teachers_options => teachers_options,
+                       :orders_array => orders_array,
                        :programs => Program.all}
   end
 
@@ -35,20 +59,17 @@ class CoursesController < ApplicationController
       @courses.each do |course|
         teachers_array = Array.new
         course.lessons.each do |lesson|
-          lesson.teachers.each do |teacher|
+          is_in_array = false
+          teacher = lesson.teacher
 
-            is_in_array = false
-
-            teachers_array.each do |teacher_in_array|
-              if teacher_in_array.id === teacher.id
-                is_in_array = true
-              end
+          teachers_array.each do |teacher_in_array|
+            if teacher_in_array.id === teacher.id
+              is_in_array = true
             end
+          end
 
-            unless is_in_array
-              teachers_array.push(teacher)
-            end
-
+          unless is_in_array
+            teachers_array.push(teacher)
           end
         end
 
@@ -67,18 +88,17 @@ class CoursesController < ApplicationController
             teachers_array = Array.new
 
             course.lessons.each do |lesson|
-              lesson.teachers.each do |teacher|
-                is_in_array = false
+              is_in_array = false
+              teacher = lesson.teacher
 
-                teachers_array.each do |teacher_in_array|
-                  if teacher_in_array.id === teacher.id
-                    is_in_array = true
-                  end
+              teachers_array.each do |teacher_in_array|
+                if teacher_in_array.id === teacher.id
+                  is_in_array = true
                 end
+              end
 
-                unless is_in_array
-                  teachers_array.push(teacher)
-                end
+              unless is_in_array
+                teachers_array.push(teacher)
               end
             end
 
@@ -108,20 +128,17 @@ class CoursesController < ApplicationController
     teachers_array = Array.new
 
     @course.lessons.each do |lesson|
-      lesson.teachers.each do |teacher|
+      is_in_array = false
+      teacher = lesson.teacher
 
-        is_in_array = false
-
-        teachers_array.each do |teacher_in_array|
-          if teacher_in_array.id === teacher.id
-            is_in_array = true
-          end
+      teachers_array.each do |teacher_in_array|
+        if teacher_in_array.id === teacher.id
+          is_in_array = true
         end
+      end
 
-        unless is_in_array
-          teachers_array.push(teacher)
-        end
-
+      unless is_in_array
+        teachers_array.push(teacher)
       end
     end
 

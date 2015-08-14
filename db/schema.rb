@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813005834) do
+ActiveRecord::Schema.define(version: 20150814041944) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
@@ -19,33 +19,46 @@ ActiveRecord::Schema.define(version: 20150813005834) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "courses", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "detail"
-    t.string   "thumbnail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "program_id", null: false
-  end
-
-  add_index "courses", ["program_id"], name: "index_courses_on_program_id"
-
-  create_table "lessons", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "held_at"
+  create_table "course_schedules", force: :cascade do |t|
+    t.integer  "order",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "course_id",  null: false
   end
 
-  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"
+  add_index "course_schedules", ["course_id"], name: "index_course_schedules_on_course_id"
 
-  create_table "lessons_teachers", id: false, force: :cascade do |t|
-    t.integer "lesson_id"
-    t.integer "teacher_id"
+  create_table "courses", force: :cascade do |t|
+    t.integer  "program_id", null: false
+    t.string   "name",       null: false
+    t.string   "detail"
+    t.string   "thumbnail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "lessons_teachers", ["lesson_id", "teacher_id"], name: "index_lessons_teachers_on_lesson_id_and_teacher_id"
+  add_index "courses", ["program_id"], name: "index_courses_on_program_id"
+
+  create_table "lesson_schedules", force: :cascade do |t|
+    t.datetime "held_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "lesson_id",  null: false
+  end
+
+  add_index "lesson_schedules", ["lesson_id"], name: "index_lesson_schedules_on_lesson_id"
+
+  create_table "lessons", force: :cascade do |t|
+    t.integer  "course_id",  null: false
+    t.integer  "teacher_id", null: false
+    t.string   "name",       null: false
+    t.integer  "order",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"
+  add_index "lessons", ["teacher_id"], name: "index_lessons_on_teacher_id"
 
   create_table "programs", force: :cascade do |t|
     t.string   "name",                        null: false
@@ -58,13 +71,13 @@ ActiveRecord::Schema.define(version: 20150813005834) do
   add_index "programs", ["category_id"], name: "index_programs_on_category_id"
 
   create_table "registrations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "course_id",  null: false
-    t.integer  "student_id", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "course_schedule_id", null: false
+    t.integer  "student_id",         null: false
   end
 
-  add_index "registrations", ["course_id"], name: "index_registrations_on_course_id"
+  add_index "registrations", ["course_schedule_id"], name: "index_registrations_on_course_schedule_id"
   add_index "registrations", ["student_id"], name: "index_registrations_on_student_id"
 
   create_table "students", force: :cascade do |t|

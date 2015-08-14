@@ -56,13 +56,13 @@ Rails.application.routes.draw do
   patch '/admin/courses/new' => 'courses#update'
 
   get '/admin/lessons' => 'lessons#index', as: :admin_lesson
-  get '/admin/lessons/new' => 'lessons#new'
+  get '/admin/lessons/new' => 'lessons#new', as: :admin_lessons_new
   get '/admin/lessons/edit/:id' => 'lessons#edit',
       as: :admin_edit_lesson
   post '/admin/lessons/new' => 'lessons#create'
   delete '/admin/lessons/:id' => 'lessons#delete',
          as: :admin_delete_lesson
-  patch '/admin/lessons/new' => 'lessons#update'
+  patch '/admin/lessons/new' => 'lessons#create'
 
   get '/admin/users' => 'users#index', as: :admin_user
   get '/admin/users/new' => 'users#new'

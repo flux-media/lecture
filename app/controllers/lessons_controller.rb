@@ -2,46 +2,28 @@ class LessonsController < ApplicationController
   before_action :check_admin
 
   def create
-    lesson = Lesson.new
+    if params[:lesson] != nil && params[:lesson][:id] != nil
+      lesson = Lesson.find_by(params[:lesson][:id])
+    else
+      lesson = Lesson.new
+    end
     lesson.name = params[:lesson][:name]
+    lesson.teacher = Teacher.find(params[:teacher])
+    lesson.order = params[:order]
+    lesson.course = Course.find(params[:course_id])
+
     if lesson.save
-      redirect_to admin_lesson_path
+      redirect_to admin_edit_course_path lesson.course_id
     end
   end
 
   def delete
     lesson = Lesson.find(params[:id])
+    course_id = lesson.course_id
     if lesson != nil
-      lesson.destroy
-    end
-
-    redirect_to admin_lesson_path
-  end
-
-  def edit
-    @lesson = Lesson.find(params[:id])
-    render template: 'lessons/new',
-           :layout => 'admin',
-           :locals => {:action => 'Update'}
-  end
-
-  def index
-    @lessons = Lesson.all
-    render template: 'lessons/index', :layout => 'admin'
-  end
-
-  def new
-    @lesson = Lesson.new
-    render :layout => 'admin',
-           :locals => {:action => 'Create'}
-  end
-
-  def update
-    lesson = Lesson.find(params[:lesson][:id])
-    lesson.name = params[:lesson][:name]
-    if lesson.save
-      redirect_to admin_edit_lesson_path lesson.id
+      if lesson.destroy
+        redirect_to admin_edit_course_path course_id
+      end
     end
   end
-
 end

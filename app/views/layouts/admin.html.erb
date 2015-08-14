@@ -45,8 +45,11 @@
                           admin_course_path,
                           {class: 'pure-menu-link'} %>
             </li>
-            <li class="pure-menu-item"><%= link_to t('lessons'), admin_lesson_path, {class: 'pure-menu-link'} %></li>
-            <li class="pure-menu-item"><%= link_to t('logout'), logout_path, {:class => 'pure-menu-link'} %></li>
+            <li class="pure-menu-item">
+              <%= link_to t('logout'),
+                          logout_path,
+                          {:class => 'pure-menu-link'} %>
+            </li>
         <% end %>
       </ul>
     </div>

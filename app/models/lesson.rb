@@ -1,4 +1,4 @@
 class Lesson < ActiveRecord::Base
-	belongs_to :program
-	has_and_belongs_to_many :teachers
+	belongs_to :course
+	belongs_to :teacher
 end
