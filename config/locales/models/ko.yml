@@ -6,6 +6,9 @@ ko:
       teacher: '강사'
       user: '회원'
     attributes:
+      category:
+        name: '제목'
+
       program:
         name: '제목'
 

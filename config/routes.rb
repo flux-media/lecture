@@ -28,6 +28,15 @@ Rails.application.routes.draw do
 
   get '/admin' => 'admin#index', as: :admin
 
+  get '/admin/categories' => 'categories#index', as: :admin_category
+  get '/admin/categories/new' => 'categories#new'
+  get '/admin/categories/edit/:id' => 'categories#edit',
+      as: :admin_edit_category
+  post '/admin/categories/new' => 'categories#create'
+  delete '/admin/categories/:id' => 'categories#delete',
+         as: :admin_delete_category
+  patch '/admin/categories/new' => 'categories#update'
+
   get '/admin/programs' => 'programs#index', as: :admin_program
   get '/admin/programs/new' => 'programs#new'
   get '/admin/programs/edit/:id' => 'programs#edit',
