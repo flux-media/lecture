@@ -15,7 +15,9 @@
           <%= Category.model_name.human %>:
           <%= select_tag :category,
                          options_from_collection_for_select(
-                                 categories, 'id', 'name') %>
+                                 categories, 'id', 'name',
+                                 @program.category.nil? ? categories.first.id :
+                                         @program.category.id) %>
         </div>
       </div>
     </fieldset>
