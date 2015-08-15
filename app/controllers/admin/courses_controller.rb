@@ -8,7 +8,7 @@ class Admin::CoursesController < ApplicationController
     course.program = Program.find(params[:program])
 
     if course.save
-      redirect_to admin_courses_path
+      redirect_to edit_admin_course_path course.id
     end
   end
 

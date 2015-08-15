@@ -4,52 +4,10 @@ class Admin::UsersController < ApplicationController
 
   def create
     user = User.new
-    user.name = params[:user][:name]
-    user.email = params[:user][:email]
-    user.password = params[:password]
-    user.is_admin = params[:user][:is_admin]
-
-    if user.save
-      redirect_to admin_users_path
-    end
+    create_or_update_user user, params
   end
 
-  def destroy
-    user = User.find(params[:id])
-
-    if user != nil
-      # If there's only one remaining admin User, don't delete it.
-      if (user.is_admin && User.where(is_admin: true).count === 1) ||
-          # If the user deletes itself, don't do it.
-          params[:id] === current_user.id
-        # Do nothing.
-      else
-        user.destroy
-      end
-    end
-
-    redirect_to admin_users_path
-  end
-
-  def edit
-    @user = User.find(params[:id])
-    render :template => 'admin/users/new',
-           :locals => {:action => 'update',
-                       :url => admin_user_path(@user)}
-  end
-
-  def index
-    @users = User.all
-  end
-
-  def new
-    @user = User.new
-    render :locals => {:action => 'create',
-                       :url => admin_users_path}
-  end
-
-  def update
-    user = User.find(params[:user][:id])
+  def create_or_update_user(user, params)
     user.name = params[:user][:name]
     user.email = params[:user][:email]
     if params[:password] != nil
@@ -100,7 +58,46 @@ class Admin::UsersController < ApplicationController
     end
 
     if user.save
-      redirect_to admin_users_path user.id
+      redirect_to admin_users_path
     end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+
+    if user != nil
+      # If there's only one remaining admin User, don't delete it.
+      if (user.is_admin && User.where(is_admin: true).count === 1) ||
+          # If the user deletes itself, don't do it.
+          params[:id] === current_user.id
+        # Do nothing.
+      else
+        user.destroy
+      end
+    end
+
+    redirect_to admin_users_path
+  end
+
+  def edit
+    @user = User.find(params[:id])
+    render :template => 'admin/users/new',
+           :locals => {:action => 'update',
+                       :url => admin_user_path(@user)}
+  end
+
+  def index
+    @users = User.all
+  end
+
+  def new
+    @user = User.new
+    render :locals => {:action => 'create',
+                       :url => admin_users_path}
+  end
+
+  def update
+    user = User.find(params[:user][:id])
+    create_or_update_user user, params
   end
 end

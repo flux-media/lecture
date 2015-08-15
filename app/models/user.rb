@@ -1,12 +1,11 @@
 class User < ActiveRecord::Base
-	has_secure_password
-
-	has_one :student
-	has_one :teacher
-
   attr_accessor :is_teacher, :is_student
+  has_secure_password
 
-	def password=(password)
+  has_one :student, :dependent => :destroy
+  has_one :teacher, :dependent => :destroy
+
+  def password=(password)
     self.password_digest = BCrypt::Password.create(password)
   end
 
