@@ -27,22 +27,22 @@
             <li class="pure-menu-item"><%= link_to t('admin_main'), admin_path, {class: 'pure-menu-link'} %></li>
             <li class="pure-menu-item">
               <%= link_to User.model_name.human,
-                          admin_user_path,
+                          admin_users_path,
                           {class: 'pure-menu-link'} %>
             </li>
             <li class="pure-menu-item">
               <%= link_to Category.model_name.human,
-                          admin_category_path,
+                          admin_categories_path,
                           {class: 'pure-menu-link'} %>
             </li>
             <li class="pure-menu-item">
               <%= link_to Program.model_name.human,
-                          admin_program_path,
+                          admin_programs_path,
                           {class: 'pure-menu-link'} %>
             </li>
             <li class="pure-menu-item">
               <%= link_to Course.model_name.human,
-                          admin_course_path,
+                          admin_courses_path,
                           {class: 'pure-menu-link'} %>
             </li>
             <li class="pure-menu-item">

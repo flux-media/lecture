@@ -2,7 +2,7 @@
 <% admin_subtitle(t('list')) %>
 
 <div class="new-entry-wrapper">
-  <%= link_to t('add_new_course'), admin_courses_new_path, {class: 'pure-button'} %>
+  <%= link_to t('add_new_course'), new_admin_course_path, {class: 'pure-button'} %>
 </div>
 
 <table class="pure-table">
@@ -31,9 +31,9 @@
         <td><%= course.program.name %></td>
         <td>
           <%= link_to t('update'),
-                      admin_edit_course_path(course.id),
+                      edit_admin_course_path(course.id),
                       {class: 'pure-button'} %>
-          <%= form_tag admin_delete_course_path(course.id),
+          <%= form_tag admin_course_path(course.id),
                        {method: 'delete',
                         class: 'inline-form'} do %>
               <%= submit_tag t('delete'), {class: 'pure-button'} %>

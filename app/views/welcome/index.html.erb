@@ -23,7 +23,8 @@
 
                     <% course.lessons.each do |lesson| %>
                         <li>Lesson <%= lesson.id %>: <%= lesson.name %>
-                          <span class="span-small"><%= lesson.held_at.strftime("%m/%d/%Y") %></span></li>
+                          <!-- TODO: Insert held_at here.-->
+                          <span class="span-small"></span></li>
                     <% end %>
                 <% end %>
               </ul>

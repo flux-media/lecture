@@ -1,41 +1,38 @@
-class ProgramsController < ApplicationController
+class Admin::ProgramsController < ApplicationController
   before_action :check_admin
+  layout 'admin'
 
   def create
     program = Program.new
     program.name = params[:program][:name]
     program.category = Category.find(params[:category])
     if program.save
-      redirect_to admin_program_path
+      redirect_to admin_programs_path
     end
   end
 
-  def delete
+  def destroy
     program = Program.find(params[:id])
-    if program != nil
-      program.destroy
-    end
 
-    redirect_to admin_program_path
+    if program != nil && program.destroy
+      redirect_to admin_programs_path
+    end
   end
 
   def edit
     @program = Program.find(params[:id])
-    render template: 'programs/new',
-           :layout => 'admin',
+    render template: 'admin/programs/new',
            :locals => {:action => 'update',
                        :categories => Category.all}
   end
 
   def index
     @programs = Program.all
-    render template: 'programs/index', :layout => 'admin'
   end
 
   def new
     @program = Program.new
-    render :layout => 'admin',
-           :locals => {:action => 'create',
+    render :locals => {:action => 'create',
                        :categories => Category.all}
   end
 
@@ -43,8 +40,9 @@ class ProgramsController < ApplicationController
     program = Program.find(params[:program][:id])
     program.name = params[:program][:name]
     program.category = Category.find(params[:category])
+
     if program.save
-      redirect_to admin_edit_program_path program.id
+      redirect_to admin_programs_path
     end
   end
 end

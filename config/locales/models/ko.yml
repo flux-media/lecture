@@ -2,6 +2,7 @@ ko:
   activerecord:
     models:
       category: '대주제'
+      course_schedule: '강연일정'
       course: '강연'
       lesson: '소강연'
       program: '소주제'

@@ -2,7 +2,7 @@
 <% admin_subtitle(t('list')) %>
 
 <div class="new-entry-wrapper">
-  <%= link_to t('add_new_program'), admin_programs_new_path, {class: 'pure-button'} %>
+  <%= link_to t('add_new_program'), new_admin_program_path, {class: 'pure-button'} %>
 </div>
 
 <table class="pure-table">
@@ -23,9 +23,9 @@
         <td><%= program.category.name %></td>
         <td>
           <%= link_to t('update'),
-                      admin_edit_program_path(program.id),
+                      edit_admin_program_path(program.id),
                       {class: 'pure-button'} %>
-          <%= form_tag admin_delete_program_path(program.id),
+          <%= form_tag admin_program_path(program.id),
                        {method: 'delete',
                         class: 'inline-form'} do %>
               <%= submit_tag t('delete'), {class: 'pure-button'} %>

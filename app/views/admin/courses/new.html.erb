@@ -25,7 +25,7 @@
     <%= submit_tag t('submit'), class: 'pure-button pure-button-primary' %>
 <% end %>
 
-<% if action == 'update' %>
+<% if action === 'update' %>
     <%= Lesson.model_name.human %>
     <table class="pure-table">
       <thead>
@@ -49,11 +49,8 @@
           <% @course.lessons.each_with_index do |lesson, index| %>
               <tr>
                 <%= form_for lesson,
-                             controllers: 'lessons',
-                             url: url_for(:controller => 'lessons',
-                                          :action => 'create'),
+                             url: admin_lesson_path(lesson.id),
                              html: {id: 'lesson_'+ lesson.id.to_s} do |f| %>
-                    <%= f.hidden_field :id, {form: 'lesson_' + lesson.id.to_s} %>
                     <%= hidden_field_tag :course_id, @course.id,
                                          {form: 'lesson_' + lesson.id.to_s} %>
                     <td><%= lesson.id %></td>
@@ -70,7 +67,7 @@
                                        class: 'pure-button pure-button-primary',
                                        form: 'lesson_' + lesson.id.to_s %>
                 <% end %>
-                <%= form_tag admin_delete_lesson_path(lesson.id),
+                <%= form_tag admin_lesson_path(lesson.id),
                              {method: 'delete',
                               class: 'inline-form'} do %>
                     <%= submit_tag t('delete'),
@@ -81,7 +78,7 @@
           <% end %>
       <% end %>
       <tr>
-        <%= form_tag admin_lessons_new_path, {id: 'lesson_new'} do %>
+        <%= form_tag admin_lessons_path, {id: 'lesson_new'} do %>
             <%= hidden_field_tag :course_id, @course.id,
                                  {form: 'lesson_new'} %>
             <td>N</td>
