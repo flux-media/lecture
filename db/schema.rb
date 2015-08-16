@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20150814041944) do
 
   create_table "course_schedules", force: :cascade do |t|
     t.integer  "order",      null: false
+    t.integer  "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "course_id",  null: false
   end
 
   add_index "course_schedules", ["course_id"], name: "index_course_schedules_on_course_id"
@@ -40,12 +40,14 @@ ActiveRecord::Schema.define(version: 20150814041944) do
   add_index "courses", ["program_id"], name: "index_courses_on_program_id"
 
   create_table "lesson_schedules", force: :cascade do |t|
-    t.datetime "held_at",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "lesson_id",  null: false
+    t.integer  "course_schedule_id"
+    t.integer  "lesson_id"
+    t.datetime "held_at",            null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
+  add_index "lesson_schedules", ["course_schedule_id"], name: "index_lesson_schedules_on_course_schedule_id"
   add_index "lesson_schedules", ["lesson_id"], name: "index_lesson_schedules_on_lesson_id"
 
   create_table "lessons", force: :cascade do |t|

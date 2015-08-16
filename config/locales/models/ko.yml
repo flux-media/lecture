@@ -15,9 +15,15 @@ ko:
       course:
         name: '제목'
 
+      course_schedule:
+        order: '회차'
+
       lesson:
         name: '제목'
         order: '순서'
+
+      lesson_schedule:
+        held_at: '날짜'
 
       program:
         name: '제목'

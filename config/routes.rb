@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   # Paths related to admin
   get '/admin' => 'admin#index', as: :admin
   namespace :admin do
-    resources :categories, :programs, :courses, :lessons, :users
+    resources :categories, :programs, :courses,
+              :lessons, :users, :course_schedules, :lesson_schedules
   end
 
   # Example resource route with options:
