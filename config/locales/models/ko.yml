@@ -28,6 +28,9 @@ ko:
       program:
         name: '제목'
 
+      registration:
+        created_at: '등록일'
+
       teacher:
         description: '소개'
 

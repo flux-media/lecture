@@ -49,7 +49,7 @@
                   <% @course_schedule.lesson_schedules.each do |lesson_schedule| %>
                       <% if lesson.id === lesson_schedule.lesson.id %>
                           <% held_at = lesson_schedule.held_at.
-                                             strftime(t('simple_datetime')) %>
+                                  strftime(t('simple_datetime')) %>
                           <% break %>
                       <% end %>
                   <% end %>
@@ -68,31 +68,36 @@
     </table>
 <% end %>
 
-
-<!--TODO: Fix this mass.-->
-<% if action == 'TODO' %>
+<% if action === 'update' %>
     <table class="pure-table">
       <thead>
       <tr>
         <th>#</th>
-        <th>User</th>
-        <th>Date</th>
-        <th></th>
+        <th><%= User.human_attribute_name('name') %></th>
+        <th><%= Registration.human_attribute_name('created_at') %></th>
+        <th><%= t('manage') %></th>
       </tr>
       </thead>
 
       <tbody>
-      <% if @course.registrations.count > 0 %>
-          <% @course.registrations.each do |registration| %>
+      <% if @course_schedule.registrations.count > 0 %>
+          <% @course_schedule.registrations.each do |registration| %>
               <tr>
                 <td><%= registration.id %></td>
-                <td><%= link_to registration.student.user.name,
-                                admin_edit_user_path(registration.student.user.id) %></td>
-                <td><%= registration.created_at %></td>
                 <td>
-                  <%= form_tag delete_registration_path(@course.id),
+                  <%= link_to registration.student.user.name + '(' +
+                                      registration.student.user.email + ')',
+                              edit_admin_user_path(registration.student.user.id) %>
+                </td>
+                <td>
+                  <%= registration.created_at.strftime(t('simple_datetime')) %>
+                </td>
+                <td>
+                  <%= form_tag admin_registration_path(registration.id),
                                class: 'pure-form', method: 'delete' do %>
-                      <%= submit_tag 'Cancel registration',
+                      <%= hidden_field_tag :course_schedule_id,
+                                           @course_schedule.id %>
+                      <%= submit_tag t('delete'),
                                      class: 'button-warning pure-button' %>
                   <% end %>
                 </td>
@@ -100,9 +105,22 @@
           <% end %>
       <% else %>
           <tr>
-            <td colspan="4">No registration yet.</td>
+            <td colspan="4"><%= t('no_registration') %></td>
           </tr>
       <% end %>
       </tbody>
     </table>
+
+    <h2><%= t('register_user') %></h2>
+    <%= form_tag admin_registrations_path,
+                 class: 'pure-form',
+                 method: 'post' do %>
+        <%= hidden_field_tag :course_schedule_id, @course_schedule.id %>
+        <fieldset>
+          <label><%= User.human_attribute_name('email') %></label>
+          <%= text_field_tag :user_email %>
+        </fieldset>
+        <%= submit_tag t('submit'),
+                       class: 'button-primary pure-button' %>
+    <% end %>
 <% end %>

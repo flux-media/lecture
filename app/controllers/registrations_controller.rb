@@ -40,7 +40,7 @@ class RegistrationsController < ApplicationController
     registration = Registration.find(params[:id])
     course = Course.find(params[:course_id])
 
-    if course.nil? && registration.nil?
+    if course.nil? || registration.nil?
       # TODO: Wrong course or registration!
       return
     elsif current_user.nil?
