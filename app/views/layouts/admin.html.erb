@@ -24,7 +24,7 @@
 
       <ul class="pure-menu-list">
         <% if is_admin %>
-            <li class="pure-menu-item"><%= link_to t('admin_main'), admin_path, {class: 'pure-menu-link'} %></li>
+            <li class="pure-menu-item"><%= link_to t('main'), admin_path, {class: 'pure-menu-link'} %></li>
             <li class="pure-menu-item">
               <%= link_to User.model_name.human,
                           admin_users_path,

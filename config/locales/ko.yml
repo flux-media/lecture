@@ -18,11 +18,14 @@
 ko:
   site_name: "어벤저스쿨"
 
-  admin_main: "처음"
-  logout: "로그아웃"
+  main: "처음"
   list: "목록"
+  admin: "관리자"
   add_new_user: "새 회원 추가"
 
+  logout: "로그아웃"
+  login: "로그인"
+  sign_up: "회원가입"
   manage: "관리"
   update: "수정"
   delete: "삭제"
@@ -35,13 +38,23 @@ ko:
   no_lessons: "등록된 강연이 없습니다."
   add_new_course_schedule: "새 소주제 일정 추가"
   no_course_schedules: "소주제 일정이 없습니다."
+
   default_introduction: "닥치고 내 돈을 가져가!"
 
   period: "기간"
 
   simple_date: "%Y.%m.%d"
   simple_datetime: "%Y.%m.%d %H:%M"
-  course_closed: "수강 불가"
+
   no_registration: "등록된 수강 정보가 없습니다."
   user_id_or_email: "회원 아이디(숫자) 또는 이메일"
   register_user: "회원 수강 등록"
+
+  signed_in_as: "%s로 로그인"
+  cancel_registration: "수강 신청 취소"
+
+  all_courses: "모든 강연 보기"
+  courses_closed: "수강 불가"
+  courses_registered: "등록한 강연"
+  courses_completed: "완료된 강연"
+  copyright: "Copyright © 2015 PPSS"

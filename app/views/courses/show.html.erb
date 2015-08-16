@@ -59,12 +59,12 @@
       <% else %>
           <%= form_tag course_registration_path(@course, registration),
                        class: 'pure-form', method: 'delete' do %>
-              <%= submit_tag 'Cancel registration',
+              <%= submit_tag t('cancel_registration'),
                              class: 'button-warning pure-button' %>
           <% end %>
       <% end %>
   <% else %>
-      <%= link_to t('course_closed'), '#',
+      <%= link_to t('courses_closed'), '#',
                   class: 'pure-button pure-button-disabled' %>
   <% end %>
 </div>

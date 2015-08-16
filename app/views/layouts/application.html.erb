@@ -3,33 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lecture</title>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title><%= t('site_name') %></title>
+  <link rel="stylesheet"
+        href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet"
+        href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+  <%= stylesheet_link_tag 'application',
+                          media: 'all',
+                          'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application',
+                             'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <div class="pure-menu pure-menu-horizontal">
-  <a href="<%= root_path %>" class="pure-menu-heading"><%= image_tag 'logo.png', {:class => 'logo'} %></a>
+  <a href="<%= root_path %>" class="pure-menu-heading">
+    <%= image_tag 'logo.png', {:class => 'logo'} %>
+  </a>
   <ul class="pure-menu-list custom-pure-menu-list">
     <li class="pure-menu-item pure-menu-selected">
-      <%= link_to 'Home', root_path, {class: 'pure-menu-link'} %>
+      <%= link_to t('main'), root_path,
+                  {class: 'pure-menu-link'} %>
     </li>
     <li class="pure-menu-item">
-      <%= link_to 'Courses', courses_path, {class: 'pure-menu-link'} %>
+      <%= link_to t('all_courses'), courses_path,
+                  {class: 'pure-menu-link'} %>
     </li>
     <% if current_user %>
         <% if is_admin %>
-            <li class="pure-menu-item float-right"><%= link_to 'Admin', admin_path, {:class => 'pure-menu-link'} %></li>
+            <li class="pure-menu-item float-right">
+              <%= link_to t('admin'), admin_path,
+                          {:class => 'pure-menu-link'} %>
+            </li>
         <% end %>
-        <li class="pure-menu-item float-right"><%= link_to 'Signed in as ' + current_user.name, users_path(current_user.id), {:class => 'pure-menu-link'} %></li>
-        <li class="pure-menu-item float-right"><%= link_to 'Logout', logout_path, {:class => 'pure-menu-link'} %></li>
+        <li class="pure-menu-item float-right">
+          <%= link_to t('signed_in_as') % [current_user.name],
+                      user_path(current_user.id),
+                      {:class => 'pure-menu-link'} %>
+        </li>
+        <li class="pure-menu-item float-right">
+          <%= link_to t('logout'), logout_path,
+                      {:class => 'pure-menu-link'} %>
+        </li>
     <% else %>
-        <li class="pure-menu-item float-right"><%= link_to 'Sign up', signup_path, {:class => 'pure-menu-link'} %></li>
-        <li class="pure-menu-item float-right"><%= link_to 'Log in', login_path, {:class => 'pure-menu-link'} %></li>
+        <li class="pure-menu-item float-right">
+          <%= link_to t('sign_up'), sign_up_path,
+                      {:class => 'pure-menu-link'} %>
+        </li>
+        <li class="pure-menu-item float-right">
+          <%= link_to t('login'), login_path,
+                      {:class => 'pure-menu-link'} %>
+        </li>
     <% end %>
   </ul>
 </div>
@@ -48,8 +73,7 @@
 
 <div class="footer l-box">
   <p>
-    <a href="#">Try now</a> for 14 days. No credit card required. Header image
-    courtesy of <a href='http://unsplash.com/'>Unsplash</a>.
+    <%= t('site_name') %> <%= t('copyright') %>
   </p>
 </div>
 
