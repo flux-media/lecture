@@ -1,12 +1,13 @@
 class CreateRegistrations < ActiveRecord::Migration
   def change
     create_table :registrations do |t|
+      t.belongs_to :course_schedule, index: true
+      t.belongs_to :student, index: true
+
       t.timestamps null: false
     end
 
-    add_reference :registrations, :course_schedule, index: true, foreign_key: true
     change_column :registrations, :course_schedule_id, :integer, :null => false
-    add_reference :registrations, :student, index: true, foreign_key: true
     change_column :registrations, :student_id, :integer, :null => false
   end
 end

@@ -37,8 +37,7 @@ class CoursesController < ApplicationController
   def show
     @is_banner_visible = true
 
-    course_id = params[:course_id]
-    @course = Course.find(course_id)
+    @course = Course.find(params[:id])
     teachers_array = Array.new
 
     @course.lessons.each do |lesson|
@@ -59,12 +58,35 @@ class CoursesController < ApplicationController
     @course.teachers = teachers_array
 
     if current_user
-      @registration_path = course_path(@course.id) +'/register'
+      registration_path = course_path(@course.id) +'/register'
     else
-      @registration_path = login_path(:target => course_path(@course.id))
+      registration_path = login_path(:target => course_path(@course.id))
     end
 
-    @is_registration_possible = Registration.has_duplicate(
-        @course.id, current_user).nil?
+    is_course_open = false
+    displayable_course_schedule = nil
+    @course.course_schedules.each do |course_schedule|
+      if course_schedule.lesson_schedules.last.held_at > DateTime.now
+        is_course_open = true
+        if displayable_course_schedule.nil?
+          displayable_course_schedule = course_schedule
+        end
+      else
+        is_course_open = false
+      end
+    end
+
+    if displayable_course_schedule.nil?
+      displayable_course_schedule = @course.course_schedules.last
+    end
+
+    registration = Registration.has_duplicate(
+        displayable_course_schedule.id, current_user)
+
+    render :locals => {
+               displayable_course_schedule: displayable_course_schedule,
+               registration_path: registration_path,
+               is_course_open: is_course_open,
+               registration: registration}
   end
 end

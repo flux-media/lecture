@@ -35,7 +35,7 @@
       <% end %>
   <% end %>
 
-  <h2 class="text-center">Recommended courses</h2>
+  <h2 class="text-center">Upcoming courses</h2>
 
   <div class="information pure-g">
     <% @courses.each do |course| %>
@@ -52,7 +52,7 @@
 
 <% content_for :banner do %>
     <h1 class="banner-head">
-      Simple Pricing.<br>
-      Try before you buy.
+      <!-- TODO: Let admin manage this. -->
+      <%= t('default_introduction') %>
     </h1>
 <% end %>

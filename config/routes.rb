@@ -3,22 +3,16 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   root 'welcome#index'
 
-  get '/login' => 'sessions#new'
+  get '/login' => 'sessions#new', as: :login
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-
   get '/signup' => 'users#new'
 
-  get '/courses' => 'courses#index', as: :courses
-  get '/courses/:course_id' => 'courses#show', as: :course
-  post '/courses/:course_id/register' => 'registrations#create',
-       as: :new_registration
-  delete '/courses/:course_id/cancel' => 'registrations#delete',
-         as: :delete_registration
-
-  get 'registration/new'
-
   resources :users
+
+  resources :courses do
+    resources :registrations
+  end
 
   # Paths related to admin
   get '/admin' => 'admin#index', as: :admin

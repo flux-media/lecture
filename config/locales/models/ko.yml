@@ -1,11 +1,11 @@
 ko:
   activerecord:
     models:
-      category: '대주제'
+      category: '카테고리'
       course_schedule: '강연일정'
-      course: '강연'
-      lesson: '소강연'
-      program: '소주제'
+      program: '대주제'
+      course: '소주제'
+      lesson: '강연'
       teacher: '강사'
       user: '회원'
     attributes:

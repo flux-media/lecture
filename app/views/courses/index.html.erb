@@ -1,7 +1,7 @@
 <table class="pure-table">
   <thead>
   <tr>
-    <th>카테고리</th>
+    <th><%= Category.model_name.human %></th>
     <th>대주제</th>
     <th>번호</th>
     <th>소주제</th>
@@ -19,20 +19,26 @@
               <tr>
                 <% if last_category_id != category.id %>
                     <% last_category_id = category.id %>
-                    <td rowspan="<%= category.courses_count %>"><%= category.name %></td>
+                    <td rowspan="<%= category.courses_count %>">
+                      <%= category.name %>
+                    </td>
                 <% end %>
                 <% if last_program_id != program.id %>
                     <% last_program_id = program.id %>
-                    <td rowspan="<%= program.courses.count %>"><%= program.name %></td>
+                    <td rowspan="<%= program.courses.count %>">
+                      <%= program.name %>
+                    </td>
                 <% end %>
                 <td><%= course.id %></td>
-                <td><%= course.name %></td>
+                <td><%= link_to course.name, course_path(course.id) %></td>
                 <td>
-                  <% course.teachers.each do |teacher| %><%= teacher.user.name %>
+                  <% course.teachers.each do |teacher| %>
+                      <%= teacher.user.name %>
                   <% end %>
                 </td>
                 <td>
-                  <% course.teachers.each do |teacher| %><%= teacher.description %>
+                  <% course.teachers.each do |teacher| %>
+                      <%= teacher.description %>
                   <% end %>
                 </td>
               </tr>
