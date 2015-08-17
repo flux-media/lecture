@@ -1,0 +1,53 @@
+<% admin_title(Payment.model_name.human) %>
+<% admin_subtitle(t('list')) %>
+
+<table class="pure-table">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th><%= User.model_name.human %></th>
+    <th><%= Payment.human_attribute_name('point') %></th>
+    <th><%= Payment.human_attribute_name('amount') %></th>
+    <th><%= PaymentState.model_name.human %></th>
+    <th><%= Payment.human_attribute_name('created_at') %></th>
+    <th><%= Payment.human_attribute_name('updated_at') %></th>
+    <th><%= t('manage') %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @payments.each do |payment| %>
+      <tr>
+        <%= form_for payment,
+                     url: admin_payment_path(payment),
+                     html: {id: 'payment_' + payment.id.to_s} do |f| %>
+            <td><%= payment.id %></td>
+            <td><%= payment.user.name %></td>
+            <td><%= text_field_tag(:point, payment.point,
+                                   {form: 'payment_' + payment.id.to_s}) %></td>
+            <td><%= text_field_tag(:amount, payment.amount,
+                                   {form: 'payment_' + payment.id.to_s}) %></td>
+            <td><%= select_tag(:payment_state,
+                               options_from_collection_for_select(
+                                       payment_states, 'key', 'name',
+                                       payment.payment_state.nil? ?
+                                               payment_states.first.key :
+                                               payment.payment_state.key),
+                               {form: 'payment_' + payment.id.to_s}) %></td>
+            <td><%= payment.created_at.strftime(t('simple_datetime')) %></td>
+            <td><%= payment.updated_at.strftime(t('simple_datetime')) %></td>
+            <td>
+              <%= f.submit t('update'),
+                           {class: 'pure-button pure-button-primary',
+                            form: 'payment_' + payment.id.to_s} %>
+        <% end %>
+        <%= form_tag admin_payment_path(payment.id),
+                     {method: 'delete',
+                      class: 'inline-form'} do %>
+            <%= submit_tag t('delete'), {class: 'pure-button'} %>
+        <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

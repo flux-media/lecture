@@ -29,7 +29,17 @@ class RegistrationsController < ApplicationController
         registration = Registration.new
         registration.course_schedule_id = open_course_schedule.id
         registration.student_id = current_user.student.id
-        registration.save
+        if registration.save
+          payment = Payment.new
+          payment.user = current_user
+          payment.registration = registration
+          payment.amount = 0
+          payment.point = -1
+          payment.payment_state = PaymentState.find_by_key('completed')
+          if payment.save
+
+          end
+        end
       end
 
       redirect_to course_path(course.id)
@@ -49,7 +59,10 @@ class RegistrationsController < ApplicationController
       # TODO: Wrong user attempts to delete this registration!
     else
       if registration.destroy
-        redirect_to course_path(course.id)
+        payment = Payment.where(user_id: current_user.id, registration_id: registration.id).first
+        if !payment.nil? && payment.destroy
+          redirect_to course_path(course.id)
+        end
       end
     end
   end

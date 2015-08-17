@@ -30,6 +30,10 @@
       <%= link_to t('all_courses'), courses_path,
                   {class: 'pure-menu-link'} %>
     </li>
+    <li class="pure-menu-item">
+      <%= link_to t('new_payments'), new_payment_path,
+                  {class: 'pure-menu-link'} %>
+    </li>
     <% if current_user %>
         <% if is_admin %>
             <li class="pure-menu-item float-right">

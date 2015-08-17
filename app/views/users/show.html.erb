@@ -23,3 +23,16 @@
 <ul>
   <!-- TODO: Implement this. -->
 </ul>
+
+<h2><%= Payment.model_name.human %></h2>
+<ul>
+  <% unless @user.payments.nil? %>
+      <% @user.payments.each do |payment| %>
+          <li>
+            <%= Payment.human_attribute_name('point') %> : <%= payment.point %>
+            <%= Payment.human_attribute_name('amount') %> : <%= payment.amount %>
+            <%= PaymentState.model_name.human %> : <%= payment.payment_state.name %>
+          </li>
+      <% end %>
+  <% end %>
+</ul>

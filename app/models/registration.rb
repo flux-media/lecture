@@ -2,6 +2,8 @@ class Registration < ActiveRecord::Base
   belongs_to :course_schedule
   belongs_to :student
 
+  has_one :payment
+
   def self.has_duplicate(course_schedule_id, user)
     if user.nil? || user.student.nil?
       nil

@@ -56,6 +56,11 @@
                           {class: 'pure-menu-link'} %>
             </li>
             <li class="pure-menu-item">
+              <%= link_to Payment.model_name.human,
+                          admin_payments_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
+            <li class="pure-menu-item">
               <%= link_to t('logout'),
                           admin_sessions_destroy_path,
                           {:class => 'pure-menu-link'} %>

@@ -6,6 +6,8 @@ ko:
       course_schedule: '강연일정'
       lesson: '강연'
       location: '장소'
+      payment: '결제'
+      payment_state : '결제 상태'
       program: '대주제'
       teacher: '강사'
       user: '회원'
@@ -33,6 +35,12 @@ ko:
         website: '웹사이트'
         latitude: '위도'
         longitude: '경도'
+
+      payment:
+        point: '강의 수'
+        amount: '액수'
+        created_at: '결제일'
+        updated_at: '처리일'
 
       program:
         name: '제목'

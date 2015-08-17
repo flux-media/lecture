@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy', as: :logout
   get '/signup' => 'users#new', as: :sign_up
 
-  resources :users
+  resources :users, :payments
 
   resources :courses do
     resources :registrations
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :categories, :programs, :courses,
               :lessons, :users, :course_schedules, :lesson_schedules,
-              :registrations, :sessions, :locations
+              :registrations, :sessions, :locations, :payments
   end
 
   # Example resource route with options:

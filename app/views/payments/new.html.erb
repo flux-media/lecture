@@ -1,0 +1,7 @@
+<div class="payments">
+  <%= form_tag payments_path, {class: 'pure-form'} do %>
+      <%= label_tag :point %>
+      <%= select_tag(:point, '<option value="1">1</option><option value="5">5</option>'.html_safe) %>
+      <%= submit_tag(t('submit'), {class: 'pure-button pure-button-primary'}) %>
+  <% end %>
+</div>

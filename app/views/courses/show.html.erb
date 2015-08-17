@@ -61,10 +61,15 @@
 <div class="registration">
   <% if is_course_open %>
       <% if registration.nil? %>
-          <%= form_tag course_registrations_path(@course),
-                       class: 'pure-form' do %>
-              <%= submit_tag 'Register now!',
-                             class: 'pure-button pure-button-primary' %>
+          <% if current_user.credit > 0 %>
+              <%= form_tag course_registrations_path(@course),
+                           class: 'pure-form' do %>
+                  <%= submit_tag t('register_course'),
+                                 class: 'pure-button pure-button-primary' %>
+              <% end %>
+          <% else %>
+              <%= link_to t('register_course'), new_payment_path,
+                          class: 'pure-button' %>
           <% end %>
       <% else %>
           <%= form_tag course_registration_path(@course, registration),
