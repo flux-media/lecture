@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814041944) do
+ActiveRecord::Schema.define(version: 20150817011713) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150814041944) do
 
   create_table "lesson_schedules", force: :cascade do |t|
     t.integer  "course_schedule_id"
+    t.integer  "location_id"
     t.integer  "lesson_id"
     t.datetime "held_at",            null: false
     t.datetime "created_at",         null: false
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150814041944) do
 
   add_index "lesson_schedules", ["course_schedule_id"], name: "index_lesson_schedules_on_course_schedule_id"
   add_index "lesson_schedules", ["lesson_id"], name: "index_lesson_schedules_on_lesson_id"
+  add_index "lesson_schedules", ["location_id"], name: "index_lesson_schedules_on_location_id"
 
   create_table "lessons", force: :cascade do |t|
     t.integer  "course_id",  null: false
@@ -62,21 +64,32 @@ ActiveRecord::Schema.define(version: 20150814041944) do
   add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"
   add_index "lessons", ["teacher_id"], name: "index_lessons_on_teacher_id"
 
+  create_table "locations", force: :cascade do |t|
+    t.string   "name",         null: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "phone_number"
+    t.string   "address"
+    t.string   "website"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "programs", force: :cascade do |t|
+    t.integer  "category_id",                 null: false
     t.string   "name",                        null: false
     t.boolean  "is_public",   default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.integer  "category_id",                 null: false
   end
 
   add_index "programs", ["category_id"], name: "index_programs_on_category_id"
 
   create_table "registrations", force: :cascade do |t|
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
     t.integer  "course_schedule_id", null: false
     t.integer  "student_id",         null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "registrations", ["course_schedule_id"], name: "index_registrations_on_course_schedule_id"

@@ -6,7 +6,8 @@ class Admin::CourseSchedulesController < ApplicationController
     course_schedule = CourseSchedule.new
 
     course = Course.find(params[:course])
-    course_schedule.order = CourseSchedule.where(:course_id => course.id).size + 1
+    course_schedule.order = CourseSchedule.where(
+        :course_id => course.id).size + 1
     course_schedule.course = Course.find(course)
 
     if course_schedule.save
@@ -18,7 +19,7 @@ class Admin::CourseSchedulesController < ApplicationController
     course_schedule = CourseSchedule.find(params[:id])
 
     if course_schedule != nil && course_schedule.destroy
-      # Success!
+      redirect_to admin_course_schedules_path
     end
   end
 
@@ -28,6 +29,7 @@ class Admin::CourseSchedulesController < ApplicationController
            :locals => {
                action: 'update',
                courses: Course.all,
+               locations: Location.all,
                url: edit_admin_course_schedule_path(@course_schedule)}
   end
 
@@ -40,6 +42,7 @@ class Admin::CourseSchedulesController < ApplicationController
     render :locals => {
                action: 'create',
                courses: Course.all,
+               locations: Location.all,
                url: admin_course_schedules_path}
   end
 end

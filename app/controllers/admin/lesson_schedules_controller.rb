@@ -1,4 +1,6 @@
 class Admin::LessonSchedulesController < ApplicationController
+  before_action :check_admin
+
   def update
     lesson_schedule = LessonSchedule.where(
         lesson_id: params[:lesson_id],
@@ -10,9 +12,9 @@ class Admin::LessonSchedulesController < ApplicationController
       lesson_schedule.course_schedule = CourseSchedule.find(
           params[:course_schedule_id])
     end
+    lesson_schedule.location = Location.find(params[:location])
     begin
-      lesson_schedule.held_at = DateTime.strptime(
-          params[:held_at], t('simple_datetime'))
+      lesson_schedule.held_at = Time.zone.parse(params[:held_at])
       if lesson_schedule.save
         redirect_to edit_admin_course_schedule_path(
                         params[:course_schedule_id])

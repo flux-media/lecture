@@ -2,10 +2,11 @@ ko:
   activerecord:
     models:
       category: '카테고리'
-      course_schedule: '강연일정'
-      program: '대주제'
       course: '소주제'
+      course_schedule: '강연일정'
       lesson: '강연'
+      location: '장소'
+      program: '대주제'
       teacher: '강사'
       user: '회원'
     attributes:
@@ -24,6 +25,14 @@ ko:
 
       lesson_schedule:
         held_at: '날짜'
+
+      location:
+        name: '이름'
+        phone_number: '전화번호'
+        address: '주소'
+        website: '웹사이트'
+        latitude: '위도'
+        longitude: '경도'
 
       program:
         name: '제목'

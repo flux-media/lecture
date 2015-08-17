@@ -1,0 +1,38 @@
+<% admin_title(Location.model_name.human) %>
+<% admin_subtitle(t(action)) %>
+
+<%= form_for @location,
+             url: {action: action},
+             html: {class: 'pure-form pure-form-stacked'} do |f| %>
+    <fieldset>
+      <%= f.hidden_field :id %>
+
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= Location.human_attribute_name('name') %>
+          <%= f.text_field :name %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= Location.human_attribute_name('latitude') %>
+          <%= f.text_field :latitude %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= Location.human_attribute_name('longitude') %>
+          <%= f.text_field :longitude %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= Location.human_attribute_name('phone_number') %>
+          <%= f.text_field :phone_number %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= Location.human_attribute_name('address') %>
+          <%= f.text_field :address %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= Location.human_attribute_name('website') %>
+          <%= f.text_field :website %>
+        </div>
+      </div>
+    </fieldset>
+    <%= submit_tag t('submit'), class: 'pure-button pure-button-primary' %>
+<% end %>

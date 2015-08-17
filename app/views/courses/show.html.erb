@@ -22,6 +22,7 @@
       <th><%= Lesson.human_attribute_name('name') %></th>
       <th><%= Teacher.model_name.human %></th>
       <th><%= LessonSchedule.human_attribute_name('held_at') %></th>
+      <th><%= Location.model_name.human %></th>
     </tr>
     </thead>
     <tbody>
@@ -41,6 +42,15 @@
                 <% end %>
             <% end %>
             <%= held_at %>
+          </td>
+          <td>
+            <% displayable_course_schedule.lesson_schedules.
+                    each do |lesson_schedule| %>
+                <% if lesson.id === lesson_schedule.lesson.id %>
+                    <%= lesson_schedule.location.nil? ?
+                                '' : lesson_schedule.location.name %>
+                <% end %>
+            <% end %>
           </td>
         </tr>
     <% end %>

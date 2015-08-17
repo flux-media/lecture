@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :categories, :programs, :courses,
               :lessons, :users, :course_schedules, :lesson_schedules,
-              :registrations, :sessions
+              :registrations, :sessions, :locations
   end
 
   # Example resource route with options:
