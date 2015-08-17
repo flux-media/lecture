@@ -1,14 +1,21 @@
 <% content_for :banner do %>
     <div class="form-center">
-      <%= form_for :user, url: new_user_path, html: {class: 'pure-form
-pure-form-stacked'} do %>
+      <%= form_for :user,
+                   url: users_path,
+                   html: {class: 'pure-form pure-form-stacked'} do |f| %>
           <fieldset>
-            <legend>Sign up</legend>
-            Name: <%= text_field_tag :name %>
-            Email: <%= text_field_tag :email %>
-            Password: <%= password_field_tag :password %>
+            <legend><%= t('sign_up') %></legend>
+            <%= f.label :name, User.human_attribute_name('name') %>
+            <%= f.text_field :name %>
+
+            <%= f.label :email, User.human_attribute_name('email') %>
+            <%= f.text_field :email %>
+
+            <%= f.label :password, User.human_attribute_name('password') %>
+            <%= f.password_field :password %>
           </fieldset>
-          <%= submit_tag 'Submit', class: 'pure-button pure-button-primary' %>
+          <%= submit_tag t('submit'),
+                         class: 'pure-button pure-button-primary' %>
       <% end %>
     </div>
 <% end %>

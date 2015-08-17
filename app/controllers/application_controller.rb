@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def check_admin
     unless is_admin
-      redirect_to root_path
+      redirect_to new_admin_session_path
     end
   end
 

@@ -1,13 +1,19 @@
 <% content_for :banner do %>
     <div class="form-center">
-      <%= form_tag login_path, class: 'pure-form pure-form-stacked' do %>
-          <%= hidden_field_tag 'target', @target %>
+      <%= form_for :user,
+                   url: login_path,
+                   html: {class: 'pure-form pure-form-stacked'} do |f| %>
+          <%= hidden_field_tag 'target', target %>
           <fieldset>
-            <legend>Log in</legend>
-            Email: <%= text_field_tag :email %>
-            Password: <%= password_field_tag :password %>
+            <legend><%= t('login') %></legend>
+            <%= f.label User.human_attribute_name('email') %>
+            <%= f.text_field :email %>
+
+            <%= f.label User.human_attribute_name('password') %>
+            <%= f.password_field :password %>
           </fieldset>
-          <%= submit_tag 'Submit', class: 'pure-button pure-button-primary' %>
+          <%= submit_tag t('submit'),
+                         class: 'pure-button pure-button-primary' %>
       <% end %>
     </div>
 <% end %>

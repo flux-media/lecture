@@ -1,7 +1,8 @@
 class AdminController < ApplicationController
+  before_action :check_admin
   layout 'admin'
 
   def index
-    render is_admin ? 'admin/index' : 'admin/login'
+    render 'admin/index'
   end
 end

@@ -1,0 +1,16 @@
+<div class="form-center">
+  <%= form_for :user,
+               url: admin_sessions_path,
+               html: {class: 'pure-form pure-form-stacked'} do |f| %>
+      <fieldset>
+        <legend><%= t('login') %></legend>
+        <%= f.label User.human_attribute_name('email') %>
+        <%= f.text_field :email %>
+
+        <%= f.label User.human_attribute_name('password') %>
+        <%= f.password_field :password %>
+      </fieldset>
+      <%= submit_tag t('submit'),
+                     class: 'pure-button pure-button-primary' %>
+  <% end %>
+</div>

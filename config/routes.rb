@@ -16,10 +16,11 @@ Rails.application.routes.draw do
 
   # Paths related to admin
   get '/admin' => 'admin#index', as: :admin
+  get '/admin/logout' => 'admin/sessions#destroy', as: :admin_sessions_destroy
   namespace :admin do
     resources :categories, :programs, :courses,
               :lessons, :users, :course_schedules, :lesson_schedules,
-              :registrations
+              :registrations, :sessions
   end
 
   # Example resource route with options:
@@ -32,12 +33,6 @@ Rails.application.routes.draw do
   #     collection do
   #       get 'sold'
   #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
   #   end
 
   # Example resource route with more complex sub-resources:
