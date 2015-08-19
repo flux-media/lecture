@@ -1,54 +1,24 @@
-<div class="pricing-tables pure-g">
-  <% unless @programs == nil %>
-      <% @programs.each do |program| %>
-          <div class="pure-u-1 pure-u-md-1-2">
-            <div class="pricing-table <%= program.style_class %>">
-              <div class="pricing-table-header">
-                <h2><%= program.name %></h2>
-
-          <span class="pricing-table-price">
-              $20 <span>per month</span>
-          </span>
-              </div>
-
-              <ul class="pricing-table-list">
-                <% program.courses.each do |course| %>
-                    <li><a href="<%= course_path course.id %>"><span class="span-bold">Course <%= course.id %>
-                      : <%= course.name %></span>
-						<span class="span-small">(Teacher:
-                          <% course.teachers.each do |teacher| %>
-							<%= teacher.user.name %>
-						<% end %>)</span>
-                    </a></li>
-
-                    <% course.lessons.each do |lesson| %>
-                        <li>Lesson <%= lesson.id %>: <%= lesson.name %>
-                          <!-- TODO: Insert held_at here.-->
-                          <span class="span-small"></span></li>
-                    <% end %>
-                <% end %>
-              </ul>
-
-              <button class="pure-button">Choose</button>
-            </div>
-          </div>
-      <% end %>
-  <% end %>
-
-  <h2 class="text-center">Upcoming courses</h2>
-
-  <div class="information pure-g">
-    <% @courses.each do |course| %>
-        <div class="pure-u-1 pure-u-md-1-2">
-          <div class="l-box">
-            <h3 class="information-head"><%= link_to course.name, course_path(course.id) %></h3>
-
-            <p><%= course.detail %></p>
-          </div>
+<div class="open-courses">
+  <% unless courses_1.nil? %>
+      <section id="grid" class="clear" data-columns="3">
+        <div class="column size-1of3">
+          <% courses_1.each do |course| %>
+              <%= render partial: 'card', locals: {course: course} %>
+          <% end %>
         </div>
-    <% end %>
-  </div>
-</div><!-- end information -->
+        <div class="column size-1of3">
+          <% courses_2.each do |course| %>
+              <%= render partial: 'card', locals: {course: course} %>
+          <% end %>
+        </div>
+        <div class="column size-1of3">
+          <% courses_3.each do |course| %>
+              <%= render partial: 'card', locals: {course: course} %>
+          <% end %>
+        </div>
+      </section>
+  <% end %>
+</div>
 
 <% content_for :banner do %>
     <h1 class="banner-head">

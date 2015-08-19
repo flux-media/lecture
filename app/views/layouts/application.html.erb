@@ -4,10 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= t('site_name') %></title>
-  <link rel="stylesheet"
-        href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-  <link rel="stylesheet"
-        href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
   <%= stylesheet_link_tag 'application',
                           media: 'all',
                           'data-turbolinks-track' => true %>
@@ -17,68 +13,60 @@
 </head>
 <body>
 
-<div class="pure-menu pure-menu-horizontal">
-  <a href="<%= root_path %>" class="pure-menu-heading">
-    <%= image_tag 'logo.png', {:class => 'logo'} %>
-  </a>
-  <ul class="pure-menu-list custom-pure-menu-list">
-    <li class="pure-menu-item pure-menu-selected">
-      <%= link_to t('main'), root_path,
-                  {class: 'pure-menu-link'} %>
-    </li>
-    <li class="pure-menu-item">
-      <%= link_to t('all_courses'), courses_path,
-                  {class: 'pure-menu-link'} %>
-    </li>
-    <li class="pure-menu-item">
-      <%= link_to t('new_payments'), new_payment_path,
-                  {class: 'pure-menu-link'} %>
-    </li>
-    <% if current_user %>
-        <% if is_admin %>
-            <li class="pure-menu-item float-right">
-              <%= link_to t('admin'), admin_path,
-                          {:class => 'pure-menu-link'} %>
-            </li>
-        <% end %>
-        <li class="pure-menu-item float-right">
-          <%= link_to t('signed_in_as') % [current_user.name],
-                      user_path(current_user.id),
-                      {:class => 'pure-menu-link'} %>
-        </li>
-        <li class="pure-menu-item float-right">
-          <%= link_to t('logout'), logout_path,
-                      {:class => 'pure-menu-link'} %>
-        </li>
-    <% else %>
-        <li class="pure-menu-item float-right">
-          <%= link_to t('sign_up'), sign_up_path,
-                      {:class => 'pure-menu-link'} %>
-        </li>
-        <li class="pure-menu-item float-right">
-          <%= link_to t('login'), login_path,
-                      {:class => 'pure-menu-link'} %>
-        </li>
-    <% end %>
-  </ul>
-</div>
-
-<% if @is_banner_visible %>
-    <div class="banner" style="background: transparent url('<%= content_for?(:thumbnail_url) ? content_for(:thumbnail_url) : 'http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg' %>') 0 0 no-repeat fixed;
-            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= content_for?(:thumbnail_url) || 'http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg' %>', sizingMethod='scale');">
-      <%= content_for :banner %>
+<div class="container">
+  <!-- Add "slideRight" class to items that move right when viewing Nav Drawer -->
+  <header class="slide">
+    <div class="header-contents">
+      <!-- Add "slideRight" class to items that move right when viewing Nav Drawer -->
+      <ul id="navToggle" class="burger slide">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <h1><%= link_to t('site_name'), root_path %></h1>
     </div>
-<% end %>
+  </header>
 
-<div class="l-content">
-  <%= yield %>
-</div>
-<!-- end l-content -->
+  <nav class="slide">
+    <ul>
+      <li><%= link_to t('main'), root_path %></li>
+      <li><%= link_to t('all_courses'), courses_path %></li>
+      <li><%= link_to t('new_payments'), new_payment_path %></li>
+      <% if current_user %>
+          <% if is_admin %>
+              <li><%= link_to t('admin'), admin_path %></li>
+          <% end %>
+          <li>
+            <%= link_to t('signed_in_as') % [current_user.name],
+                        user_path(current_user.id) %>
+          </li>
+          <li><%= link_to t('logout'), logout_path %></li>
+      <% else %>
+          <li><%= link_to t('sign_up'), sign_up_path %></li>
+          <li><%= link_to t('login'), login_path %></li>
+      <% end %>
+    </ul>
+  </nav>
 
-<div class="footer l-box">
-  <p>
-    <%= t('site_name') %> <%= t('copyright') %>
-  </p>
+  <!-- Add "slideRight" class to items that move right when viewing Nav Drawer -->
+  <div class="content slide">
+    <% if @is_banner_visible %>
+        <div class="banner" style="background-image: url('<%= content_for?(:thumbnail_url) ?
+        content_for(:thumbnail_url) : 'https://upload.wikimedia.org/wikipedia/commons/3/34/Math_lecture_at_TKK.JPG' %>')">
+          <%= content_for :banner %>
+        </div>
+    <% end %>
+    <div class="body-section">
+      <%= yield %>
+    </div>
+    <div class="footer-wrapper">
+      <div class="footer">
+        <p>
+          <span class="logo"><%= t('site_name') %></span> <%= t('copyright') %>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
