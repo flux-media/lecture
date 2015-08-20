@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   has_one :teacher, :dependent => :destroy
   has_many :payments, :dependent => :destroy
 
+  validates :email, :presence => true, :email => true, :uniqueness => true
+  validates :name, :presence => true, :length => {:maximum => 30}
+
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
   end
@@ -23,7 +26,9 @@ class User < ActiveRecord::Base
   end
 
   def credit
-    credit = Payment.where(user_id: self.id, payment_state_id: 2).group(:user_id).sum(:point)[self.id]
+    credit = Payment.where(
+        user_id: self.id,
+        payment_state_id: 2).group(:user_id).sum(:point)[self.id]
     if credit.nil?
       0
     else

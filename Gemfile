@@ -29,6 +29,9 @@ gem 'bcrypt', '~> 3.1.7'
 # For smooth jQuery implementation
 gem 'jquery-turbolinks'
 
+# For email validation
+gem 'email_validator'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

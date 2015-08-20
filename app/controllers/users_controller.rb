@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
   def create
     user = User.new(user_params)
-
-    student = Student.new
-    user.student = student
     if user.save
+      student = Student.new
+      user.student = student
       session[:user_id] = user.id
       redirect_to root_path
     else
@@ -17,7 +16,9 @@ class UsersController < ApplicationController
   end
 
   def new
-    @is_banner_visible = true
+    if current_user
+      redirect_to user_path current_user
+    end
   end
 
   def show

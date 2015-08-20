@@ -12,9 +12,11 @@
 //
 //= require jquery
 //= require jquery.turbolinks
-//= require ladda/ladda.min.js
 //= require ladda/spin.min.js
+//= require ladda/ladda.min.js
 //= require salvattore.min
 //= require trunk
+//= require sessions
+//= require users
 //= require welcome
 //= require turbolinks

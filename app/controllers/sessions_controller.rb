@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-    @is_banner_visible = true
     render :locals => {target: params[:target]}
   end
 

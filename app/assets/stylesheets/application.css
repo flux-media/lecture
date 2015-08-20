@@ -15,5 +15,6 @@
  *= require trunk
  *= require welcome
  *= require courses
+ *= require users
  *= require ladda/ladda.min.css
  */
