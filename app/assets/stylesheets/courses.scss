@@ -1,31 +1,83 @@
-// Place all the styles related to the courses controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$break-small: 800px;
 
-aside {
-  background: #ccc;
-  padding: 0.3em 1em;
-  border-radius: 3px;
-  color: #fff;
-  text-align: center;
-  margin: 1em 0;
+.center-table {
+  margin: 1em auto;
 }
 
-.custom-table {
-  width: 100%;
-}
+.course {
+  .course-header {
+    overflow: hidden;
+    margin: 0 0 3em;
 
-.teacher {
-  h2 {
-    text-align: center;
+    .course-thumbnail {
+      float: left;
+      width: 50%;
+      text-align: center;
+      max-height: 220px;
+      overflow: hidden;
+
+      @media screen and (max-width: $break-small) {
+        width: 100%;
+        margin-bottom: 2em;
+      }
+
+      img {
+        width: 80%;
+      }
+    }
+
+    .course-summary {
+      float: left;
+      width: 50%;
+      line-height: 1.5em;
+      padding: 1em 0;
+
+      @media screen and (max-width: $break-small) {
+        width: 100%;
+      }
+
+      h2 {
+        font-size: 2em;
+        line-height: 1.5em;
+        color: #333333;
+      }
+
+      p {
+        margin: 2em 0;
+      }
+
+      p.summary {
+        margin-bottom: 0;
+      }
+
+      p.schedule {
+        margin-top: 1em;
+        text-align: center;
+        font-size: 1.2em;
+        color: #555555;
+      }
+
+      .registration {
+        text-align: center;
+      }
+    }
   }
-}
 
-.registration {
-  text-align: center;
-}
+  .course-body {
+    clear: both;
 
-.button-warning {
-  color: white;
-  background: rgb(223, 117, 20); /* this is an orange */
+    .course-body-element {
+      margin-bottom: 2em;
+
+      h3 {
+        font-size: 1.5em;
+        color: #555555;
+      }
+
+      p {
+        margin: 1em 0;
+        line-height: 1.5em;
+      }
+    }
+  }
 }

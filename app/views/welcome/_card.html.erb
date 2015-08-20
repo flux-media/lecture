@@ -1,17 +1,19 @@
-<div class="card">
-  <%= image_tag course.thumbnail, class: 'card-thumbnail' %>
+<a href="<%= course_path course.id %>">
+  <div class="card">
+    <%= image_tag course.thumbnail, class: 'card-thumbnail' %>
 
-  <div class="contents">
-    <p class="category"><%= course.program.category.name %></p>
+    <div class="contents">
+      <p class="category"><%= course.program.category.name %></p>
 
-    <p class="program"><%= course.program.name %></p>
+      <p class="program"><%= course.program.name %></p>
 
-    <p class="course"><%= course.name %></p>
+      <p class="course"><%= course.name %></p>
 
-    <p class="teachers">
-      <% course.teachers.each do |teacher| %>
-          <%= teacher.user.name %>
-      <% end %>
-    </p>
+      <p class="teachers">
+        <% course.teachers.each do |teacher| %>
+            <%= teacher.user.name %>
+        <% end %>
+      </p>
+    </div>
   </div>
-</div>
+</a>

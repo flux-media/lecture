@@ -17,6 +17,7 @@ ko:
 
       course:
         name: '제목'
+        detail: '소개'
 
       course_schedule:
         order: '회차'

@@ -35,8 +35,6 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @is_banner_visible = true
-
     @course = Course.find(params[:id])
     teachers_array = Array.new
 
@@ -81,7 +79,8 @@ class CoursesController < ApplicationController
     end
 
     registration = Registration.has_duplicate(
-        displayable_course_schedule.id, current_user)
+        displayable_course_schedule.nil? ? nil :
+            displayable_course_schedule.id, current_user)
 
     render :locals => {
                displayable_course_schedule: displayable_course_schedule,

@@ -1,17 +1,17 @@
 <div class="open-courses">
   <% unless courses_1.nil? %>
-      <section id="grid" class="clear" data-columns="3">
-        <div class="column size-1of3">
+      <section id="grid" class="clear" data-columns>
+        <div class="column">
           <% courses_1.each do |course| %>
               <%= render partial: 'card', locals: {course: course} %>
           <% end %>
         </div>
-        <div class="column size-1of3">
+        <div class="column">
           <% courses_2.each do |course| %>
               <%= render partial: 'card', locals: {course: course} %>
           <% end %>
         </div>
-        <div class="column size-1of3">
+        <div class="column">
           <% courses_3.each do |course| %>
               <%= render partial: 'card', locals: {course: course} %>
           <% end %>

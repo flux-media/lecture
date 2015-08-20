@@ -1,6 +1,6 @@
 body {
-  font: 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
   color: #9aa6af;
+  background-color: #fafafa;
   text-rendering: optimizelegibility;
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -22,6 +22,7 @@ a {
 
 .container {
   overflow: hidden;
+  position: relative;
 
   /*  Prevents Flickering  */
   -webkit-backface-visibility: hidden;
@@ -31,6 +32,7 @@ a {
 
 header {
   height: 60px;
+  background-color: white;
 
   .header-contents {
     max-width: 1024px;
@@ -72,7 +74,7 @@ header h1 {
 
 nav {
   position: absolute;
-  top: 0;
+  top: calc((60px - 3em) / 2);
   right: calc((100% - 1024px) / 2)
 }
 
@@ -82,9 +84,8 @@ nav li {
 }
 
 nav li a {
-  font-size: 11px;
   color: #9aa6af;
-  padding: 24px 15px;
+  padding: 1em;
   display: block;
 }
 
@@ -94,6 +95,10 @@ nav li a:hover {
 
 /*  Removable CSS  */
 @media only screen and (max-width: 780px) {
+
+  .content {
+    margin-top: 60px;
+  }
 
   header {
     height: 60px;
@@ -372,14 +377,6 @@ nav li a:hover {
 
 /* Added by Lee Han Kyeol */
 
-body {
-  background-color: #fafafa;
-}
-
-.container {
-  position: relative;
-}
-
 @media only screen and (max-width: 780px) {
   .container {
     background-color: white;
@@ -387,11 +384,11 @@ body {
 }
 
 .content {
-  background-color: white;
+  background-color: #fafafa;
 }
 
 header.slide {
-  border-bottom: 3px solid #ccc;
+  border-bottom: 3px solid #cccccc;
 }
 
 header.slide h1 {
@@ -415,11 +412,6 @@ nav.slide ul {
   padding-right: 1em;
 }
 
-nav.slide li a {
-  font-size: 1.2em;
-  padding: 1.5em 1em;
-}
-
 .burger li {
   background-color: #cccccc;
 }
@@ -434,12 +426,6 @@ nav.slide li a {
   background: no-repeat center;
 }
 
-@media only screen and (max-width: 780px) {
-  .banner {
-    margin-top: 60px;
-  }
-}
-
 .banner-head {
   display: table-cell;
   text-align: center;
@@ -451,11 +437,11 @@ nav.slide li a {
   text-shadow: 0 1px 1px black;
 }
 
-.body-section {
-  margin: 2em auto;
-  background-color: #fafafa;
+.body {
+  margin: 0 auto;
   max-width: 1024px;
-  padding: 0;
+  padding: 2em 1em;
+  background-color: white;
 }
 
 .footer-wrapper {
@@ -467,7 +453,9 @@ nav.slide li a {
     margin: 0 auto;
     padding: 2em;
 
-    p {
+    .footer-contents {
+      margin: 0 2em;
+
       span.logo {
         font-size: 2em;
       }

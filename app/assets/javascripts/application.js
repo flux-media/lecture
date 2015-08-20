@@ -11,7 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require trunk
+//= require jquery.turbolinks
+//= require ladda/ladda.min.js
+//= require ladda/spin.min.js
 //= require salvattore.min
+//= require trunk
+//= require welcome
+//= require turbolinks

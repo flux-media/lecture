@@ -57,7 +57,11 @@ ko:
   courses_closed: "수강 불가"
   courses_registered: "등록한 강연"
   courses_completed: "완료된 강연"
+  register_course: "수강 신청하기"
+  course_starts_from: "%s부터 시작"
+  course_ends: "수강 완료"
+
   copyright: "Copyright © 2015 PPSS"
   add_new_location: "새 장소 추가"
   new_payments: "결제하기"
-  register_course: "수강 신청하기"
+  not_decided: "미정"

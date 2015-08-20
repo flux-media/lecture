@@ -3,9 +3,10 @@ class CreateCourses < ActiveRecord::Migration
     create_table :courses do |t|
       t.belongs_to :program, index: true
 
-    	t.string :name, null: false
-    	t.string :detail, null: true
-    	t.string :thumbnail, null: true
+      t.string :name, null: false
+      t.string :summary
+      t.string :detail
+      t.string :thumbnail
 
       t.timestamps null: false
     end

@@ -7,6 +7,7 @@
   <%= stylesheet_link_tag 'application',
                           media: 'all',
                           'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/tables-min.css">
   <%= javascript_include_tag 'application',
                              'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -56,14 +57,14 @@
           <%= content_for :banner %>
         </div>
     <% end %>
-    <div class="body-section">
+    <div class="body">
       <%= yield %>
     </div>
     <div class="footer-wrapper">
       <div class="footer">
-        <p>
+        <div class="footer-contents">
           <span class="logo"><%= t('site_name') %></span> <%= t('copyright') %>
-        </p>
+        </div>
       </div>
     </div>
   </div>

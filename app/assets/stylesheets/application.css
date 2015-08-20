@@ -14,4 +14,6 @@
  *= require reset
  *= require trunk
  *= require welcome
+ *= require courses
+ *= require ladda/ladda.min.css
  */

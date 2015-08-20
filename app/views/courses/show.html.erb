@@ -1,89 +1,118 @@
-<% banner_thumbnail_url @course.thumbnail %>
+<div class="course">
+  <div class="course-header">
+    <div class="course-thumbnail">
+      <%= image_tag @course.thumbnail %>
+    </div>
+    <div class="course-summary">
+      <h2><%= @course.name %></h2>
 
-<div class="courses">
-  <aside><%= @course.detail %></aside>
-</div>
+      <p class="summary"><%= @course.summary %></p>
 
-<div class="teacher">
-  <h2><%= Teacher.model_name.human %></h2>
-  <% @course.teachers.each do |teacher| %>
-      <p>
-        <%= teacher.user.name %>: <%= teacher.description %>
+      <p class="schedule">
+        <% if is_course_open && !displayable_course_schedule.nil? %>
+            <%= t('course_starts_from') % [displayable_course_schedule.lesson_schedules.first.held_at.strftime(t('simple_date'))] %>
+        <% else %>
+            <%= t('course_ends') %>
+        <% end %>
       </p>
-  <% end %>
-</div>
 
-<div class="course_schedule">
-  <h2><%= CourseSchedule.model_name.human %></h2>
-  <table class="pure-table custom-table">
-    <thead>
-    <tr>
-      <th></th>
-      <th><%= Lesson.human_attribute_name('name') %></th>
-      <th><%= Teacher.model_name.human %></th>
-      <th><%= LessonSchedule.human_attribute_name('held_at') %></th>
-      <th><%= Location.model_name.human %></th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @course.lessons.each_with_index do |lesson, index| %>
+      <div class="registration">
+        <% if is_course_open %>
+            <% if registration.nil? %>
+                <% if current_user.credit > 0 %>
+                    <%= form_tag course_registrations_path(@course) do %>
+                        <%= submit_tag t('register_course'),
+                                       class: 'ladda-button',
+                                       'data-color' => 'green' %>
+                    <% end %>
+                <% else %>
+                    <%= link_to t('register_course'), new_payment_path,
+                                class: 'ladda-button',
+                                'data-color' => 'green' %>
+                <% end %>
+            <% else %>
+                <%= form_tag course_registration_path(@course, registration),
+                             method: 'delete' do %>
+                    <%= submit_tag t('cancel_registration'),
+                                   class: 'ladda-button' %>
+                <% end %>
+            <% end %>
+        <% else %>
+            <%= link_to t('courses_closed'), '#',
+                        class: 'ladda-button',
+                        disabled: 'disabled' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="course-body">
+    <div class="course-body-element">
+      <h3><%= Course.human_attribute_name('detail') %></h3>
+
+      <p>
+        <%= @course.detail %>
+      </p>
+    </div>
+
+    <div class="course-body-element">
+      <h3><%= Teacher.model_name.human %></h3>
+
+      <p>
+        <% @course.teachers.each do |teacher| %>
+            <%= teacher.user.name %>: <%= teacher.description %>
+        <% end %>
+      </p>
+    </div>
+
+    <div class="course-body-element">
+      <h3><%= CourseSchedule.model_name.human %></h3>
+      <table class="pure-table center-table">
+        <thead>
         <tr>
-          <td><%= index + 1 %></td>
-          <td><%= lesson.name %></td>
-          <td><%= lesson.teacher.user.name %></td>
-          <td>
-            <% held_at = '' %>
-            <% displayable_course_schedule.lesson_schedules.
-                    each do |lesson_schedule| %>
-                <% if lesson.id === lesson_schedule.lesson.id %>
-                    <% held_at = lesson_schedule.held_at.
-                            strftime(t('simple_datetime')) %>
-                    <% break %>
-                <% end %>
-            <% end %>
-            <%= held_at %>
-          </td>
-          <td>
-            <% displayable_course_schedule.lesson_schedules.
-                    each do |lesson_schedule| %>
-                <% if lesson.id === lesson_schedule.lesson.id %>
-                    <%= lesson_schedule.location.nil? ?
-                                '' : lesson_schedule.location.name %>
-                <% end %>
-            <% end %>
-          </td>
+          <th></th>
+          <th><%= Lesson.human_attribute_name('name') %></th>
+          <th><%= Teacher.model_name.human %></th>
+          <th><%= LessonSchedule.human_attribute_name('held_at') %></th>
+          <th><%= Location.model_name.human %></th>
         </tr>
-    <% end %>
-    </tbody>
-  </table>
+        </thead>
+        <tbody>
+        <% @course.lessons.each_with_index do |lesson, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= lesson.name %></td>
+              <td><%= lesson.teacher.user.name %></td>
+              <td>
+                <% held_at = '' %>
+                <% unless displayable_course_schedule.nil? %>
+                    <% displayable_course_schedule.lesson_schedules.
+                            each do |lesson_schedule| %>
+                        <% if lesson.id === lesson_schedule.lesson.id %>
+                            <% held_at = lesson_schedule.held_at.
+                                    strftime(t('simple_datetime')) %>
+                            <% break %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <%= held_at %>
+              </td>
+              <td>
+                <% unless displayable_course_schedule.nil? %>
+                    <% displayable_course_schedule.lesson_schedules.
+                            each do |lesson_schedule| %>
+                        <% if lesson.id === lesson_schedule.lesson.id %>
+                            <%= lesson_schedule.location.nil? ?
+                                        t('not_decided') :
+                                        lesson_schedule.location.name %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-
-<div class="registration">
-  <% if is_course_open %>
-      <% if registration.nil? %>
-          <% if current_user.credit > 0 %>
-              <%= form_tag course_registrations_path(@course),
-                           class: 'pure-form' do %>
-                  <%= submit_tag t('register_course'),
-                                 class: 'pure-button pure-button-primary' %>
-              <% end %>
-          <% else %>
-              <%= link_to t('register_course'), new_payment_path,
-                          class: 'pure-button' %>
-          <% end %>
-      <% else %>
-          <%= form_tag course_registration_path(@course, registration),
-                       class: 'pure-form', method: 'delete' do %>
-              <%= submit_tag t('cancel_registration'),
-                             class: 'button-warning pure-button' %>
-          <% end %>
-      <% end %>
-  <% else %>
-      <%= link_to t('courses_closed'), '#',
-                  class: 'pure-button pure-button-disabled' %>
-  <% end %>
-</div>
-
-<% content_for :banner do %>
-    <h1 class="banner-head"><%= @course.name %></h1>
-<% end %>

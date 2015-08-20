@@ -18,8 +18,34 @@
   content: '3 .column.size-1of3'
 }
 
+@media screen and (max-width: 480px) {
+  #grid[data-columns]::before {
+    content: '1 .column.size-1of1';
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  #grid[data-columns]::before {
+    content: '2 .column.size-1of2';
+  }
+}
+
+@media screen and (min-width: 769px) {
+  #grid[data-columns]::before {
+    content: '3 .column.size-1of3';
+  }
+}
+
 .column {
   float: left;
+}
+
+.size-1of1 {
+  width: 100%;
+}
+
+.size-1of2 {
+  width: 50%;
 }
 
 .size-1of3 {
@@ -40,17 +66,16 @@
     padding: 1em;
 
     .category {
-      font-size: 1em;
+      font-size: 0.8em;
     }
 
     .program {
-      font-size: 1.2em;
       margin: 0 0 0.5em;
     }
 
     .course {
-      min-height: 5em;
-      font-size: 1.8em;
+      min-height: 4em;
+      font-size: 1.5em;
     }
   }
 }
