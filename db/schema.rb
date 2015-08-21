@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817055633) do
+ActiveRecord::Schema.define(version: 20150821052152) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
@@ -116,6 +116,16 @@ ActiveRecord::Schema.define(version: 20150817055633) do
 
   add_index "registrations", ["course_schedule_id"], name: "index_registrations_on_course_schedule_id"
   add_index "registrations", ["student_id"], name: "index_registrations_on_student_id"
+
+  create_table "reset_password_tokens", force: :cascade do |t|
+    t.integer  "user_id",                    null: false
+    t.string   "key"
+    t.boolean  "expired",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "reset_password_tokens", ["user_id"], name: "index_reset_password_tokens_on_user_id"
 
   create_table "students", force: :cascade do |t|
     t.datetime "created_at", null: false
