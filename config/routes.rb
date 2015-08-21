@@ -7,8 +7,11 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy', as: :logout
   get '/signup' => 'users#new', as: :sign_up
+
   post '/signup_by_provider' => 'sessions#new_by_provider',
        as: :sign_up_by_provider
+  post '/reset_password' => 'users#reset_password',
+       as: :reset_password
 
   resources :users, :payments
 

@@ -30,8 +30,25 @@
                   data: {url: sign_up_by_provider_path} do %>
   <% end %>
 
-  <%= button_tag t('sign_up_with_facebook'),
-                 {id: 'sign-up-with-facebook-button',
-                  class: 'ladda-button',
-                  'data-style' => 'expand-right'} %>
+  <div class="form-by-providers">
+    <%= button_tag t('sign_up_with_facebook'),
+                   {id: 'sign-up-with-facebook-button',
+                    class: 'ladda-button',
+                    'data-style' => 'expand-right'} %>
+  </div>
+
+  <%= form_tag reset_password_path,
+               {id: 'reset-password',
+                class: 'pure-form pure-form-stacked'} do %>
+      <legend><%= t('reset_password') %></legend>
+      <fieldset>
+        <%= label_tag :email, User.human_attribute_name('email') %>
+        <%= text_field_tag :email, '', {class: 'input-big'} %>
+      </fieldset>
+
+      <%= button_tag t('reset_password'),
+                     {id: 'reset-password-button',
+                      class: 'ladda-button',
+                      'data-style' => 'expand-right'} %>
+  <% end %>
 </div>

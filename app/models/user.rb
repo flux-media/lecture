@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   has_one :student, :dependent => :destroy
   has_one :teacher, :dependent => :destroy
+  has_many :reset_password_tokens, :dependent => :destroy
   has_many :payments, :dependent => :destroy
 
   validates :email, :presence => true, :email => true, :uniqueness => true

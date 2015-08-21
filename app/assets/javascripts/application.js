@@ -15,6 +15,7 @@
 //= require ladda/spin.min.js
 //= require ladda/ladda.min.js
 //= require salvattore.min
+//= require sweetalert/dist/sweetalert.min.js
 //= require trunk
 //= require sessions
 //= require users

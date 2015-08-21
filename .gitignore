@@ -22,5 +22,8 @@
 *.iws
 *.DS_Store
 
+# For Bower
+/vendor/assets/components/
+
 # For private information
 /db/seeds.rb

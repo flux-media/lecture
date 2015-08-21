@@ -42,6 +42,57 @@ $(document).on('submit', '#user-new', function (e) {
     }
 });
 
+$(document).on('submit', '#reset-password', function (e) {
+    e.preventDefault();
+
+    var $this = $(this);
+    var data = {};
+    $.each($this.serializeArray(), function (index, field) {
+        data[field.name] = field.value;
+    });
+
+    var l = Ladda.create(document.querySelector('#reset-password-button'));
+    l.start();
+
+    if (data['email'].length <= 0) {
+        $this.find('#email').focus();
+        l.stop();
+        return false;
+    }
+
+    $.ajax({
+        method: 'POST',
+        url: $this.attr('action'),
+        data: {
+            email: data['email'],
+            authenticity_token: $('meta[name=csrf-token]').attr('content')
+        },
+        success: function (response) {
+            l.stop();
+            swal({
+                title: response.data.title,
+                text: response.data.text,
+                type: response.data.type,
+                confirmButtonText: response.data.confirmButtonText
+            });
+
+            if (response.result === 0) {
+                $this.find('#email').val('');
+            }
+        },
+        error: function (response) {
+            l.stop();
+            swal({
+                title: "Error!",
+                text: "Something's wrong!",
+                type: "error",
+                confirmButtonText: "Sorry"
+            });
+        }
+    });
+});
+
+
 $(document).on('click', '#sign-up-with-facebook-button', function (e) {
     e.preventDefault();
     var l = Ladda.create(document.querySelector('#sign-up-with-facebook-button'));
