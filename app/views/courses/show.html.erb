@@ -19,7 +19,12 @@
       <div class="registration">
         <% if is_course_open %>
             <% if registration.nil? %>
-                <% if current_user.credit > 0 %>
+                <% if current_user.nil? %>
+                    <%= link_to t('register_course'),
+                                login_path(target: course_path(@course)),
+                                class: 'ladda-button',
+                                'data-color' => 'green' %>
+                <% elsif current_user.credit > 0 %>
                     <%= form_tag course_registrations_path(@course) do %>
                         <%= submit_tag t('register_course'),
                                        class: 'ladda-button',

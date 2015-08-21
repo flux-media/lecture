@@ -66,3 +66,5 @@ ko:
   new_payments: "결제하기"
   not_decided: "미정"
   agree_on_terms: "약관에 동의합니다."
+  sign_up_with_facebook: "페이스북으로 가입하기"
+  login_with_facebook: "페이스북으로 로그인하기"

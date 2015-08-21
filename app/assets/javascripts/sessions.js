@@ -9,7 +9,8 @@ $(document).on('submit', '#session-new', function (e) {
         $this.find('#user_email').focus();
         e.preventDefault();
         return false;
-    } else if (data['user[password]'].length <= 0) {
+    }
+    else if (data['user[password]'].length <= 0) {
         $this.find('#user_password').focus();
         e.preventDefault();
         return false;

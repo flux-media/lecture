@@ -20,8 +20,18 @@
         </label>
       </fieldset>
 
-      <%= button_tag t('sign_up'), {id: 'submit-button',
-                                    class: 'ladda-button',
-                                    'data-style' => 'expand-right'} %>
+      <%= button_tag t('sign_up'),
+                     {id: 'submit-button',
+                      class: 'ladda-button',
+                      'data-style' => 'expand-right'} %>
   <% end %>
+
+  <%= content_tag 'div', id: 'sign_up_by_provider_path',
+                  data: {url: sign_up_by_provider_path} do %>
+  <% end %>
+
+  <%= button_tag t('sign_up_with_facebook'),
+                 {id: 'sign-up-with-facebook-button',
+                  class: 'ladda-button',
+                  'data-style' => 'expand-right'} %>
 </div>

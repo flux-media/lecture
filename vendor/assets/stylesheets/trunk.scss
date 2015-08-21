@@ -394,6 +394,10 @@ header.slide {
 header.slide h1 {
   font-size: 2em;
   padding-left: 1em;
+
+  @media only screen and (max-width: 780px) {
+    padding-left: 0;
+  }
 }
 
 header.slide h1 a {
