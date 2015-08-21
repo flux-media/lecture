@@ -1,3 +1,5 @@
+require 'mailgun'
+
 class UsersController < ApplicationController
   def create
     user = User.new(user_params)
@@ -34,7 +36,18 @@ class UsersController < ApplicationController
       if token.save
         result['result'] = 0
       end
-      UserMailer.reset_password(user).deliver_now
+
+      # First, instantiate the Mailgun Client with your API key
+      mg_client = Mailgun::Client.new(Rails.application.secrets.mailgun_key)
+
+      # Define your message parameters
+      message_params = {:from => 'bob@sandboxdd06a1ef54af47498077a84b91a0f0a0.mailgun.org',
+                        :to => user.email,
+                        :subject => 'The Ruby SDK is awesome!',
+                        :text => 'It is really easy to send a message!'}
+
+      # Send your message through the client
+      mg_client.send_message 'sandboxdd06a1ef54af47498077a84b91a0f0a0.mailgun.org', message_params
     end
 
     render json: result

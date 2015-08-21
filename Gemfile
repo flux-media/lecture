@@ -32,6 +32,9 @@ gem 'jquery-turbolinks'
 # For email validation
 gem 'email_validator'
 
+# For Mailgun support
+gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
