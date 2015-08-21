@@ -69,11 +69,25 @@ $(document).on('submit', '#reset-password', function (e) {
         },
         success: function (response) {
             l.stop();
-            console.log(response);
+            swal({
+                title: response.data.title,
+                text: response.data.text,
+                type: response.data.type,
+                confirmButtonText: response.data.confirmButtonText
+            });
+
+            if (response.result === 0) {
+                $this.find('#email').val('');
+            }
         },
         error: function (response) {
             l.stop();
-            console.log(response);
+            swal({
+                title: "Error!",
+                text: "Something's wrong!",
+                type: "error",
+                confirmButtonText: "Sorry"
+            });
         }
     });
 });

@@ -21,9 +21,15 @@ class UsersController < ApplicationController
     email = params[:email]
     result = Hash.new
     result['result'] = 1
+    result['data'] = Hash.new
 
     user = User.find_by_email(email)
-    unless user.nil?
+    if user.nil?
+      result['data']['title'] = t('error')
+      result['data']['text'] = t('no_email_exists')
+      result['data']['type'] = 'error'
+      result['data']['confirmButtonText'] = t('confirm')
+    else
       tokens = ResetPasswordToken.where(:user_id => user.id, :expired => false)
 
       unless tokens.nil?
@@ -34,20 +40,29 @@ class UsersController < ApplicationController
       token.key = SecureRandom.hex(32)
       token.user = user
       if token.save
+        # First, instantiate the Mailgun Client with your API key
+        mg_client = Mailgun::Client.new(Rails.application.secrets.mailgun_key)
+
+        # Define your message parameters
+        message_params = {:from => 'bob@sandboxdd06a1ef54af47498077a84b91a0f0a0.mailgun.org',
+                          :to => user.email,
+                          :subject => 'The Ruby SDK is awesome!',
+                          :text => 'It is really easy to send a message!'}
+
+        # Send your message through the client
+        mg_client.send_message 'sandboxdd06a1ef54af47498077a84b91a0f0a0.mailgun.org', message_params
+
         result['result'] = 0
+        result['data']['title'] = t('success')
+        result['data']['text'] = t('check_email')
+        result['data']['type'] = 'success'
+        result['data']['confirmButtonText'] = t('confirm')
+      else
+        result['data']['title'] = t('error')
+        result['data']['text'] = t('database_error')
+        result['data']['type'] = 'error'
+        result['data']['confirmButtonText'] = t('confirm')
       end
-
-      # First, instantiate the Mailgun Client with your API key
-      mg_client = Mailgun::Client.new(Rails.application.secrets.mailgun_key)
-
-      # Define your message parameters
-      message_params = {:from => 'bob@sandboxdd06a1ef54af47498077a84b91a0f0a0.mailgun.org',
-                        :to => user.email,
-                        :subject => 'The Ruby SDK is awesome!',
-                        :text => 'It is really easy to send a message!'}
-
-      # Send your message through the client
-      mg_client.send_message 'sandboxdd06a1ef54af47498077a84b91a0f0a0.mailgun.org', message_params
     end
 
     render json: result
