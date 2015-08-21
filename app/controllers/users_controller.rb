@@ -60,7 +60,7 @@ class UsersController < ApplicationController
       token.user = user
       if token.save
         # First, instantiate the Mailgun Client with your API key
-        mg_client = Mailgun::Client.new(Rails.application.secrets.mailgun_key, 'bin.mailgun.net', '97d74c4f', ssl = false)
+        mg_client = Mailgun::Client.new(Rails.application.secrets.mailgun_key)
 
         # Define your message parameters
         html_body = render_to_string template: 'user_mailer/reset_password',
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
                           :html => html_body.to_str}
 
         # Send your message through the client
-        mg_client.send_message 'sandboxdd06a1ef54af47498077a84b91a0f0a0.mailgun.org', message_params
+        mg_client.send_message('sandboxdd06a1ef54af47498077a84b91a0f0a0.mailgun.org', message_params)
 
         result['result'] = 0
         result['data']['title'] = t('success')

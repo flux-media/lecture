@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post '/reset_password' => 'users#reset_password',
        as: :reset_password
 
+  get '/sessions/new_from_token/:user_id/:key' => 'sessions#new_from_token'
+
   resources :users, :payments
 
   resources :courses do

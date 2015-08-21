@@ -41,7 +41,7 @@ $(document).on('submit', '#user-new', function (e) {
         success: function (response) {
             l.stop();
             if (response.result === 0) {
-                window.location.href = response.redirect_url;
+                window.location.href = response.data.redirect_url;
             } else {
                 swal({
                     title: response.data.title,

@@ -85,4 +85,21 @@ class SessionsController < ApplicationController
 
     render json: result
   end
+
+  def new_from_token
+    user_id = params[:user_id]
+    token = ResetPasswordToken.where(:user_id => user_id, :key => params[:key]).last
+
+    if token.nil? || token.expired === true
+      # TODO: Redirect to 'expired key' page.
+      not_found
+    else
+      token.expired = true
+      if token.save
+        session[:user_id] = user_id
+
+        redirect_to user_path user_id
+      end
+    end
+  end
 end
