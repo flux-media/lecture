@@ -2,15 +2,34 @@ require 'mailgun'
 
 class UsersController < ApplicationController
   def create
-    user = User.new(user_params)
-    if user.save
-      student = Student.new
-      user.student = student
-      session[:user_id] = user.id
-      redirect_to root_path
+    result = Hash.new
+    result['result'] = 1
+    result['data'] = Hash.new
+
+    user = User.find_by_email(params[:user][:email])
+    if user.nil?
+      user = User.new(user_params)
+      if user.save
+        student = Student.new
+        user.student = student
+        session[:user_id] = user.id
+
+        result['result'] = 0
+        result['data']['redirect_url'] = root_path
+      else
+        result['data']['title'] = t('error')
+        result['data']['text'] = t('database_error')
+        result['data']['type'] = 'error'
+        result['data']['confirmButtonText'] = t('confirm')
+      end
     else
-      redirect_to sign_up_path
+      result['data']['title'] = t('error')
+      result['data']['text'] = t('duplicate_email_exists')
+      result['data']['type'] = 'error'
+      result['data']['confirmButtonText'] = t('confirm')
     end
+
+    render json: result
   end
 
   def edit

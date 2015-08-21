@@ -1,4 +1,6 @@
 $(document).on('submit', '#user-new', function (e) {
+    e.preventDefault();
+
     var $this = $(this);
     var data = {};
     $.each($this.serializeArray(), function (index, field) {
@@ -11,29 +13,55 @@ $(document).on('submit', '#user-new', function (e) {
     if (data['user[email]'].length <= 0) {
         $this.find('#user_email').focus();
         l.stop();
-        e.preventDefault();
         return false;
     } else if (!validateEmail(data['user[email]'])) {
         $this.find('#user_email').focus();
         l.stop();
-        e.preventDefault();
         return false;
     } else if (data['user[password]'].length <= 0) {
         $this.find('#user_password').focus();
         l.stop();
-        e.preventDefault();
         return false;
     } else if (data['user[name]'].length <= 0) {
         $this.find('#user_name').focus();
         l.stop();
-        e.preventDefault();
         return false;
     } else if (!$this.find('#user_terms').is(':checked')) {
         $this.find('#user_terms').focus();
         l.stop();
-        e.preventDefault();
         return false;
     }
+
+    data['target'] = getUrlParameter('target');
+
+    $.ajax({
+        method: 'POST',
+        url: $this.attr('action'),
+        data: data,
+        success: function (response) {
+            l.stop();
+            if (response.result === 0) {
+                window.location.href = response.redirect_url;
+            } else {
+                swal({
+                    title: response.data.title,
+                    text: response.data.text,
+                    type: response.data.type,
+                    confirmButtonText: response.data.confirmButtonText
+                });
+            }
+        },
+        error: function (response) {
+            l.stop();
+            // TODO: Do something about it.
+            swal({
+                title: "Error!",
+                text: "Something's wrong!",
+                type: "error",
+                confirmButtonText: "Sorry"
+            });
+        }
+    });
 
     // From http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
     function validateEmail(email) {
@@ -82,6 +110,7 @@ $(document).on('submit', '#reset-password', function (e) {
         },
         error: function (response) {
             l.stop();
+            // TODO: Do something about it.
             swal({
                 title: "Error!",
                 text: "Something's wrong!",
@@ -95,6 +124,7 @@ $(document).on('submit', '#reset-password', function (e) {
 
 $(document).on('click', '#sign-up-with-facebook-button', function (e) {
     e.preventDefault();
+
     var l = Ladda.create(document.querySelector('#sign-up-with-facebook-button'));
     l.start();
 
@@ -124,19 +154,4 @@ $(document).on('click', '#sign-up-with-facebook-button', function (e) {
             l.stop();
         }
     }, {scope: 'public_profile, email'});
-
-    var getUrlParameter = function getUrlParameter(sParam) {
-        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
-
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : sParameterName[1];
-            }
-        }
-    };
 });

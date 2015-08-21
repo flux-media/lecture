@@ -17,6 +17,7 @@
 //= require salvattore.min
 //= require sweetalert/dist/sweetalert.min.js
 //= require trunk
+//= require common
 //= require sessions
 //= require users
 //= require welcome
