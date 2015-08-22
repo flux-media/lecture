@@ -35,6 +35,9 @@ gem 'email_validator'
 # For Mailgun support
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 
+# Use Redis to manage sessions
+gem 'redis-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

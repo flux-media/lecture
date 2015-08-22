@@ -75,7 +75,11 @@ header h1 {
 nav {
   position: absolute;
   top: calc((60px - 3em) / 2);
-  right: calc((100% - 1024px) / 2)
+  right: calc((100% - 1024px) / 2);
+
+  @media only screen and (max-width: 1024px) {
+    right: 0;
+  }
 }
 
 nav li {

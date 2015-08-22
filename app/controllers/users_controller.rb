@@ -32,6 +32,37 @@ class UsersController < ApplicationController
     render json: result
   end
 
+  def destroy
+    result = Hash.new
+    result['result'] = 1
+    result['data'] = Hash.new
+    if current_user.nil? || current_user.id != params[:user_id].to_i
+      result['data']['title'] = t('error')
+      result['data']['text'] = t('not_authorized')
+      result['data']['type'] = 'error'
+      result['data']['confirmButtonText'] = t('confirm')
+    else
+      current_user.deleted_at = DateTime.now
+      if current_user.save
+        session[:user_id] = nil
+
+        result['result'] = 0
+        result['data']['title'] = t('success')
+        result['data']['text'] = t('successfully_signed_out')
+        result['data']['type'] = 'success'
+        result['data']['confirmButtonText'] = t('confirm')
+        result['data']['redirect_url'] = root_path
+      else
+        result['data']['title'] = t('error')
+        result['data']['text'] = t('database_error')
+        result['data']['type'] = 'error'
+        result['data']['confirmButtonText'] = t('confirm')
+      end
+    end
+
+    render json: result
+  end
+
   def edit
     render nothing: true
   end
@@ -107,7 +138,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = (User.find(params[:id]) or not_found)
   end
 
   private

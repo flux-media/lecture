@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20150821052152) do
     t.string   "password_digest"
     t.string   "name",                            null: false
     t.boolean  "is_admin",        default: false
+    t.datetime "deleted_at"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end

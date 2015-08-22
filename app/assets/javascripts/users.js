@@ -155,3 +155,60 @@ $(document).on('click', '#sign-up-with-facebook-button', function (e) {
         }
     }, {scope: 'public_profile, email'});
 });
+
+$(document).on('submit', '#sign-out', function (e) {
+    e.preventDefault();
+
+    var $this = $(this);
+    var data = {};
+    $.each($this.serializeArray(), function (index, field) {
+        data[field.name] = field.value;
+    });
+
+    swal({
+        // TODO: Manage these with admin database
+        title: '경고',
+        text: '진짜로 탈퇴하시렵니까?',
+        type: 'warning',
+        showCancelButton: 'true',
+        confirmButtonText: '응',
+        cancelButtonText: '아니',
+        closeOnConfirm: false
+    }, function () {
+        var l = Ladda.create(document.querySelector('#sign-out-button'));
+        l.start();
+
+        $.ajax({
+            method: 'DELETE',
+            url: $this.attr('action'),
+            data: {
+                user_id: data['user_id'],
+                authenticity_token: $('meta[name=csrf-token]').attr('content')
+            },
+            success: function (response) {
+                l.stop();
+
+                swal({
+                    title: response.data.title,
+                    text: response.data.text,
+                    type: response.data.type,
+                    confirmButtonText: response.data.confirmButtonText
+                }, function () {
+                    if (response.result === 0) {
+                        window.location.href = response.data.redirect_url;
+                    }
+                });
+            },
+            error: function (response) {
+                l.stop();
+                // TODO: Do something about it.
+                swal({
+                    title: "Error!",
+                    text: "Something's wrong!",
+                    type: "error",
+                    confirmButtonText: "Sorry"
+                });
+            }
+        });
+    });
+});

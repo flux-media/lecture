@@ -25,5 +25,8 @@
 # For Bower
 /vendor/assets/components/
 
+# For Redis
+dump.rdb
+
 # For private information
 /db/seeds.rb

@@ -72,7 +72,9 @@ class Admin::UsersController < ApplicationController
           params[:id] === current_user.id
         # Do nothing.
       else
-        user.destroy
+        if user.destroy
+          # TODO: Delete every single records of this user.
+        end
       end
     end
 

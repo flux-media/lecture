@@ -60,4 +60,5 @@ ko:
         is_student: '학생'
         is_teacher: '강사'
         created_at: '가입일'
+        deleted_at: '탈퇴신청일'
 
