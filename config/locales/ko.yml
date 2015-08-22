@@ -79,4 +79,7 @@ ko:
   duplicate_email_exists: "이미 가입된 이메일 주소입니다."
   sign_out: "회원 탈퇴"
   not_authorized: "권한이 없습니다."
+  wrong_parameters: "잘못된 요청입니다."
+  payment_request_success: "결제 신청이 완료되었습니다. 1주 내로 입금 확인이 됩니다."
   successfully_signed_out: "탈퇴 처리가 완료되었습니다. 회원 정보는 3주 내로 완전히 삭제됩니다."
+  number_of_courses: "%s번의 강연"

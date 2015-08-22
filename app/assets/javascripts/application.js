@@ -18,6 +18,7 @@
 //= require sweetalert/dist/sweetalert.min.js
 //= require trunk
 //= require common
+//= require payments
 //= require sessions
 //= require users
 //= require welcome

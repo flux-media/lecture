@@ -19,6 +19,7 @@
 # For RubyMine
 /.idea/workspace.xml
 /.idea/tasks.xml
+/.idea/dictionaries/LeeHanKyeol.xml
 *.iws
 *.DS_Store
 
