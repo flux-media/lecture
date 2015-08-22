@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get '/sessions/new_from_token/:user_id/:key' => 'sessions#new_from_token'
 
-  resources :users, :payments
+  resources :users, :payments, :inquiries
 
   resources :courses do
     resources :registrations

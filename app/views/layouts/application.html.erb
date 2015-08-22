@@ -51,18 +51,29 @@
 
   <nav class="slide">
     <ul>
-      <li><%= link_to t('main'), root_path %></li>
-      <li><%= link_to t('all_courses'), courses_path %></li>
-      <li><%= link_to t('new_payments'), new_payment_path %></li>
+      <li>
+        <%= link_to t('main'), root_path %>
+      </li>
+      <li>
+        <%= link_to t('all_courses'), courses_path %>
+      </li>
+      <li>
+        <%= link_to t('new_payments'), new_payment_path %>
+      </li>
+      <li>
+        <%= link_to t('inquiry'), new_inquiry_path %>
+      </li>
       <% if current_user %>
-          <% if is_admin %>
-              <li><%= link_to t('admin'), admin_path %></li>
-          <% end %>
           <li>
             <%= link_to t('signed_in_as') % [current_user.name],
                         user_path(current_user.id) %>
           </li>
-          <li><%= link_to t('logout'), logout_path %></li>
+          <li>
+            <%= link_to t('logout'), logout_path %>
+          </li>
+          <% if is_admin %>
+              <li><%= link_to t('admin'), admin_path %></li>
+          <% end %>
       <% else %>
           <li><%= link_to t('sign_up'), sign_up_path %></li>
           <li><%= link_to t('login'), login_path %></li>
