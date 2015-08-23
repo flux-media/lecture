@@ -9,7 +9,8 @@
 
         <%= label_tag User.human_attribute_name('email') %>
         <%= text_field_tag :email, current_user.nil? ? '' : current_user.email,
-                           {class: 'input-big'} %>
+                           {type: 'email',
+                            class: 'input-big'} %>
 
         <%= label_tag t('content') %>
         <%= text_area_tag :content, '',

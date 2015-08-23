@@ -10,11 +10,7 @@ $(document).on('submit', '#new-user', function (e) {
     var l = Ladda.create(document.querySelector('#submit-button'));
     l.start();
 
-    if (data['user[email]'].length <= 0) {
-        $this.find('#user_email').focus();
-        l.stop();
-        return false;
-    } else if (!validateEmail(data['user[email]'])) {
+    if (data['user[email]'].length <= 0 || !validateEmail(data['user[email]'])) {
         $this.find('#user_email').focus();
         l.stop();
         return false;
@@ -56,10 +52,10 @@ $(document).on('submit', '#new-user', function (e) {
             l.stop();
             var locales_error = $('#locales_error');
             swal({
-                title: locales_error.attr('title'),
-                text: locales_error.attr('text'),
+                title: locales_error.data('title'),
+                text: locales_error.data('text'),
                 type: 'error',
-                confirmButtonText: locales_error.attr('confirmButtonText')
+                confirmButtonText: locales_error.data('confirmButtonText')
             });
         }
     });
@@ -107,10 +103,10 @@ $(document).on('submit', '#reset-password', function (e) {
             l.stop();
             var locales_error = $('#locales_error');
             swal({
-                title: locales_error.attr('title'),
-                text: locales_error.attr('text'),
+                title: locales_error.data('title'),
+                text: locales_error.data('text'),
                 type: 'error',
-                confirmButtonText: locales_error.attr('confirmButtonText')
+                confirmButtonText: locales_error.data('confirmButtonText')
             });
         }
     });
@@ -163,12 +159,12 @@ $(document).on('submit', '#sign-out', function (e) {
     var locales_warning = $('#locales_warning');
 
     swal({
-        title: locales_warning.attr('title'),
-        text: locales_warning.attr('text'),
+        title: locales_warning.data('title'),
+        text: locales_warning.data('text'),
         type: 'warning',
         showCancelButton: 'true',
-        confirmButtonText: locales_warning.attr('confirmButtonText'),
-        cancelButtonText: locales_warning.attr('cancelButtonText'),
+        confirmButtonText: locales_warning.data('confirmButtonText'),
+        cancelButtonText: locales_warning.data('cancelButtonText'),
         closeOnConfirm: false
     }, function () {
         var l = Ladda.create(document.querySelector('#sign-out-button'));
@@ -199,10 +195,10 @@ $(document).on('submit', '#sign-out', function (e) {
                 l.stop();
                 var locales_error = $('#locales_error');
                 swal({
-                    title: locales_error.attr('title'),
-                    text: locales_error.attr('text'),
+                    title: locales_error.data('title'),
+                    text: locales_error.data('text'),
                     type: 'error',
-                    confirmButtonText: locales_error.attr('confirmButtonText')
+                    confirmButtonText: locales_error.data('confirmButtonText')
                 });
             }
         });

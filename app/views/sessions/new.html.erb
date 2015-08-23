@@ -7,7 +7,8 @@
       <%= hidden_field_tag 'target', target %>
       <fieldset>
         <%= f.label User.human_attribute_name('email') %>
-        <%= f.text_field :email, {class: 'input-big'} %>
+        <%= f.text_field :email, {type: 'email',
+                                  class: 'input-big'} %>
 
         <%= f.label User.human_attribute_name('password') %>
         <%= f.password_field :password, {class: 'input-big'} %>
@@ -33,7 +34,8 @@
       <legend><%= t('reset_password') %></legend>
       <fieldset>
         <%= label_tag :email, User.human_attribute_name('email') %>
-        <%= text_field_tag :email, '', {class: 'input-big'} %>
+        <%= text_field_tag :email, '', {type: 'email',
+                                        class: 'input-big'} %>
       </fieldset>
 
       <%= button_tag t('reset_password'),

@@ -37,10 +37,10 @@ $(document).on('submit', '#new-payment', function (e) {
             l.stop();
             var locales_error = $('#locales_error');
             swal({
-                title: locales_error.attr('title'),
-                text: locales_error.attr('text'),
+                title: locales_error.data('title'),
+                text: locales_error.data('text'),
                 type: 'error',
-                confirmButtonText: locales_error.attr('confirmButtonText')
+                confirmButtonText: locales_error.data('confirmButtonText')
             });
         }
     });

@@ -5,7 +5,7 @@ $(document).on('submit', '#new-session', function (e) {
         data[field.name] = $.trim(field.value);
     });
 
-    if (data['user[email]'].length <= 0) {
+    if (data['user[email]'].length <= 0 || !validateEmail(data['user[email]'])) {
         $this.find('#user_email').focus();
         e.preventDefault();
         return false;

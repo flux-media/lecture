@@ -10,7 +10,7 @@ $(document).on('submit', '#new-inquiry', function (e) {
         e.preventDefault();
         return false;
     }
-    else if (data['email'].length <= 0) {
+    else if (data['email'].length <= 0 || !validateEmail(data['email'])) {
         $this.find('#email').focus();
         e.preventDefault();
         return false;
