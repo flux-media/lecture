@@ -13,7 +13,7 @@
  *= require_self
  *= require reset
  *= require trunk
- *= require welcome
+ *= require salvattore
  *= require courses
  *= require users
  *= require sweetalert/dist/sweetalert

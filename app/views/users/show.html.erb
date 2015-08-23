@@ -1,66 +1,89 @@
-<h1><%= @user.name %></h1>
+<div class="user">
+  <div class="user-element-wrapper user-profile">
+    <%= image_tag [true, false].sample ? 'boy.png' : 'girl.png',
+                  {class: 'profile-image'} %>
 
-<h2><%= t('courses_registered') %></h2>
-<ul>
-  <% unless @user.student.nil? %>
-      <% @user.student.registrations.each do |registration| %>
-          <%= registration.course_schedule.course.name %>
+    <div class="profile-detail-wrapper">
+      <div class="profile-detail">
+        <h2 class="user-name">
+          <%= @user.name %>
+          <%= link_to t('edit'), edit_user_path(@user.id),
+                      {class: 'ladda-button',
+                       data: {size: 'xs'}} %>
+        </h2>
 
-          <% if !current_user.nil? && current_user.id === @user.id %>
-              <%= form_tag course_registration_path(
-                                   registration.course_schedule.course_id,
-                                   registration.id),
-                           class: 'pure-form', method: 'delete' do %>
-                  <%= submit_tag t('cancel_registration'),
-                                 class: 'button-warning pure-button' %>
+        <% unless @user.teacher.nil? %>
+            <p><%= @user.teacher.description %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div id="registered-courses" class="user-element-wrapper registered-courses">
+    <h3><%= t('courses_registered') %></h3>
+    <% if courses_1.length > 0 %>
+        <section id="grid" class="clear" data-columns>
+          <div class="column">
+            <% courses_1.each do |course| %>
+                <%= render partial: 'welcome/card',
+                           locals: {course: course} %>
+            <% end %>
+          </div>
+          <div class="column">
+            <% courses_2.each do |course| %>
+                <%= render partial: 'welcome/card',
+                           locals: {course: course} %>
+            <% end %>
+          </div>
+          <div class="column">
+            <% courses_3.each do |course| %>
+                <%= render partial: 'welcome/card',
+                           locals: {course: course} %>
+            <% end %>
+          </div>
+        </section>
+    <% else %>
+        <div class="user-element">
+          <%= t('no_registration') %>
+        </div>
+    <% end %>
+  </div>
+
+  <% if !current_user.nil? && current_user.id === @user.id %>
+      <div class="user-element-wrapper payments">
+        <h3><%= Payment.model_name.human %></h3>
+        <% if @user.payments.nil? %>
+            <div class="user-element">
+              <%= t('no_payment') %>
+            </div>
+        <% else %>
+            <table class="pure-table center-table">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th><%= Payment.human_attribute_name('point') %></th>
+                <th><%= Payment.human_attribute_name('amount') %></th>
+                <th><%= Payment.human_attribute_name('created_at') %></th>
+                <th><%= PaymentState.model_name.human %></th>
+                <th><%= t('note') %></th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% @user.payments.each_with_index do |payment, index| %>
+                  <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= payment.point %></td>
+                    <td><%= payment.amount %></td>
+                    <td><%= payment.created_at.strftime(t('simple_datetime')) %></td>
+                    <td><%= payment.payment_state.name %></td>
+                    <td><%= payment.registration.nil? ? '' :
+                                    payment.registration.course_schedule.course.name %></td>
+                  </tr>
               <% end %>
-          <% end %>
-      <% end %>
+              </tbody>
+            </table>
+        <% end %>
+      </div>
   <% end %>
-</ul>
-
-<h2><%= t('courses_completed') %></h2>
-<ul>
-  <!-- TODO: Implement this. -->
-</ul>
-
-<h2><%= Payment.model_name.human %></h2>
-<ul>
-  <% unless @user.payments.nil? %>
-      <% @user.payments.each do |payment| %>
-          <li>
-            <%= Payment.human_attribute_name('point') %> : <%= payment.point %>
-            <%= Payment.human_attribute_name('amount') %> : <%= payment.amount %>
-            <%= PaymentState.model_name.human %> : <%= payment.payment_state.name %>
-          </li>
-      <% end %>
-  <% end %>
-</ul>
-
-<% if !current_user.nil? && @user.id === current_user.id %>
-    <%= content_tag 'div', id: 'locales_warning',
-                    data: {title: t('warning'),
-                           text: t('ask_sign_out'),
-                           confirmButtonText: t('confirm'),
-                           cancelButtonText: t('cancel')} do %>
-    <% end %>
-    <%= content_tag 'div', id: 'sign_up_by_provider_path',
-                    data: {url: sign_up_by_provider_path} do %>
-    <% end %>
-    <%= content_tag 'div', id: 'sign_up_by_provider_path',
-                    data: {url: sign_up_by_provider_path} do %>
-    <% end %>
-    <%= content_tag 'div', id: 'sign_up_by_provider_path',
-                    data: {url: sign_up_by_provider_path} do %>
-    <% end %>
-    <%= form_tag user_path(current_user.id),
-                 {id: 'sign-out',
-                  class: 'pure-form',
-                  method: 'delete'} do %>
-        <%= hidden_field_tag :user_id, current_user.id %>
-        <%= button_tag t('sign_out'),
-                       {id: 'sign-out-button',
-                        class: 'ladda-button',
-                        'data-style' => 'expand-right'} %>
-    <% end %>
-<% end %>
+</div>

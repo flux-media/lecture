@@ -25,7 +25,7 @@
     <%= button_tag t('login_with_facebook'),
                    {id: 'sign-up-with-facebook-button',
                     class: 'ladda-button',
-                    :'data-style' => 'expand-right'} %>
+                    data: {style: 'expand-right'}} %>
   </div>
 
   <%= form_tag reset_password_path,
@@ -41,6 +41,6 @@
       <%= button_tag t('reset_password'),
                      {id: 'reset-password-button',
                       class: 'ladda-button',
-                      :'data-style' => 'expand-right'} %>
+                      data: {style: 'expand-right'}} %>
   <% end %>
 </div>

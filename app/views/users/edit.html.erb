@@ -1,0 +1,25 @@
+<%= content_tag 'div', id: 'locales_warning',
+                data: {title: t('warning'),
+                       text: t('ask_sign_out'),
+                       confirmButtonText: t('confirm'),
+                       cancelButtonText: t('cancel')} do %>
+<% end %>
+<%= content_tag 'div', id: 'sign_up_by_provider_path',
+                data: {url: sign_up_by_provider_path} do %>
+<% end %>
+<%= content_tag 'div', id: 'sign_up_by_provider_path',
+                data: {url: sign_up_by_provider_path} do %>
+<% end %>
+<%= content_tag 'div', id: 'sign_up_by_provider_path',
+                data: {url: sign_up_by_provider_path} do %>
+<% end %>
+<%= form_tag user_path(current_user.id),
+             {id: 'sign-out',
+              class: 'pure-form',
+              method: 'delete'} do %>
+    <%= hidden_field_tag :user_id, current_user.id %>
+    <%= button_tag t('sign_out'),
+                   {id: 'sign-out-button',
+                    class: 'ladda-button',
+                    'data-style' => 'expand-right'} %>
+<% end %>

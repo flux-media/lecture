@@ -64,7 +64,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    render nothing: true
+    @user = (User.find(params[:id]) or not_found)
+    if current_user.nil? || current_user.id != @user.id
+      redirect_to root_path
+    end
   end
 
   def reset_password
@@ -93,6 +96,7 @@ class UsersController < ApplicationController
         # First, instantiate the Mailgun Client with your API key
         mg_client = Mailgun::Client.new(Rails.application.secrets.mailgun_key)
 
+        # TODO: Consider moving these codes to helper.
         # Define your message parameters
         html_body = render_to_string template: 'user_mailer/reset_password',
                                      :layout => false,
@@ -139,6 +143,51 @@ class UsersController < ApplicationController
 
   def show
     @user = (User.find(params[:id]) or not_found)
+    courses_1 = Array.new
+    courses_2 = Array.new
+    courses_3 = Array.new
+
+    unless @user.student.nil?
+      @user.student.registrations.each_with_index do |registration, index|
+        course = registration.course_schedule.course
+
+        teachers_array = Array.new
+
+        course.lessons.each do |lesson|
+          teacher = lesson.teacher
+
+          is_in_array = false
+
+          teachers_array.each do |teacher_in_array|
+            if teacher_in_array.id === teacher.id
+              is_in_array = true
+            end
+          end
+
+          unless is_in_array
+            teachers_array.push(teacher)
+          end
+
+        end
+
+        course.teachers = teachers_array
+
+        case (index % 3)
+          when 0
+            courses_1.push(course)
+          when 1
+            courses_2.push(course)
+          when 2
+            courses_3.push(course)
+          else
+        end
+      end
+    end
+
+    render :locals => {
+               courses_1: courses_1,
+               courses_2: courses_2,
+               courses_3: courses_3}
   end
 
   private
