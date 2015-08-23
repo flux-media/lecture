@@ -45,5 +45,4 @@ class WelcomeController < ApplicationController
                courses_2: courses_2,
                courses_3: courses_3}
   end
-
 end

@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   end
 
   def reset_password
-    email = params[:email]
+    email = params[:email].nil? ? '' : params[:email].squish
     result = Hash.new
     result['result'] = 1
     result['data'] = Hash.new

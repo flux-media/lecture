@@ -132,10 +132,18 @@ $(document).on('click', '#sign-up-with-facebook-button', function (e) {
                 },
                 success: function (response) {
                     l.stop();
-                    window.location.href = response.redirect_url;
+                    if (response.result === 0) {
+                        window.location.href = response.data.redirect_url;
+                    }
                 },
                 error: function (response) {
-                    l.stop();
+                    var locales_error = $('#locales_error');
+                    swal({
+                        title: locales_error.data('title'),
+                        text: locales_error.data('text'),
+                        type: 'error',
+                        confirmButtonText: locales_error.data('confirmButtonText')
+                    });
                     console.log(response);
                 }
             });

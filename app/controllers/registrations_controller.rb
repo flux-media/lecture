@@ -3,10 +3,11 @@ class RegistrationsController < ApplicationController
     course = Course.find(params[:course_id])
 
     if course.nil?
-      # TODO: Wrong course!
+      redirect_to course_path(course.id)
       return
     elsif current_user.nil?
       redirect_to login_path(:target => course_path(course.id))
+      return
     else
       open_course_schedule = nil
       course.course_schedules.each do |course_schedule|
@@ -19,7 +20,7 @@ class RegistrationsController < ApplicationController
       end
 
       if open_course_schedule.nil?
-        # TODO: No open course exists!
+        redirect_to course_path(course.id)
         return
       end
 
@@ -37,12 +38,16 @@ class RegistrationsController < ApplicationController
           payment.point = -1
           payment.payment_state = PaymentState.find_by_key('completed')
           if payment.save
-
+            redirect_to user_path(current_user.id)
+          else
+            redirect_to course_path(course.id)
           end
+        else
+          redirect_to course_path(course.id)
         end
+      else
+        redirect_to course_path(course.id)
       end
-
-      redirect_to course_path(course.id)
     end
   end
 
@@ -51,18 +56,22 @@ class RegistrationsController < ApplicationController
     course = Course.find(params[:course_id])
 
     if course.nil? || registration.nil?
-      # TODO: Wrong course or registration!
+      redirect_to course_path(course.id)
       return
     elsif current_user.nil?
       redirect_to login_path(:target => course_path(course.id))
     elsif current_user.student.id != registration.student.id
-      # TODO: Wrong user attempts to delete this registration!
+      redirect_to course_path(course.id)
     else
       if registration.destroy
         payment = Payment.where(user_id: current_user.id, registration_id: registration.id).first
         if !payment.nil? && payment.destroy
           redirect_to course_path(course.id)
+        else
+          redirect_to course_path(course.id)
         end
+      else
+        redirect_to course_path(course.id)
       end
     end
   end

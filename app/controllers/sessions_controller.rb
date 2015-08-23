@@ -1,27 +1,30 @@
 class SessionsController < ApplicationController
-  def new
-    render :locals => {target: params[:target]}
-  end
-
   def create
-    user = User.find_by_email(params[:user][:email])
-    password = params[:user][:password]
-    # If the user exists AND the password entered is correct.
-    if user && password.to_s.length > 0 && user.authenticate(password)
-      # Save the user id inside the browser cookie.
-      # This is how we keep the user logged in
-      # when they navigate around our website.
+    if params[:user].nil?
+      redirect_to login_path
+      return
+    end
+
+    email = params[:user][:email].nil? ?
+        '' : params[:user][:email].squish
+    password = params[:user][:password].nil? ?
+        '' : params[:user][:password].squish
+
+    user = User.find_by_email(email)
+    if email.length > 0 && password.length > 0 &&
+        !user.nil? && user.authenticate(password)
       session[:user_id] = user.id
 
       # For a nicer look of URL, strip off a leading '/'.
       target = params[:target]
+      if target.nil?
+        target = ''
+      end
       if target.start_with?('/')
         target = target[1..-1]
       end
       redirect_to root_url + target
     else
-      # If user's login doesn't work,
-      # send them back to the login form.
       redirect_to login_path
     end
   end
@@ -31,11 +34,17 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
 
+  def new
+    render :locals => {target: params[:target]}
+  end
+
   def new_by_provider
     provider = params[:provider]
     token = params[:token]
-
     result = Hash.new
+    result['result'] = 1
+    result['data'] = Hash.new
+
     email = 'default_email'
     name = 'default_name'
 
@@ -47,10 +56,12 @@ class SessionsController < ApplicationController
       req = Net::HTTP::Get.new(url.to_s)
       res = JSON(http.request(req).body)
 
-      unless res.has_key?('error')
-        email = res['email']
-        id = res['id']
-        name = res['name']
+      if res.has_key?('error')
+        render json: result
+        return
+      else
+        email = res['email'].squish
+        name = res['name'].squish
       end
     end
 
@@ -65,6 +76,9 @@ class SessionsController < ApplicationController
       if user.save
         student = Student.new
         user.student = student
+      else
+        render json: result
+        return
       end
     end
 
@@ -81,14 +95,15 @@ class SessionsController < ApplicationController
     end
 
     result['result'] = 0
-    result['redirect_url'] = root_url + target
+    result['data']['redirect_url'] = root_url + target
 
     render json: result
   end
 
   def new_from_token
     user_id = params[:user_id]
-    token = ResetPasswordToken.where(:user_id => user_id, :key => params[:key]).last
+    token = ResetPasswordToken.where(:user_id => user_id,
+                                     :key => params[:key]).last
 
     if token.nil? || token.expired === true
       # TODO: Redirect to 'expired key' page.
@@ -99,6 +114,9 @@ class SessionsController < ApplicationController
         session[:user_id] = user_id
 
         redirect_to user_path user_id
+      else
+        # TODO: What to do?
+        not_found
       end
     end
   end

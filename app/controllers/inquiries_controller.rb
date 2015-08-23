@@ -2,11 +2,14 @@ require 'mailgun'
 
 class InquiriesController < ApplicationController
   def create
-    email = params[:email]
-    name = params[:name]
-    content = params[:content]
+    name = params[:name].nil? ? '' : params[:name].squish
+    email = params[:email].nil? ? '' : params[:email].squish
+    content = params[:content].nil? ? '' : params[:content]
+    result = Hash.new
+    result['result'] = 1
+    result['data'] = Hash.new
 
-    if !email.nil? && !name.nil? && !content.nil?
+    if name.length > 0 && email.length > 0 && content.length > 0
       mg_client = Mailgun::Client.new(Rails.application.secrets.mailgun_key)
 
       message_params = {:from => email,
@@ -16,9 +19,20 @@ class InquiriesController < ApplicationController
                         :text => content}
 
       mg_client.send_message('sandboxdd06a1ef54af47498077a84b91a0f0a0.mailgun.org', message_params)
+
+      result['result'] = 0
+      result['data']['title'] = t('success')
+      result['data']['text'] = t('inquiry_submit_success')
+      result['data']['type'] = 'success'
+      result['data']['confirmButtonText'] = t('confirm')
+    else
+      result['data']['title'] = t('error')
+      result['data']['text'] = t('server_error')
+      result['data']['type'] = 'error'
+      result['data']['confirmButtonText'] = t('confirm')
     end
 
-    redirect_to new_inquiry_path
+    render json: result
   end
 
   def new
