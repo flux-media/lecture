@@ -2,7 +2,7 @@ $(document).on('submit', '#new-inquiry', function (e) {
     var $this = $(this);
     var data = {};
     $.each($this.serializeArray(), function (index, field) {
-        data[field.name] = field.value;
+        data[field.name] = $.trim(field.value);
     });
 
     if (data['name'].length <= 0) {

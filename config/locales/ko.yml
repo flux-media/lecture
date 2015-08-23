@@ -85,3 +85,7 @@ ko:
   number_of_courses: "%s번의 강연"
   inquiry: "문의하기"
   content: "내용"
+  warning: "경고"
+  ask_sign_out: "탈퇴를 취소하는 일은 대단히 번거롭습니다. 계속하시겠습니까?"
+  cancel: "취소"
+  server_error: "서버 오류입니다. 나중에 다시 시도해주세요."

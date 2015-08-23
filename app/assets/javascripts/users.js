@@ -1,10 +1,10 @@
-$(document).on('submit', '#user-new', function (e) {
+$(document).on('submit', '#new-user', function (e) {
     e.preventDefault();
 
     var $this = $(this);
     var data = {};
     $.each($this.serializeArray(), function (index, field) {
-        data[field.name] = field.value;
+        data[field.name] = $.trim(field.value);
     });
 
     var l = Ladda.create(document.querySelector('#submit-button'));
@@ -40,6 +40,7 @@ $(document).on('submit', '#user-new', function (e) {
         data: data,
         success: function (response) {
             l.stop();
+
             if (response.result === 0) {
                 window.location.href = response.data.redirect_url;
             } else {
@@ -51,23 +52,17 @@ $(document).on('submit', '#user-new', function (e) {
                 });
             }
         },
-        error: function (response) {
+        error: function () {
             l.stop();
-            // TODO: Do something about it.
+            var locales_error = $('#locales_error');
             swal({
-                title: "Error!",
-                text: "Something's wrong!",
-                type: "error",
-                confirmButtonText: "Sorry"
+                title: locales_error.attr('title'),
+                text: locales_error.attr('text'),
+                type: 'error',
+                confirmButtonText: locales_error.attr('confirmButtonText')
             });
         }
     });
-
-    // From http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
-    function validateEmail(email) {
-        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        return re.test(email);
-    }
 });
 
 $(document).on('submit', '#reset-password', function (e) {
@@ -76,7 +71,7 @@ $(document).on('submit', '#reset-password', function (e) {
     var $this = $(this);
     var data = {};
     $.each($this.serializeArray(), function (index, field) {
-        data[field.name] = field.value;
+        data[field.name] = $.trim(field.value);
     });
 
     var l = Ladda.create(document.querySelector('#reset-password-button'));
@@ -108,14 +103,14 @@ $(document).on('submit', '#reset-password', function (e) {
                 $this.find('#email').val('');
             }
         },
-        error: function (response) {
+        error: function () {
             l.stop();
-            // TODO: Do something about it.
+            var locales_error = $('#locales_error');
             swal({
-                title: "Error!",
-                text: "Something's wrong!",
-                type: "error",
-                confirmButtonText: "Sorry"
+                title: locales_error.attr('title'),
+                text: locales_error.attr('text'),
+                type: 'error',
+                confirmButtonText: locales_error.attr('confirmButtonText')
             });
         }
     });
@@ -162,17 +157,18 @@ $(document).on('submit', '#sign-out', function (e) {
     var $this = $(this);
     var data = {};
     $.each($this.serializeArray(), function (index, field) {
-        data[field.name] = field.value;
+        data[field.name] = $.trim(field.value);
     });
 
+    var locales_warning = $('#locales_warning');
+
     swal({
-        // TODO: Manage these with admin database
-        title: '경고',
-        text: '진짜로 탈퇴하시렵니까?',
+        title: locales_warning.attr('title'),
+        text: locales_warning.attr('text'),
         type: 'warning',
         showCancelButton: 'true',
-        confirmButtonText: '응',
-        cancelButtonText: '아니',
+        confirmButtonText: locales_warning.attr('confirmButtonText'),
+        cancelButtonText: locales_warning.attr('cancelButtonText'),
         closeOnConfirm: false
     }, function () {
         var l = Ladda.create(document.querySelector('#sign-out-button'));
@@ -199,14 +195,14 @@ $(document).on('submit', '#sign-out', function (e) {
                     }
                 });
             },
-            error: function (response) {
+            error: function () {
                 l.stop();
-                // TODO: Do something about it.
+                var locales_error = $('#locales_error');
                 swal({
-                    title: "Error!",
-                    text: "Something's wrong!",
-                    type: "error",
-                    confirmButtonText: "Sorry"
+                    title: locales_error.attr('title'),
+                    text: locales_error.attr('text'),
+                    type: 'error',
+                    confirmButtonText: locales_error.attr('confirmButtonText')
                 });
             }
         });

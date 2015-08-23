@@ -16,8 +16,9 @@ $(document).on('submit', '#new-payment', function (e) {
         method: 'POST',
         url: $this.attr('action'),
         data: {
-            pricing_id: $('input[name=pricing]:checked', $this).first().val(),
-            authenticity_token: $('meta[name=csrf-token]').attr('content')
+            pricing_id: $.trim($('input[name=pricing]:checked', $this).
+                first().val()),
+            authenticity_token: $.trim($('meta[name=csrf-token]').attr('content'))
         },
         success: function (response) {
             l.stop();
@@ -32,15 +33,15 @@ $(document).on('submit', '#new-payment', function (e) {
                 }
             });
         },
-        error: function (response) {
+        error: function () {
             l.stop();
-            // TODO: Do something about it.
+            var locales_error = $('#locales_error');
             swal({
-                title: "Error!",
-                text: "Something's wrong!",
-                type: "error",
-                confirmButtonText: "Sorry"
+                title: locales_error.attr('title'),
+                text: locales_error.attr('text'),
+                type: 'error',
+                confirmButtonText: locales_error.attr('confirmButtonText')
             });
         }
     });
-})
+});

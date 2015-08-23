@@ -1,8 +1,8 @@
-$(document).on('submit', '#session-new', function (e) {
+$(document).on('submit', '#new-session', function (e) {
     var $this = $(this);
     var data = {};
     $.each($this.serializeArray(), function (index, field) {
-        data[field.name] = field.value;
+        data[field.name] = $.trim(field.value);
     });
 
     if (data['user[email]'].length <= 0) {
