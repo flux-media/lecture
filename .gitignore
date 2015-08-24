@@ -29,5 +29,8 @@
 # For Redis
 dump.rdb
 
+# For Paperclip
+/public/system/*
+
 # For private information
 /db/seeds.rb
