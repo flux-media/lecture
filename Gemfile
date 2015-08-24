@@ -38,6 +38,9 @@ gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 # Use Redis to manage sessions
 gem 'redis-rails'
 
+# Paperclip to manage images
+gem "paperclip", "~> 4.3"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

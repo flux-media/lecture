@@ -29,13 +29,16 @@ ActiveRecord::Schema.define(version: 20150822034439) do
   add_index "course_schedules", ["course_id"], name: "index_course_schedules_on_course_id"
 
   create_table "courses", force: :cascade do |t|
-    t.integer  "program_id", null: false
-    t.string   "name",       null: false
+    t.integer  "program_id",             null: false
+    t.string   "name",                   null: false
     t.string   "summary"
     t.string   "detail"
-    t.string   "thumbnail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "thumbnail_file_name"
+    t.string   "thumbnail_content_type"
+    t.integer  "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
   end
 
   add_index "courses", ["program_id"], name: "index_courses_on_program_id"

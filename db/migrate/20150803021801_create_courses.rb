@@ -6,11 +6,11 @@ class CreateCourses < ActiveRecord::Migration
       t.string :name, null: false
       t.string :summary
       t.string :detail
-      t.string :thumbnail
 
       t.timestamps null: false
     end
 
     change_column :courses, :program_id, :integer, :null => false
+    add_attachment :courses, :thumbnail
   end
 end

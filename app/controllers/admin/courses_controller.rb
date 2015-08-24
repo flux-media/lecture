@@ -3,8 +3,7 @@ class Admin::CoursesController < ApplicationController
   layout 'admin'
 
   def create
-    course = Course.new
-    course.name = params[:course][:name]
+    course = Course.new(course_params)
     course.program = Program.find(params[:program])
 
     if course.save
@@ -92,10 +91,17 @@ class Admin::CoursesController < ApplicationController
   def update
     course = Course.find(params[:course][:id])
     course.name = params[:course][:name]
+    course.thumbnail = params[:course][:thumbnail]
     course.program = Program.find(params[:program])
 
     if course.save
       redirect_to edit_admin_course_path course.id
     end
+  end
+
+  private
+
+  def course_params
+    params.require(:course).permit(:name, :thumbnail)
   end
 end

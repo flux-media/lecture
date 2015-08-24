@@ -3,7 +3,8 @@
 
 <%= form_for @course,
              url: {action: action},
-             html: {class: 'pure-form pure-form-stacked'} do |f| %>
+             html: {class: 'pure-form pure-form-stacked',
+                    multipart: true} do |f| %>
     <fieldset>
       <%= f.hidden_field :id %>
 
@@ -19,6 +20,10 @@
                                  programs, 'id', 'name',
                                  @course.program.nil? ? programs.first.id :
                                          @course.program.id) %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= image_tag @course.thumbnail.url(:medium) %>
+          <%= f.file_field :thumbnail %>
         </div>
       </div>
     </fieldset>
