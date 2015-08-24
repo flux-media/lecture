@@ -11,6 +11,16 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
+//= require jquery.turbolinks
+//= require ladda/spin.min.js
+//= require ladda/ladda.min.js
+//= require salvattore.min
+//= require sweetalert/dist/sweetalert.min.js
+//= require trunk
+//= require common
+//= require inquiries
+//= require payments
+//= require sessions
+//= require users
+//= require welcome
 //= require turbolinks
-//= require_tree .

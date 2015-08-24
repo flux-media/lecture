@@ -1,0 +1,41 @@
+<% admin_title(Location.model_name.human) %>
+<% admin_subtitle(t('list')) %>
+
+<div class="new-entry-wrapper">
+  <%= link_to t('add_new_location'),
+              new_admin_location_path,
+              {class: 'pure-button'} %>
+</div>
+
+<table class="pure-table">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th><%= Location.human_attribute_name('name') %></th>
+    <th><%= Location.human_attribute_name('phone_number') %></th>
+    <th><%= Location.human_attribute_name('address') %></th>
+    <th><%= t('manage') %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.id %></td>
+        <td><%= location.name %></td>
+        <td><%= location.phone_number %></td>
+        <td><%= location.address %></td>
+        <td>
+          <%= link_to t('update'),
+                      edit_admin_location_path(location.id),
+                      {class: 'pure-button'} %>
+          <%= form_tag admin_location_path(location.id),
+                       {method: 'delete',
+                        class: 'inline-form'} do %>
+              <%= submit_tag t('delete'), {class: 'pure-button'} %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

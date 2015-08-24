@@ -1,0 +1,20 @@
+{
+  "name": "lecture",
+  "version": "0.0.0",
+  "homepage": "https://github.com/flux-media/lecture",
+  "authors": [
+    "Lee Han Kyeol <lee0hankyeol@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sweetalert": "~1.1.0"
+  }
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= t('site_name') %></title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+  <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="layout">
+  <!-- Menu toggle -->
+  <a href="#menu" id="menuLink" class="menu-link">
+    <!-- Hamburger icon -->
+    <span></span>
+  </a>
+
+  <div id="menu">
+    <div class="pure-menu">
+      <%= link_to t('site_name'), root_path, {class: 'pure-menu-heading'} %>
+
+      <ul class="pure-menu-list">
+        <% if is_admin %>
+            <li class="pure-menu-item"><%= link_to t('main'), admin_path, {class: 'pure-menu-link'} %></li>
+            <li class="pure-menu-item">
+              <%= link_to User.model_name.human,
+                          admin_users_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
+            <li class="pure-menu-item">
+              <%= link_to Category.model_name.human,
+                          admin_categories_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
+            <li class="pure-menu-item">
+              <%= link_to Program.model_name.human,
+                          admin_programs_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
+            <li class="pure-menu-item">
+              <%= link_to Course.model_name.human,
+                          admin_courses_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
+            <li class="pure-menu-item">
+              <%= link_to CourseSchedule.model_name.human,
+                          admin_course_schedules_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
+            <li class="pure-menu-item">
+              <%= link_to Location.model_name.human,
+                          admin_locations_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
+            <li class="pure-menu-item">
+              <%= link_to Payment.model_name.human,
+                          admin_payments_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
+            <li class="pure-menu-item">
+              <%= link_to t('logout'),
+                          admin_sessions_destroy_path,
+                          {:class => 'pure-menu-link'} %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div id="main">
+    <div class="header">
+      <h1><%= yield(:admin_title) %></h1>
+
+      <h2><%= yield(:admin_subtitle) %></h2>
+    </div>
+
+    <div class="content">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+</body>
+</html>

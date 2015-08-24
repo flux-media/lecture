@@ -1,0 +1,67 @@
+.user-profile {
+  padding: 0 3em;
+  overflow: hidden;
+
+  .profile-image-wrapper {
+    float: left;
+
+    @media only screen and (max-width: 780px) {
+      float: none;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .profile-image {
+      border-radius: 50%;
+    }
+  }
+
+  .profile-detail-wrapper {
+    float: left;
+    height: 200px;
+    width: calc(100% - 200px);
+
+    @media only screen and (max-width: 780px) {
+      width: 100%;
+    }
+
+    // http://davidwalsh.name/css-vertical-center
+    .profile-detail {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+
+      .user-name {
+        font-size: 2em;
+        color: #333333;
+        margin: 0 0 1em;
+      }
+    }
+  }
+}
+
+.user-element-wrapper {
+  margin: 0 auto 2em;
+
+  h3 {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0 0 1em;
+  }
+
+  .user-element {
+    text-align: center;
+  }
+}
+
+.show-user {
+  .registered-courses {
+    clear: both;
+    background-color: #dddddd;
+    padding: 2em 1em;
+
+    h3 {
+      color: white;
+    }
+  }
+}

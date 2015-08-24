@@ -1,0 +1,66 @@
+ko:
+  activerecord:
+    models:
+      category: '카테고리'
+      course: '소주제'
+      course_schedule: '강연일정'
+      lesson: '강연'
+      location: '장소'
+      payment: '결제'
+      payment_state : '결제 상태'
+      program: '대주제'
+      teacher: '강사'
+      user: '회원'
+    attributes:
+      category:
+        name: '제목'
+
+      course:
+        name: '제목'
+        detail: '소개'
+
+      course_schedule:
+        order: '회차'
+
+      lesson:
+        name: '제목'
+        order: '순서'
+
+      lesson_schedule:
+        held_at: '날짜'
+
+      location:
+        name: '이름'
+        phone_number: '전화번호'
+        address: '주소'
+        website: '웹사이트'
+        latitude: '위도'
+        longitude: '경도'
+
+      payment:
+        point: '강의 수'
+        amount: '액수'
+        created_at: '결제일'
+        updated_at: '처리일'
+
+      program:
+        name: '제목'
+
+      registration:
+        created_at: '등록일'
+
+      teacher:
+        description: '소개'
+
+      user:
+        name: '이름'
+        email: '이메일'
+        password: '비밀번호'
+        old_password: '이전 비밀번호'
+        new_password: '새 비밀번호'
+        is_admin: '관리자'
+        is_student: '학생'
+        is_teacher: '강사'
+        created_at: '가입일'
+        deleted_at: '탈퇴신청일'
+

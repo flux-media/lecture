@@ -1,0 +1,50 @@
+<table class="pure-table center-table">
+  <thead>
+  <tr>
+    <th><%= Category.model_name.human %></th>
+    <th>대주제</th>
+    <th>번호</th>
+    <th>소주제</th>
+    <th>강연자</th>
+    <th>강연자 이력</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% last_category_id = -1 %>
+  <% last_program_id = -1 %>
+  <% @categories.each do |category| %>
+      <% category.programs.each do |program| %>
+          <% program.courses.each do |course| %>
+              <tr>
+                <% if last_category_id != category.id %>
+                    <% last_category_id = category.id %>
+                    <td rowspan="<%= category.courses_count %>">
+                      <%= category.name %>
+                    </td>
+                <% end %>
+                <% if last_program_id != program.id %>
+                    <% last_program_id = program.id %>
+                    <td rowspan="<%= program.courses.count %>">
+                      <%= program.name %>
+                    </td>
+                <% end %>
+                <td><%= course.id %></td>
+                <td><%= link_to course.name, course_path(course.id) %></td>
+                <td>
+                  <% course.teachers.each do |teacher| %>
+                      <%= teacher.user.name %>
+                  <% end %>
+                </td>
+                <td>
+                  <% course.teachers.each do |teacher| %>
+                      <%= teacher.description %>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+      <% end %>
+
+  <% end %>
+  </tbody>
+</table>

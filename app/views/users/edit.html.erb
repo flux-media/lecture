@@ -1,0 +1,64 @@
+<div class="edit-user">
+  <%= render partial: 'profile' %>
+
+  <div class="user-element-wrapper form-wrapper">
+    <%= form_for :user, {url: user_path(current_user),
+                         html: {id: 'edit-user',
+                                class: 'pure-form pure-form-stacked'}} do |f| %>
+        <fieldset>
+          <legend><%= t('edit_user_profile') %></legend>
+
+          <%= f.label :email, User.human_attribute_name('email') %>
+          <%= f.text_field(:email, class: 'input-big', readonly: 'readonly') %>
+
+          <%= f.label :name, User.human_attribute_name('name') %>
+          <%= f.text_field(:name, class: 'input-big') %>
+        </fieldset>
+
+        <%= button_tag t('submit'),
+                       id: 'edit-user-button',
+                       class: 'ladda-button',
+                       data: {style: 'expand-right'} %>
+    <% end %>
+  </div>
+
+  <div class="user-element-wrapper form-wrapper">
+    <%= form_for :user, {url: user_path(current_user),
+                         html: {id: 'edit-password',
+                                class: 'pure-form pure-form-stacked'}} do |f| %>
+        <fieldset>
+          <legend><%= t('edit_user_password') %></legend>
+
+          <%= f.label :old_password, User.human_attribute_name('old_password') %>
+          <%= f.password_field(:old_password, class: 'input-big') %>
+
+          <%= f.label :new_password, User.human_attribute_name('new_password') %>
+          <%= f.password_field(:new_password, class: 'input-big') %>
+        </fieldset>
+
+        <%= button_tag t('submit'),
+                       id: 'edit-password-button',
+                       class: 'ladda-button',
+                       data: {style: 'expand-right'} %>
+    <% end %>
+  </div>
+
+  <div class="user-element-wrapper form-wrapper">
+    <%= content_tag 'div', id: 'locales_warning',
+                    data: {title: t('warning'),
+                           text: t('ask_sign_out'),
+                           confirmButtonText: t('confirm'),
+                           cancelButtonText: t('cancel')} do %>
+    <% end %>
+    <%= form_tag user_path(current_user.id),
+                 {id: 'sign-out',
+                  class: 'pure-form',
+                  method: 'delete'} do %>
+        <%= hidden_field_tag :user_id, current_user.id %>
+        <%= button_tag t('sign_out'),
+                       id: 'sign-out-button',
+                       class: 'ladda-button',
+                       data: {style: 'expand-right'} %>
+    <% end %>
+  </div>
+</div>

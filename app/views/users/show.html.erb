@@ -1,0 +1,71 @@
+<div class="show-user">
+  <%= render partial: 'profile' %>
+
+  <div id="registered-courses" class="user-element-wrapper registered-courses">
+    <h3><%= t('courses_registered') %></h3>
+    <% if courses_1.length > 0 %>
+        <section id="grid" class="clear" data-columns>
+          <div class="column">
+            <% courses_1.each do |course| %>
+                <%= render partial: 'welcome/card',
+                           locals: {course: course} %>
+            <% end %>
+          </div>
+          <div class="column">
+            <% courses_2.each do |course| %>
+                <%= render partial: 'welcome/card',
+                           locals: {course: course} %>
+            <% end %>
+          </div>
+          <div class="column">
+            <% courses_3.each do |course| %>
+                <%= render partial: 'welcome/card',
+                           locals: {course: course} %>
+            <% end %>
+          </div>
+        </section>
+    <% else %>
+        <div class="user-element">
+          <%= t('no_registration') %>
+        </div>
+    <% end %>
+  </div>
+
+  <% if !current_user.nil? && current_user.id === @user.id %>
+      <div class="user-element-wrapper payments">
+        <h3><%= Payment.model_name.human %></h3>
+        <% if @user.payments.size > 0 %>
+            <table class="pure-table center-table">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th><%= Payment.human_attribute_name('point') %></th>
+                <th><%= Payment.human_attribute_name('amount') %></th>
+                <th><%= Payment.human_attribute_name('created_at') %></th>
+                <th><%= PaymentState.model_name.human %></th>
+                <th><%= t('note') %></th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% @user.payments.each_with_index do |payment, index| %>
+                  <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= payment.point %></td>
+                    <td><%= payment.amount %></td>
+                    <td><%= payment.created_at.strftime(t('simple_datetime')) %></td>
+                    <td><%= payment.payment_state.name %></td>
+                    <td><%= payment.registration.nil? ? '' :
+                                    payment.registration.course_schedule.course.name %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+        <% else %>
+            <div class="user-element">
+              <%= t('no_payment') %>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
+</div>

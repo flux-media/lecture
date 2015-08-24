@@ -1,0 +1,81 @@
+.clear:before, .clear:after {
+  clear: both;
+}
+
+.clear:before, .clear:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+.open-courses {
+  background-color: #dddddd;
+  padding: 2em 1em;
+}
+
+#grid[data-columns]::before {
+  content: '3 .column.size-1of3'
+}
+
+@media screen and (max-width: 480px) {
+  #grid[data-columns]::before {
+    content: '1 .column.size-1of1';
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  #grid[data-columns]::before {
+    content: '2 .column.size-1of2';
+  }
+}
+
+@media screen and (min-width: 769px) {
+  #grid[data-columns]::before {
+    content: '3 .column.size-1of3';
+  }
+}
+
+.column {
+  float: left;
+}
+
+.size-1of1 {
+  width: 100%;
+}
+
+.size-1of2 {
+  width: 50%;
+}
+
+.size-1of3 {
+  width: 33.333%;
+}
+
+.card {
+  margin: 0 1em 2em;
+  text-align: justify;
+  border-top: 5px solid #e9632f;
+  background-color: white;
+
+  img.card-thumbnail {
+    width: 100%;
+  }
+
+  .contents {
+    padding: 1em;
+
+    .category {
+      font-size: 0.8em;
+    }
+
+    .program {
+      margin: 0 0 0.5em;
+    }
+
+    .course {
+      min-height: 4em;
+      font-size: 1.5em;
+    }
+  }
+}

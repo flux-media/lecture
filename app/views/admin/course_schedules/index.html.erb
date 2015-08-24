@@ -1,0 +1,46 @@
+<% admin_title(CourseSchedule.model_name.human) %>
+<% admin_subtitle(t('list')) %>
+
+<div class="new-entry-wrapper">
+  <%= link_to t('add_new_course_schedule'), new_admin_course_schedule_path, {class: 'pure-button'} %>
+</div>
+
+<table class="pure-table">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th><%= Course.human_attribute_name('name') %></th>
+    <th><%= CourseSchedule.human_attribute_name('order') %></th>
+    <th><%= t('period') %></th>
+    <th><%= t('manage') %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if @course_schedules.size > 0 %>
+      <% @course_schedules.each do |course_schedule| %>
+          <tr>
+            <td><%= course_schedule.id %></td>
+            <td><%= course_schedule.course.name %></td>
+            <td><%= course_schedule.order %></td>
+            <td>
+              <%= course_schedule.lesson_schedules.first.held_at.strftime(t('simple_date')) %> -
+              <%= course_schedule.lesson_schedules.last.held_at.strftime(t('simple_date')) %>
+            </td>
+            <td>
+              <%= link_to t('update'), edit_admin_course_schedule_path(course_schedule.id),
+                          {class: 'pure-button'} %>
+              <%= form_tag admin_course_schedule_path(course_schedule.id),
+                           {method: 'delete', class: 'inline-form'} do %>
+                  <%= submit_tag t('delete'), {class: 'pure-button'} %>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+  <% else %>
+      <tr>
+        <td><%= t('no_course_schedules') %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

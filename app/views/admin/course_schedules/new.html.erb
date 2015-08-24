@@ -1,0 +1,138 @@
+<% admin_title(CourseSchedule.model_name.human) %>
+<% admin_subtitle(t(action)) %>
+
+<%= form_for @course_schedule,
+             url: url,
+             html: {class: 'pure-form pure-form-stacked'} do |f| %>
+    <fieldset>
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-2-3">
+          <%= Course.model_name.human %>
+          <%= select_tag(:course,
+                         options_from_collection_for_select(
+                                 courses, 'id', 'name')) %>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= @course_schedule.order %>
+          <%= CourseSchedule.human_attribute_name('order') %>
+        </div>
+      </div>
+    </fieldset>
+    <%= submit_tag t('submit'), class: 'pure-button pure-button-primary' %>
+<% end %>
+
+<% if action === 'update' %>
+    <table class="pure-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th><%= Lesson.human_attribute_name('name') %></th>
+        <th><%= LessonSchedule.human_attribute_name('held_at') %></th>
+        <th><%= Location.model_name.human %></th>
+        <th><%= t('manage') %></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @course_schedule.course.lessons.each do |lesson| %>
+          <tr>
+            <%= form_for lesson,
+                         url: admin_lesson_schedule_path,
+                         html: {id: 'lesson_'+ lesson.id.to_s} do |f| %>
+                <%= hidden_field_tag(:lesson_id, lesson.id,
+                                     {form: 'lesson_' + lesson.id.to_s}) %>
+                <%= hidden_field_tag(:course_schedule_id, @course_schedule.id,
+                                     {form: 'lesson_' + lesson.id.to_s}) %>
+                <td><%= lesson.id %></td>
+                <td><%= lesson.name %></td>
+                <td>
+                  <% held_at = '' %>
+                  <% @course_schedule.lesson_schedules.each do |lesson_schedule| %>
+                      <% if lesson.id === lesson_schedule.lesson.id %>
+                          <% held_at = lesson_schedule.held_at.
+                                  strftime(t('simple_datetime')) %>
+                          <% break %>
+                      <% end %>
+                  <% end %>
+                  <%= text_field_tag :held_at, held_at,
+                                     {form: 'lesson_' + lesson.id.to_s} %>
+                </td>
+                <td>
+                  <% selected = nil %>
+                  <% @course_schedule.lesson_schedules.each do |lesson_schedule| %>
+                      <% if lesson.id === lesson_schedule.lesson.id %>
+                          <% selected = lesson_schedule.location.nil? ?
+                                  locations.first.id :
+                                  lesson_schedule.location.id %>
+                      <% end %>
+                  <% end %>
+                  <%= select_tag :location,
+                                 options_from_collection_for_select(
+                                         locations, 'id', 'name', selected) %>
+                </td>
+                <td>
+                  <%= submit_tag t('update'),
+                                 class: 'pure-button pure-button-primary',
+                                 form: 'lesson_' + lesson.id.to_s %>
+            <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <table class="pure-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th><%= User.human_attribute_name('name') %></th>
+        <th><%= Registration.human_attribute_name('created_at') %></th>
+        <th><%= t('manage') %></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% if @course_schedule.registrations.count > 0 %>
+          <% @course_schedule.registrations.each do |registration| %>
+              <tr>
+                <td><%= registration.id %></td>
+                <td>
+                  <%= link_to registration.student.user.name + '(' +
+                                      registration.student.user.email + ')',
+                              edit_admin_user_path(registration.student.user.id) %>
+                </td>
+                <td>
+                  <%= registration.created_at.strftime(t('simple_datetime')) %>
+                </td>
+                <td>
+                  <%= form_tag admin_registration_path(registration.id),
+                               class: 'pure-form', method: 'delete' do %>
+                      <%= hidden_field_tag :course_schedule_id,
+                                           @course_schedule.id %>
+                      <%= submit_tag t('delete'),
+                                     class: 'button-warning pure-button' %>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+      <% else %>
+          <tr>
+            <td colspan="4"><%= t('no_registration') %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <h2><%= t('register_user') %></h2>
+    <%= form_tag admin_registrations_path,
+                 class: 'pure-form',
+                 method: 'post' do %>
+        <%= hidden_field_tag :course_schedule_id, @course_schedule.id %>
+        <fieldset>
+          <label><%= User.human_attribute_name('email') %></label>
+          <%= text_field_tag :user_email %>
+        </fieldset>
+        <%= submit_tag t('submit'),
+                       class: 'button-primary pure-button' %>
+    <% end %>
+<% end %>

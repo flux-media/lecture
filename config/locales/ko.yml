@@ -1,0 +1,99 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+ko:
+  site_name: "어벤저스쿨"
+
+  main: "처음"
+  list: "목록"
+  admin: "관리자"
+  add_new_user: "새 회원 추가"
+
+  logout: "로그아웃"
+  login: "로그인"
+  sign_up: "회원가입"
+  manage: "관리"
+  update: "수정"
+  delete: "삭제"
+  create: "추가"
+  submit: "제출"
+
+  add_new_program: "새 대주제 추가"
+  add_new_category: "새 카테고리 추가"
+  add_new_course: "새 소주제 추가"
+  no_lessons: "등록된 강연이 없습니다."
+  add_new_course_schedule: "새 소주제 일정 추가"
+  no_course_schedules: "소주제 일정이 없습니다."
+
+  default_introduction: "닥치고 내 돈을 가져가!"
+
+  period: "기간"
+
+  simple_date: "%Y.%m.%d"
+  simple_datetime: "%Y.%m.%d %H:%M"
+
+  no_registration: "등록된 수강 정보가 없습니다."
+  user_id_or_email: "회원 아이디(숫자) 또는 이메일"
+  register_user: "회원 수강 등록"
+
+  signed_in_as: "%s로 로그인"
+  cancel_registration: "수강 신청 취소"
+
+  all_courses: "모든 강연 보기"
+  courses_closed: "수강 불가"
+  courses_registered: "등록한 강연"
+  courses_completed: "완료된 강연"
+  register_course: "수강 신청하기"
+  course_starts_from: "%s부터 시작"
+  course_ends: "수강 완료"
+
+  copyright: "Copyright © 2015 PPSS"
+  add_new_location: "새 장소 추가"
+  new_payments: "결제하기"
+  not_decided: "미정"
+  agree_on_terms: "약관에 동의합니다."
+  sign_up_with_facebook: "페이스북으로 가입하기"
+  login_with_facebook: "페이스북으로 로그인하기"
+  reset_password: "비밀번호 찾기"
+  error: "오류"
+  no_email_exists: "존재하지 않는 이메일입니다."
+  confirm: "확인"
+  database_error: "데이터베이스에 문제가 있습니다. 원인은 모릅니다."
+  success: "성공적"
+  check_email: "이메일 계정을 확인해주세요."
+  title_reset_password: "비밀번호 리셋 알림 메일"
+  duplicate_email_exists: "이미 가입된 이메일 주소입니다."
+  sign_out: "회원 탈퇴"
+  not_authorized: "권한이 없습니다."
+  wrong_parameters: "잘못된 요청입니다."
+  payment_request_success: "결제 신청이 완료되었습니다. 1주 내로 입금 확인이 됩니다."
+  successfully_signed_out: "탈퇴 처리가 완료되었습니다. 회원 정보는 3주 내로 완전히 삭제됩니다."
+  number_of_courses: "%s번의 강연"
+  inquiry: "문의하기"
+  content: "내용"
+  warning: "경고"
+  ask_sign_out: "탈퇴를 취소하는 일은 대단히 번거롭습니다. 계속하시겠습니까?"
+  cancel: "취소"
+  server_error: "서버 오류입니다. 나중에 다시 시도해주세요."
+  inquiry_submit_success: "접수되었습니다."
+  edit: "편집"
+  no_payment: "결제 정보가 없습니다."
+  note: "비고"
+  edit_user_profile: "프로필 정보 수정"
+  edit_user_password: "비밀번호 재설정"
+  edit_user_success: "프로필 정보가 성공적으로 수정되었습니다."
+  wrong_password: "비밀번호가 틀립니다."
