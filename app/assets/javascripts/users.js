@@ -171,8 +171,8 @@ $(document).on('submit', '#sign-out', function (e) {
         text: locales_warning.data('text'),
         type: 'warning',
         showCancelButton: 'true',
-        confirmButtonText: locales_warning.data('confirmButtonText'),
-        cancelButtonText: locales_warning.data('cancelButtonText'),
+        confirmButtonText: locales_warning.data('confirmbuttontext'),
+        cancelButtonText: locales_warning.data('cancelbuttontext'),
         closeOnConfirm: false
     }, function () {
         var l = Ladda.create(document.querySelector('#sign-out-button'));
@@ -210,5 +210,108 @@ $(document).on('submit', '#sign-out', function (e) {
                 });
             }
         });
+    });
+});
+
+$(document).on('submit', '#edit-user', function (e) {
+    e.preventDefault();
+
+    var $this = $(this);
+    var data = {};
+    $.each($this.serializeArray(), function (index, field) {
+        data[field.name] = $.trim(field.value);
+    });
+
+    var l = Ladda.create(document.querySelector('#edit-user-button'));
+    l.start();
+
+    if (data['user[name]'].length <= 0) {
+        $this.find('#user_name').focus();
+        l.stop();
+        return false;
+    }
+
+    $.ajax({
+        method: 'PATCH',
+        url: $this.attr('action'),
+        data: data,
+        success: function (response) {
+            l.stop();
+
+            swal({
+                title: response.data.title,
+                text: response.data.text,
+                type: response.data.type,
+                confirmButtonText: response.data.confirmButtonText
+            }, function () {
+                if (response.result === 0) {
+                    location.reload(true);
+                }
+            });
+        },
+        error: function () {
+            l.stop();
+            var locales_error = $('#locales_error');
+            swal({
+                title: locales_error.data('title'),
+                text: locales_error.data('text'),
+                type: 'error',
+                confirmButtonText: locales_error.data('confirmButtonText')
+            });
+        }
+    });
+});
+
+$(document).on('submit', '#edit-password', function (e) {
+    e.preventDefault();
+
+    var $this = $(this);
+    var data = {};
+    $.each($this.serializeArray(), function (index, field) {
+        data[field.name] = $.trim(field.value);
+    });
+
+    var l = Ladda.create(document.querySelector('#edit-password-button'));
+    l.start();
+
+    if (data['user[old_password]'].length <= 0) {
+        $this.find('#user_old_password').focus();
+        l.stop();
+        return false;
+    } else if (data['user[new_password]'].length <= 0) {
+        $this.find('#user_new_password').focus();
+        l.stop();
+        return false;
+    }
+
+    $.ajax({
+        method: 'PATCH',
+        url: $this.attr('action'),
+        data: data,
+        success: function (response) {
+            l.stop();
+
+            swal({
+                title: response.data.title,
+                text: response.data.text,
+                type: response.data.type,
+                confirmButtonText: response.data.confirmButtonText
+            });
+
+            if (response.result === 0) {
+                $this.find('#user_old_password').val('');
+                $this.find('#user_new_password').val('');
+            }
+        },
+        error: function () {
+            l.stop();
+            var locales_error = $('#locales_error');
+            swal({
+                title: locales_error.data('title'),
+                text: locales_error.data('text'),
+                type: 'error',
+                confirmButtonText: locales_error.data('confirmButtonText')
+            });
+        }
     });
 });

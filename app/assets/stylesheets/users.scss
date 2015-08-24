@@ -1,48 +1,48 @@
-.user {
-  .user-profile {
-    padding: 0 3em;
-    overflow: hidden;
+.user-profile {
+  padding: 0 3em;
+  overflow: hidden;
 
-    .profile-image {
-      float: left;
-      border-radius: 50%;
-    }
+  .profile-image {
+    float: left;
+    border-radius: 50%;
+  }
 
-    .profile-detail-wrapper {
-      float: left;
-      height: 200px;
-      width: calc(100% - 200px);
+  .profile-detail-wrapper {
+    float: left;
+    height: 200px;
+    width: calc(100% - 200px);
 
-      // http://davidwalsh.name/css-vertical-center
-      .profile-detail {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        text-align: center;
+    // http://davidwalsh.name/css-vertical-center
+    .profile-detail {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
 
-        .user-name {
-          font-size: 2em;
-          color: #333333;
-          margin: 0 0 1em;
-        }
+      .user-name {
+        font-size: 2em;
+        color: #333333;
+        margin: 0 0 1em;
       }
     }
   }
+}
 
-  .user-element-wrapper {
-    margin: 0 0 2em;
+.user-element-wrapper {
+  margin: 0 auto 2em;
 
-    h3 {
-      text-align: center;
-      font-size: 1.5em;
-      margin: 0 0 1em;
-    }
-
-    .user-element {
-      text-align: center;
-    }
+  h3 {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0 0 1em;
   }
 
+  .user-element {
+    text-align: center;
+  }
+}
+
+.show-user {
   .registered-courses {
     clear: both;
     background-color: #dddddd;
@@ -52,4 +52,8 @@
       color: white;
     }
   }
+}
+
+.edit-user {
+
 }

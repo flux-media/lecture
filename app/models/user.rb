@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   validates :email, :presence => true, :email => true, :uniqueness => true
   validates :name, :presence => true, :length => {:maximum => 30}
+  validates :password_digest, :presence => true
 
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)

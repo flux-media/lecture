@@ -93,3 +93,7 @@ ko:
   edit: "편집"
   no_payment: "결제 정보가 없습니다."
   note: "비고"
+  edit_user_profile: "프로필 정보 수정"
+  edit_user_password: "비밀번호 재설정"
+  edit_user_success: "프로필 정보가 성공적으로 수정되었습니다."
+  wrong_password: "비밀번호가 틀립니다."

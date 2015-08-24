@@ -190,6 +190,73 @@ class UsersController < ApplicationController
                courses_3: courses_3}
   end
 
+  def update
+    result = Hash.new
+    result['result'] = 1
+    result['data'] = Hash.new
+
+    user = User.find(params[:id])
+    begin
+      unless params[:user][:name].nil?
+        if current_user.nil? || user.nil? || current_user.id != params[:id].to_i
+          result['data']['title'] = t('error')
+          result['data']['text'] = t('not_authorized')
+          result['data']['type'] = 'error'
+          result['data']['confirmButtonText'] = t('confirm')
+          render json: result
+          return
+        else
+          user.name = params[:user][:name]
+        end
+      end
+
+      old_password = params[:user][:old_password].nil? ?
+          '' : params[:user][:old_password].squish
+      new_password = params[:user][:new_password].nil? ?
+          '' : params[:user][:new_password].squish
+
+      if old_password.length > 0 && new_password.length > 0
+        if current_user.nil? || user.nil? || current_user.id != params[:id].to_i
+          result['data']['title'] = t('error')
+          result['data']['text'] = t('not_authorized')
+          result['data']['type'] = 'error'
+          result['data']['confirmButtonText'] = t('confirm')
+          render json: result
+          return
+        elsif !user.authenticate(old_password)
+          result['data']['title'] = t('error')
+          result['data']['text'] = t('wrong_password')
+          result['data']['type'] = 'error'
+          result['data']['confirmButtonText'] = t('confirm')
+          render json: result
+          return
+        else
+          user.password = new_password
+        end
+      end
+
+      if user.save
+        result['result'] = 0
+        result['data']['title'] = t('success')
+        result['data']['text'] = t('edit_user_success')
+        result['data']['type'] = 'success'
+        result['data']['confirmButtonText'] = t('confirm')
+      else
+        result['data']['title'] = t('error')
+        result['data']['text'] = t('database_error')
+        result['data']['type'] = 'error'
+        result['data']['confirmButtonText'] = t('confirm')
+      end
+    rescue Exception
+      result['data']['title'] = t('error')
+      result['data']['text'] = t('server_error')
+      result['data']['type'] = 'error'
+      result['data']['confirmButtonText'] = t('confirm')
+    end
+
+    render json: result
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password)

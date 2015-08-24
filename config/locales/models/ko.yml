@@ -56,6 +56,8 @@ ko:
         name: '이름'
         email: '이메일'
         password: '비밀번호'
+        old_password: '이전 비밀번호'
+        new_password: '새 비밀번호'
         is_admin: '관리자'
         is_student: '학생'
         is_teacher: '강사'
