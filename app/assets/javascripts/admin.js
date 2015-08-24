@@ -1,4 +1,5 @@
 //= require jquery
+//= require autosize
 
 var ready;
 ready = function () {
@@ -34,6 +35,8 @@ ready = function () {
         toggleClass(menu, active);
         toggleClass(menuLink, active);
     };
+
+    autosize($('textarea'));
 };
 
 $(document).ready(ready);

@@ -6,6 +6,6 @@ class Course < ActiveRecord::Base
   has_many :lessons, -> { order(:order) }
 
   has_attached_file :thumbnail, styles: {medium: '300x300>', thumb: '100x100>'},
-                    default_url: '/images/:style/missing.png'
+                    default_url: 'lecture.jpg'
   validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\Z/
 end

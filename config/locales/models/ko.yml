@@ -18,6 +18,7 @@ ko:
       course:
         name: '제목'
         detail: '소개'
+        thumbnail: '섬네일'
 
       course_schedule:
         order: '회차'
@@ -64,3 +65,4 @@ ko:
         created_at: '가입일'
         deleted_at: '탈퇴신청일'
 
+  delete: "삭제"

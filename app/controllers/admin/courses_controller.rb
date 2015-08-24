@@ -91,8 +91,12 @@ class Admin::CoursesController < ApplicationController
   def update
     course = Course.find(params[:course][:id])
     course.name = params[:course][:name]
-    course.thumbnail = params[:course][:thumbnail]
     course.program = Program.find(params[:program])
+    course.detail = params[:course][:detail]
+
+    if !params[:delete_thumbnail].nil? && params[:delete_thumbnail].to_i === 1
+      course.thumbnail = params[:course][:thumbnail]
+    end
 
     if course.save
       redirect_to edit_admin_course_path course.id

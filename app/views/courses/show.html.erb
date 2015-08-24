@@ -10,7 +10,8 @@
 
       <p class="schedule">
         <% if is_course_open && !displayable_course_schedule.nil? %>
-            <%= t('course_starts_from') % [displayable_course_schedule.lesson_schedules.first.held_at.strftime(t('simple_date'))] %>
+            <%= t('course_starts_from') % [displayable_course_schedule.lesson_schedules.first.
+                                                   held_at.strftime(t('simple_date'))] %>
         <% else %>
             <%= t('course_ends') %>
         <% end %>
@@ -55,9 +56,7 @@
     <div class="course-body-element">
       <h3><%= Course.human_attribute_name('detail') %></h3>
 
-      <p>
-        <%= @course.detail %>
-      </p>
+      <%= @course.detail.html_safe %>
     </div>
 
     <div class="course-body-element">
@@ -65,7 +64,7 @@
 
       <p>
         <% @course.teachers.each do |teacher| %>
-            <%= teacher.user.name %>: <%= teacher.description %>
+            <%= render partial: 'users/profile', locals: {user: teacher.user} %>
         <% end %>
       </p>
     </div>

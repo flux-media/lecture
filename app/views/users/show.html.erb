@@ -1,5 +1,5 @@
 <div class="show-user">
-  <%= render partial: 'profile' %>
+  <%= render partial: 'profile', locals: {user: @user} %>
 
   <div id="registered-courses" class="user-element-wrapper registered-courses">
     <h3><%= t('courses_registered') %></h3>

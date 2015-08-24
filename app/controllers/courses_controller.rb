@@ -35,7 +35,12 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find(params[:id])
+    @course = (Course.find(params[:id]) or not_found)
+
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
+
+    @course.detail = markdown.render(@course.detail)
+
     teachers_array = Array.new
 
     @course.lessons.each do |lesson|

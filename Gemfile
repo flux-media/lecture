@@ -39,7 +39,10 @@ gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 gem 'redis-rails'
 
 # Paperclip to manage images
-gem "paperclip", "~> 4.3"
+gem 'paperclip', '~> 4.3'
+
+# For markdown support
+gem 'redcarpet'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

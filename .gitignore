@@ -24,6 +24,7 @@
 *.DS_Store
 
 # For Bower
+npm-debug.log
 /vendor/assets/components/
 
 # For Redis

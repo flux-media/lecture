@@ -1,5 +1,5 @@
 <div class="edit-user">
-  <%= render partial: 'profile' %>
+  <%= render partial: 'profile', locals: {user: @user} %>
 
   <div class="user-element-wrapper form-wrapper">
     <%= form_for :user, {url: user_path(current_user),

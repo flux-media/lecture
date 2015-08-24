@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "sweetalert": "~1.1.0"
+    "sweetalert": "~1.1.0",
+    "autosize": "~3.0.8"
   }
 }
