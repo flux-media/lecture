@@ -2,15 +2,27 @@
   padding: 0 3em;
   overflow: hidden;
 
-  .profile-image {
+  .profile-image-wrapper {
     float: left;
-    border-radius: 50%;
+
+    @media only screen and (max-width: 780px) {
+      float: none;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .profile-image {
+      border-radius: 50%;
+    }
   }
 
   .profile-detail-wrapper {
     float: left;
     height: 200px;
     width: calc(100% - 200px);
+
+    @media only screen and (max-width: 780px) {
+      width: 100%;
+    }
 
     // http://davidwalsh.name/css-vertical-center
     .profile-detail {
@@ -52,8 +64,4 @@
       color: white;
     }
   }
-}
-
-.edit-user {
-
 }
