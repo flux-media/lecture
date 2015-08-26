@@ -15,6 +15,7 @@
  *= require trunk
  *= require salvattore
  *= require courses
+ *= require welcome
  *= require users
  *= require sweetalert/dist/sweetalert
  *= require ladda/ladda.min.css

@@ -5,26 +5,28 @@ class SessionsController < ApplicationController
       return
     end
 
-    email = params[:user][:email].nil? ?
-        '' : params[:user][:email].squish
-    password = params[:user][:password].nil? ?
-        '' : params[:user][:password].squish
+    begin
+      email = params[:user][:email].squish
+      password = params[:user][:password].squish
 
-    user = User.find_by_email(email)
-    if email.length > 0 && password.length > 0 &&
-        !user.nil? && user.authenticate(password)
-      session[:user_id] = user.id
+      user = User.find_by_email(email)
+      if email.length > 0 && password.length > 0 &&
+          !user.nil? && user.authenticate(password)
+        session[:user_id] = user.id
 
-      # For a nicer look of URL, strip off a leading '/'.
-      target = params[:target]
-      if target.nil?
-        target = ''
+        # For a nicer look of URL, strip off a leading '/'.
+        target = params[:target]
+        if target.nil?
+          target = ''
+        end
+        if target.start_with?('/')
+          target = target[1..-1]
+        end
+        redirect_to root_url + target
+      else
+        redirect_to login_path
       end
-      if target.start_with?('/')
-        target = target[1..-1]
-      end
-      redirect_to root_url + target
-    else
+    rescue NoMethodError
       redirect_to login_path
     end
   end

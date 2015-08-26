@@ -64,5 +64,3 @@ ko:
         is_teacher: '강사'
         created_at: '가입일'
         deleted_at: '탈퇴신청일'
-
-  delete: "삭제"

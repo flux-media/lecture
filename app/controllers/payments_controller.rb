@@ -40,7 +40,8 @@ class PaymentsController < ApplicationController
       end
     end
 
-    render json: result
+    render json: result,
+           status: result['result'] === 0 ? 200 : 500
   end
 
   def new

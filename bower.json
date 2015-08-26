@@ -15,7 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "sweetalert": "~1.1.0",
-    "autosize": "~3.0.8"
+    "autosize": "~3.0.8",
+    "jquery.fitvids": "fitvids#~1.1.0",
+    "sweetalert": "~1.1.0"
   }
 }

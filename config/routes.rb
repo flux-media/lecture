@@ -56,4 +56,9 @@ Rails.application.routes.draw do
   #   end
   #   resources :posts, concerns: :toggleable
   #   resources :photos, concerns: :toggleable
+
+  get '/404', :to => 'welcome#not_found'
+  get '/422', :to => 'welcome#unacceptable'
+  get '/500', :to => 'welcome#internal_error'
+
 end

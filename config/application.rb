@@ -28,12 +28,10 @@ module Lecture
     config.active_record.raise_in_transactional_callbacks = true
 
     # Use redis to manage cache
-    config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
+    config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', {expires_in: 90.minutes}
 
-    # To render 404, 500, etc...
-    # http://stackoverflow.com/questions/2385799/how-to-redirect-to-a-404-in-rails
-    config.after_initialize do |app|
-      app.routes.append { match '*a', :to => 'application#not_found' } unless config.consider_all_requests_local
-    end
+    # To render erroneous pages
+    # http://wearestac.com/blog/dynamic-error-pages-in-rails
+    config.exceptions_app = self.routes
   end
 end

@@ -16,6 +16,7 @@
 //= require ladda/ladda.min.js
 //= require salvattore.min
 //= require sweetalert/dist/sweetalert.min.js
+//= require jquery.fitvids.js
 //= require trunk
 //= require common
 //= require inquiries

@@ -30,12 +30,10 @@ class CoursesController < ApplicationController
 
       category.courses_count = courses_count
     end
-
-    render template: 'courses/index'
   end
 
   def show
-    @course = (Course.find(params[:id]) or not_found)
+    @course = Course.find(params[:id])
 
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
 
