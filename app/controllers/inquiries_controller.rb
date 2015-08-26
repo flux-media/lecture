@@ -39,8 +39,7 @@ class InquiriesController < ApplicationController
       result['data']['confirmButtonText'] = t('confirm')
     end
 
-    render json: result,
-           status: result['result'] === 0 ? 200 : 500
+    render json: result
   end
 
   def new
