@@ -17,6 +17,7 @@
 
 ko:
   site_name: "어벤저스쿨"
+  default_meta_description: "어벤저스쿨을 살려야 한다."
 
   main: "처음"
   list: "목록"

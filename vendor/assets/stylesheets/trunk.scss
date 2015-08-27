@@ -93,8 +93,8 @@ nav li a {
   display: block;
 }
 
-nav li a:hover {
-  color: #000;
+nav li.current a, nav li a:hover {
+  color: black;
 }
 
 /*  Removable CSS  */

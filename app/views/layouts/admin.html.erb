@@ -4,10 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= t('site_name') %></title>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
-  <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet"
+        href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet"
+        href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+  <%= # noinspection RailsParamDefResolve
+      stylesheet_link_tag 'admin', media: 'all',
+                          'data-turbolinks-track' => true %>
+  <%= # noinspection RailsParamDefResolve
+      javascript_include_tag 'admin',
+                             'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -24,7 +30,10 @@
 
       <ul class="pure-menu-list">
         <% if is_admin %>
-            <li class="pure-menu-item"><%= link_to t('main'), admin_path, {class: 'pure-menu-link'} %></li>
+            <li class="pure-menu-item">
+              <%= link_to t('main'), admin_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
             <li class="pure-menu-item">
               <%= link_to User.model_name.human,
                           admin_users_path,

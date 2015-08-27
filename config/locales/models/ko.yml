@@ -52,6 +52,9 @@ ko:
 
       teacher:
         description: '소개'
+        facebook_id: '페이스북 ID'
+        google_plus_id: '구글플러스 ID'
+        twitter_id: '트위터 ID'
 
       user:
         name: '이름'

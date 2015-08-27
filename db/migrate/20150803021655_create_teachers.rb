@@ -1,12 +1,16 @@
 class CreateTeachers < ActiveRecord::Migration
   def change
     create_table :teachers do |t|
-    	t.string :description
+      t.belongs_to :user, index: true
+
+      t.string :facebook_id
+      t.string :google_plus_id
+      t.string :twitter_id
+      t.string :description
 
       t.timestamps null: false
     end
 
-    add_reference :teachers, :user, index: true, foreign_key: true
-  	change_column :teachers, :user_id, :integer, :null => false
+    change_column :teachers, :user_id, :integer, :null => false
   end
 end

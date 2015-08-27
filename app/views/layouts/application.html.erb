@@ -3,15 +3,86 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= t('site_name') %></title>
-  <%= stylesheet_link_tag 'application',
+  <title><%= yield(:meta_title).to_s.size > 0 ?
+                     yield(:meta_title) : t('site_name') %></title>
+  <%= # noinspection RailsParamDefResolve
+      stylesheet_link_tag 'application',
                           media: 'all',
                           'data-turbolinks-track' => true %>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/tables-min.css">
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/forms-min.css">
-  <%= javascript_include_tag 'application',
+  <link rel="stylesheet"
+        href="http://yui.yahooapis.com/pure/0.6.0/tables-min.css">
+  <link rel="stylesheet"
+        href="http://yui.yahooapis.com/pure/0.6.0/forms-min.css">
+  <%= # noinspection RailsParamDefResolve
+      javascript_include_tag 'application',
                              'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <!-- Social media meta tags -->
+  <!-- https://scotch.io/quick-tips/all-search-and-social-media-meta-tags-starter-template-->
+
+  <!-- SEO -->
+  <% if yield(:meta_author).to_s.size > 0 %>
+      <meta name="author" content="<%= yield(:meta_author) %>">
+  <% end %>
+  <meta name="description" content="<%=
+      yield(:meta_description).to_s.size > 0 ?
+              yield(:meta_description) : t('default_meta_description') %>">
+
+  <!-- Social: Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@<%= meta_twitter_site %>">
+  <% if yield(:meta_twitter_id).to_s.size > 0 %>
+      <meta name="twitter:creator" content="@<%= yield(:meta_twitter_id) %>">
+  <% end %>
+  <meta name="twitter:title" content="<%=
+      yield(:meta_title).to_s.size > 0 ?
+              yield(:meta_title) : t('site_name') %>">
+  <meta name="twitter:description" content="<%=
+      yield(:meta_description).to_s.size > 0 ?
+              yield(:meta_description) : t('default_meta_description') %>">
+  <meta name="twitter:image:src" content="<%=
+      yield(:meta_thumbnail).to_s.size > 0 ?
+              yield(:meta_thumbnail) : default_thumbnail %>">
+
+  <!-- Social: Facebook / Open Graph -->
+  <meta property="fb:admins" content="<%= meta_fb_admins %>">
+  <meta property="fb:app_id" content="<%= meta_fb_app_id %>">
+  <meta property="og:url" content="<%= url_for :only_path => false %>">
+  <% if yield(:meta_og_type).to_s.size > 0 %>
+      <meta property="og:type" content="<%= yield(:meta_og_type) %>">
+  <% end %>
+  <meta property="og:title" content="<%=
+      yield(:meta_title).to_s.size > 0 ?
+              yield(:meta_title) : t('site_name') %>">
+  <meta property="og:image" content="<%=
+      yield(:meta_thumbnail).to_s.size > 0 ?
+              yield(:meta_thumbnail) : default_thumbnail %>"/>
+  <meta property="og:description" content="<%=
+      yield(:meta_description).to_s.size > 0 ?
+              yield(:meta_description) : t('default_meta_description') %>">
+  <meta property="og:site_name" content="<%= t('site_name') %>">
+  <% if yield(:meta_author_facebook_id).to_s.size > 0 %>
+      <meta property="article:author"
+            content="https://www.facebook.com/<%= yield(:meta_author_facebook_id) %>">
+  <% end %>
+  <meta property="article:publisher" content="<%= meta_og_article_publisher %>">
+
+  <!-- Social: Google+ / Schema.org  -->
+  <% if yield(:meta_google_plus_id).to_s.size > 0 %>
+      <link rel="author"
+            href="https://plus.google.com/+<%= yield(:meta_google_plus_id) %>/">
+  <% end %>
+  <link rel="publisher" href="<%= meta_publisher %>">
+  <meta itemprop="name" content="<%=
+      yield(:meta_title).to_s.size > 0 ?
+              yield(:meta_title) : t('site_name') %>">
+  <meta itemprop="description" content="<%=
+      yield(:meta_description).to_s.size > 0 ?
+              yield(:meta_description) : t('default_meta_description') %>">
+  <meta itemprop="image" content="<%=
+      yield(:meta_thumbnail).to_s.size > 0 ?
+              yield(:meta_thumbnail) : default_thumbnail %>">
 </head>
 <body>
 <%= content_tag 'div', id: 'locales_error',
@@ -20,10 +91,11 @@
                        confirmButtonText: t('confirm'),
                        cancelButtonText: t('cancel')} do %>
 <% end %>
+<!--suppress JSUnresolvedVariable -->
 <script>
     window.fbAsyncInit = function () {
         FB.init({
-            appId: '494648400689612',
+            appId: '<%= meta_fb_app_id %>',
             xfbml: true,
             version: 'v2.4'
         });
@@ -57,20 +129,27 @@
 
   <nav class="slide">
     <ul>
-      <li>
+      <li<%= current_page?(controller: 'welcome', action: 'index') ?
+                     ' class=current' : '' %>>
         <%= link_to t('main'), root_path %>
       </li>
-      <li>
+      <li<%= current_page?(controller: 'courses', action: 'index') ?
+                     ' class=current' : '' %>>
         <%= link_to t('all_courses'), courses_path %>
       </li>
-      <li>
+      <li<%= current_page?(controller: 'payments', action: 'new') ?
+                     ' class=current' : '' %>>
         <%= link_to t('new_payments'), new_payment_path %>
       </li>
-      <li>
+      <li<%= current_page?(controller: 'inquiries', action: 'new') ?
+                     ' class=current' : '' %>>
         <%= link_to t('inquiry'), new_inquiry_path %>
       </li>
       <% if current_user %>
-          <li>
+          <li<%= current_page?(controller: 'users',
+                               action: 'show',
+                               id: current_user.id) ?
+                         ' class=current' : '' %>>
             <%= link_to t('signed_in_as') % [current_user.name],
                         user_path(current_user.id) %>
           </li>
@@ -81,8 +160,14 @@
               <li><%= link_to t('admin'), admin_path %></li>
           <% end %>
       <% else %>
-          <li><%= link_to t('sign_up'), sign_up_path %></li>
-          <li><%= link_to t('login'), login_path %></li>
+          <li<%= current_page?(controller: 'users', action: 'new') ?
+                         ' class=current' : '' %>>
+            <%= link_to t('sign_up'), sign_up_path %>
+          </li>
+          <li<%= current_page?(controller: 'sessions', action: 'new') ?
+                         ' class=current' : '' %>>
+            <%= link_to t('login'), login_path %>
+          </li>
       <% end %>
     </ul>
   </nav>
@@ -90,8 +175,9 @@
   <!-- Add "slideRight" class to items that move right when viewing Nav Drawer -->
   <div class="content slide">
     <% if @is_banner_visible %>
-        <div class="banner" style="background-image: url('<%= content_for?(:thumbnail_url) ?
-        content_for(:thumbnail_url) : 'https://upload.wikimedia.org/wikipedia/commons/3/34/Math_lecture_at_TKK.JPG' %>')">
+        <div class="banner"
+             style="background-image: url('<%= content_for?(:thumbnail_url) ?
+        content_for(:thumbnail_url) : default_thumbnail %>')">
           <%= content_for :banner %>
         </div>
     <% end %>
@@ -101,7 +187,8 @@
     <div class="footer-wrapper">
       <div class="footer">
         <div class="footer-contents">
-          <span class="logo"><%= t('site_name') %></span> <%= t('copyright') %>
+          <span class="logo"><%= t('site_name') %></span>
+          <%= t('copyright') %>
         </div>
       </div>
     </div>

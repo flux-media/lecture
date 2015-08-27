@@ -7,61 +7,6 @@ class Admin::UsersController < ApplicationController
     create_or_update_user user, params
   end
 
-  def create_or_update_user(user, params)
-    user.name = params[:user][:name]
-    user.email = params[:user][:email]
-    if params[:password] != nil
-      user.password = params[:password]
-    end
-
-    # If there's only one remaining admin User,
-    # don't update it to false.
-    if user.is_admin && User.where(is_admin: true).count === 1 &&
-        params[:user][:is_admin] == 'false'
-      # Do nothing.
-    else
-      user.is_admin = params[:user][:is_admin]
-    end
-
-    if params[:user][:is_teacher] == 'true'
-      if user.teacher.nil?
-        user.teacher = Teacher.new
-      end
-
-      user.teacher.description = params[:teacher_description]
-
-      if user.teacher.save
-        # Good!
-      end
-    else
-      unless user.teacher.nil?
-        if user.teacher.destroy
-          # Good!
-        end
-      end
-    end
-
-    if params[:user][:is_student] == 'true'
-      if user.student.nil?
-        user.student = Student.new
-      end
-
-      if user.student.save
-        # Good!
-      end
-    else
-      unless user.student.nil?
-        if user.student.destroy
-          # Good!
-        end
-      end
-    end
-
-    if user.save
-      redirect_to admin_users_path
-    end
-  end
-
   def destroy
     user = User.find(params[:id])
 
@@ -101,5 +46,64 @@ class Admin::UsersController < ApplicationController
   def update
     user = User.find(params[:user][:id])
     create_or_update_user user, params
+  end
+
+  private
+
+  def create_or_update_user(user, params)
+    user.name = params[:user][:name]
+    user.email = params[:user][:email]
+    if params[:password] != nil
+      user.password = params[:password]
+    end
+
+    # If there's only one remaining admin User,
+    # don't update it to false.
+    if user.is_admin && User.where(is_admin: true).count === 1 &&
+        params[:user][:is_admin] == 'false'
+      # Do nothing.
+    else
+      user.is_admin = params[:user][:is_admin]
+    end
+
+    if params[:user][:is_teacher] == 'true'
+      if user.teacher.nil?
+        user.teacher = Teacher.new
+      end
+
+      user.teacher.description = params[:teacher_description]
+      user.teacher.facebook_id = params[:teacher_facebook_id]
+      user.teacher.google_plus_id = params[:teacher_google_plus_id]
+
+      if user.teacher.save
+        # Good!
+      end
+    else
+      unless user.teacher.nil?
+        if user.teacher.destroy
+          # Good!
+        end
+      end
+    end
+
+    if params[:user][:is_student] == 'true'
+      if user.student.nil?
+        user.student = Student.new
+      end
+
+      if user.student.save
+        # Good!
+      end
+    else
+      unless user.student.nil?
+        if user.student.destroy
+          # Good!
+        end
+      end
+    end
+
+    if user.save
+      redirect_to admin_users_path
+    end
   end
 end

@@ -1,3 +1,6 @@
+<% meta_title @course.name + ' :: ' + t('site_name') %>
+<% meta_description @course.detail %>
+
 <div class="course">
   <div class="course-header">
     <div class="course-thumbnail">
@@ -10,7 +13,8 @@
 
       <p class="schedule">
         <% if is_course_open && !displayable_course_schedule.nil? %>
-            <%= t('course_starts_from') % [displayable_course_schedule.lesson_schedules.first.
+            <%= t('course_starts_from') % [displayable_course_schedule.
+                                                   lesson_schedules.first.
                                                    held_at.strftime(t('simple_date'))] %>
         <% else %>
             <%= t('course_ends') %>
@@ -24,17 +28,17 @@
                     <%= link_to t('register_course'),
                                 login_path(target: course_path(@course)),
                                 class: 'ladda-button',
-                                'data-color' => 'green' %>
+                                data: {color: 'green'} %>
                 <% elsif current_user.credit > 0 %>
                     <%= form_tag course_registrations_path(@course) do %>
                         <%= submit_tag t('register_course'),
                                        class: 'ladda-button',
-                                       'data-color' => 'green' %>
+                                       data: {color: 'green'} %>
                     <% end %>
                 <% else %>
                     <%= link_to t('register_course'), new_payment_path,
                                 class: 'ladda-button',
-                                'data-color' => 'green' %>
+                                data: {color: 'green'} %>
                 <% end %>
             <% else %>
                 <%= form_tag course_registration_path(@course, registration),
@@ -46,7 +50,7 @@
         <% else %>
             <%= link_to t('courses_closed'), '#',
                         class: 'ladda-button',
-                        disabled: 'disabled' %>
+                        disabled: true %>
         <% end %>
       </div>
     </div>
