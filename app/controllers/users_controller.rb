@@ -167,6 +167,47 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    teacher_courses_1 = Array.new
+    teacher_courses_2 = Array.new
+    teacher_courses_3 = Array.new
+
+    unless @user.teacher.nil?
+      @user.teacher.lessons.each_with_index do |teacher_lesson, index|
+        course = teacher_lesson.course
+
+        teachers_array = Array.new
+
+        course.lessons.each do |lesson|
+          teacher = lesson.teacher
+
+          is_in_array = false
+
+          teachers_array.each do |teacher_in_array|
+            if teacher_in_array.id === teacher.id
+              is_in_array = true
+            end
+          end
+
+          unless is_in_array
+            teachers_array.push(teacher)
+          end
+
+        end
+
+        course.teachers = teachers_array
+
+        case (index % 3)
+          when 0
+            teacher_courses_1.push(course)
+          when 1
+            teacher_courses_2.push(course)
+          when 2
+            teacher_courses_3.push(course)
+          else
+        end
+      end
+    end
+
     courses_1 = Array.new
     courses_2 = Array.new
     courses_3 = Array.new
@@ -209,6 +250,9 @@ class UsersController < ApplicationController
     end
 
     render :locals => {
+               teacher_courses_1: teacher_courses_1,
+               teacher_courses_2: teacher_courses_2,
+               teacher_courses_3: teacher_courses_3,
                courses_1: courses_1,
                courses_2: courses_2,
                courses_3: courses_3}

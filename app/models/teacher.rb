@@ -1,4 +1,4 @@
 class Teacher < ActiveRecord::Base
   belongs_to :user
-  has_many :lesson
+  has_many :lessons
 end

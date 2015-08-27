@@ -1,5 +1,5 @@
-<% meta_description t('all_courses') %>
 <% meta_title t('all_courses') + ' :: ' + t('site_name') %>
+<% meta_description t('all_courses') %>
 
 <table class="pure-table center-table">
   <thead>
@@ -31,10 +31,10 @@
                       <%= program.name %>
                     </td>
                 <% end %>
-                <td><%= link_to course.name, course_path(course.id) %></td>
+                <td><%= link_to course.name, course_path(course) %></td>
                 <td>
                   <% course.teachers.each do |teacher| %>
-                      <%= teacher.user.name %>
+                      <%= link_to teacher.user.name, user_path(teacher.user) %>
                   <% end %>
                 </td>
                 <td>
