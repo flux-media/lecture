@@ -24,8 +24,7 @@
       <tr>
         <td><%= user.id %></td>
         <td><%= mail_to user.email %></td>
-        <!-- TODO: Move to "public" individual user page -->
-        <td><%= user.name %></td>
+        <td><%= link_to user.name, user_path(user) %></td>
         <td><%= user.teacher.nil? ? 'X' : 'O' %></td>
         <td><%= user.student.nil? ? 'X' : 'O' %></td>
         <td><%= user.created_at.strftime(t('simple_date')) %></td>

@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822034439) do
+ActiveRecord::Schema.define(version: 20150828004412) do
+
+  create_table "admin_configs", force: :cascade do |t|
+    t.string   "copyright"
+    t.string   "introduction"
+    t.string   "meta_title"
+    t.string   "meta_description"
+    t.string   "meta_fb_admins"
+    t.string   "meta_fb_app_id"
+    t.string   "meta_twitter_site"
+    t.string   "meta_og_article_publisher"
+    t.string   "meta_publisher"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "meta_thumbnail_file_name"
+    t.string   "meta_thumbnail_content_type"
+    t.integer  "meta_thumbnail_file_size"
+    t.datetime "meta_thumbnail_updated_at"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
@@ -147,10 +165,13 @@ ActiveRecord::Schema.define(version: 20150822034439) do
   add_index "students", ["user_id"], name: "index_students_on_user_id"
 
   create_table "teachers", force: :cascade do |t|
+    t.integer  "user_id",        null: false
+    t.string   "facebook_id"
+    t.string   "google_plus_id"
+    t.string   "twitter_id"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "user_id",     null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "teachers", ["user_id"], name: "index_teachers_on_user_id"

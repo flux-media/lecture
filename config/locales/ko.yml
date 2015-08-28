@@ -16,9 +16,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ko:
-  site_name: "어벤저스쿨"
-  default_meta_description: "어벤저스쿨을 살려야 한다."
-
   main: "처음"
   list: "목록"
   admin: "관리자"
@@ -40,6 +37,7 @@ ko:
   cancel: "취소"
   edit: "편집"
   note: "비고"
+  config: "설정"
 
   add_new_program: "새 대주제 추가"
   add_new_category: "새 카테고리 추가"
@@ -47,8 +45,6 @@ ko:
   no_lessons: "등록된 강연이 없습니다."
   add_new_course_schedule: "새 소주제 일정 추가"
   no_course_schedules: "소주제 일정이 없습니다."
-
-  default_introduction: "닥치고 내 돈을 가져가!"
 
   period: "기간"
 
@@ -70,7 +66,6 @@ ko:
   course_starts_from: "%s부터 시작"
   course_ends: "수강 완료"
 
-  copyright: "Copyright © 2015 PPSS"
   add_new_location: "새 장소 추가"
   new_payments: "결제하기"
   not_decided: "미정"

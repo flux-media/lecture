@@ -1,10 +1,80 @@
-<% admin_title('어드민 메인') %>
-<% admin_subtitle('이 화면은 무엇에 쓸지 아직 정하지 못했음') %>
+<% admin_title AdminConfig.model_name.human %>
+<% admin_subtitle t(:config) %>
 
-<h2 class="content-subhead">How to use this layout</h2>
-<p>
-  To use this layout, you can just copy paste the HTML, along with the CSS in
-  <a href="/css/layouts/side-menu.css" alt="Side Menu CSS">side-menu.css</a>, and the JavaScript in
-  <a href="/js/ui.js">ui.js</a>. The JS file uses vanilla JavaScript to simply toggle an <code>active</code> class that
-  makes the menu responsive.
-</p>
+<%= form_for @admin_config,
+             url: {action: :update},
+             html: {class: 'pure-form pure-form-stacked',
+                    multipart: true} do |f| %>
+    <fieldset>
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :copyright,
+                      AdminConfig.human_attribute_name(:copyright) %>
+          <%= f.text_field :copyright %>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :introduction,
+                      AdminConfig.human_attribute_name(:introduction) %>
+          <%= f.text_field :introduction %>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :meta_title,
+                      AdminConfig.human_attribute_name(:meta_title) %>
+          <%= f.text_field :meta_title %>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :meta_description,
+                      AdminConfig.human_attribute_name(:meta_description) %>
+          <%= f.text_area :meta_description %>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :meta_fb_admins,
+                      AdminConfig.human_attribute_name(:meta_fb_admins) %>
+          <%= f.text_field :meta_fb_admins %>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :meta_fb_app_id,
+                      AdminConfig.human_attribute_name(:meta_fb_app_id) %>
+          <%= f.text_field :meta_fb_app_id %>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :meta_twitter_site,
+                      AdminConfig.human_attribute_name(:meta_twitter_site) %>
+          <%= f.text_field :meta_twitter_site %>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :meta_og_article_publisher,
+                      AdminConfig.human_attribute_name(:meta_og_article_publisher) %>
+          <%= f.text_field :meta_og_article_publisher %>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :meta_publisher,
+                      AdminConfig.human_attribute_name(:meta_publisher) %>
+          <%= f.text_field :meta_publisher %>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= f.label :meta_thumbnail %>
+
+          <%= image_tag @admin_config.meta_thumbnail.url(:medium), class: 'thumbnail' %>
+          <%= f.file_field :meta_thumbnail %>
+
+          <label for="delete_thumbnail">
+            <%= check_box_tag :delete_thumbnail %>
+            <%= t(:update) %>, <%= t(:delete) %>
+          </label>
+        </div>
+      </div>
+
+    </fieldset>
+
+    <%= button_tag t(:submit), {class: 'pure-button'} %>
+<% end %>
