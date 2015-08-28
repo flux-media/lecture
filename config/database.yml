@@ -20,7 +20,7 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['LECTURE_DATABASE_PRODUCTION']>
-  username: <%= ENV['LECTURE_DATABASE_USERNAME']>
-  password: <%= ENV['LECTURE_DATABASE_PASSWORD']>
-  host: <%= ENV['LECTURE_DATABASE_HOST']>
+  database: <%= ENV['LECTURE_DATABASE_PRODUCTION'] %>
+  username: <%= ENV['LECTURE_DATABASE_USERNAME'] %>
+  password: <%= ENV['LECTURE_DATABASE_PASSWORD'] %>
+  host: <%= ENV['LECTURE_DATABASE_HOST'] %>
