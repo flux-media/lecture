@@ -4,8 +4,8 @@ class CreateCourses < ActiveRecord::Migration
       t.belongs_to :program, index: true
 
       t.string :name, null: false
-      t.string :summary
-      t.string :detail
+      t.text :summary
+      t.text :detail
 
       t.timestamps null: false
     end

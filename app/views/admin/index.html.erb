@@ -1,7 +1,8 @@
 <% admin_title AdminConfig.model_name.human %>
 <% admin_subtitle t(:config) %>
 
-<%= form_for @admin_config,
+<%= # noinspection RubyResolve
+    form_for @admin_config,
              url: {action: :update},
              html: {class: 'pure-form pure-form-stacked',
                     multipart: true} do |f| %>
