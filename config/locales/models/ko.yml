@@ -1,6 +1,7 @@
 ko:
   activerecord:
     models:
+      admin_config: '어드민 설정'
       category: '카테고리'
       course: '소주제'
       course_schedule: '강연일정'
@@ -12,6 +13,18 @@ ko:
       teacher: '강사'
       user: '회원'
     attributes:
+      admin_config:
+        copyright: '하단 저작권 문구'
+        introduction: '메인 페이지에 들어가는 문구'
+        meta_title: '사이트 이름'
+        meta_description: '사이트 디스크립션'
+        meta_fb_admins: '관리자의 페이스북 ID(숫자)'
+        meta_fb_app_id: '페이스북 앱 ID(숫자)'
+        meta_twitter_site: '트위터 웹사이트 아이디'
+        meta_og_article_publisher: '페이스북 페이지 도메인 아이디(영문)'
+        meta_publisher: '구글플러스 페이지 도메인 아이디(영문)'
+        meta_thumbnail: '기본 섬네일'
+
       category:
         name: '제목'
 

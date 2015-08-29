@@ -34,4 +34,4 @@ dump.rdb
 /public/system/*
 
 # For private information
-/db/seeds.rb
+env_var

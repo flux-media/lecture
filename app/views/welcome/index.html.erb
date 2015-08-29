@@ -22,7 +22,6 @@
 
 <% content_for :banner do %>
     <h1 class="banner-head">
-      <!-- TODO: Let admin manage this. -->
-      <%= t('default_introduction') %>
+      <%= @admin_config.introduction %>
     </h1>
 <% end %>

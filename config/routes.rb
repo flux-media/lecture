@@ -30,6 +30,8 @@ Rails.application.routes.draw do
               :registrations, :sessions, :locations, :payments
   end
 
+  patch '/admin/update' => 'admin#update', as: :admin_config
+
   # Example resource route with options:
   #   resources :products do
   #     member do

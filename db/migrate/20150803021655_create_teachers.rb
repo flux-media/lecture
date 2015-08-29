@@ -6,11 +6,12 @@ class CreateTeachers < ActiveRecord::Migration
       t.string :facebook_id
       t.string :google_plus_id
       t.string :twitter_id
-      t.string :description
+      t.text :description
 
       t.timestamps null: false
     end
 
-    change_column :teachers, :user_id, :integer, :null => false
+    change_column :teachers, :user_id,
+                  :integer, :null => false
   end
 end
