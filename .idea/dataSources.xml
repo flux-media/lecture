@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2499134846">
+  <component name="DataSourceManagerImpl" format="xml" hash="3021090267">
     <data-source source="LOCAL" name="Rails lecture: development" uuid="68c3e4c2-e04c-440d-aa72-e3deb7171fbf">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:mysql://127.0.0.1/lecture_development</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails lecture: test" uuid="0b147112-e36e-40a5-b772-a6d7de8068f9">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/lecture_test</jdbc-url>
+      <driver-properties>
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
+      </driver-properties>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails lecture: production" uuid="a8b83e63-2e5a-4e2d-bb24-8938a2b3fd1f">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://&lt;%= ENV['LECTURE_DATABASE_HOST'] %&gt;/&lt;%= ENV['LECTURE_DATABASE_PRODUCTION'] %&gt;</jdbc-url>
+      <driver-properties>
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
+      </driver-properties>
       <libraries />
     </data-source>
   </component>

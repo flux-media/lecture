@@ -170,4 +170,10 @@
       <primary-key columns="id"/>
     </table>
   </data-source>
+  <data-source name="Rails lecture: test" uuid="0b147112-e36e-40a5-b772-a6d7de8068f9">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails lecture: production" uuid="a8b83e63-2e5a-4e2d-bb24-8938a2b3fd1f">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>
