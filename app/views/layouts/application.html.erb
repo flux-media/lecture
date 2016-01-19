@@ -95,27 +95,10 @@
                        confirmButtonText: t('confirm'),
                        cancelButtonText: t('cancel')} do %>
 <% end %>
-<!--suppress JSUnresolvedVariable -->
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '<%= @admin_config.meta_fb_app_id %>',
-            xfbml: true,
-            version: 'v2.4'
-        });
-    };
 
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+<%= content_tag 'div', id: 'meta-fb-app-id',
+                data: {id: @admin_config.meta_fb_app_id} do %>
+<% end %>
 
 <div class="container">
   <!-- Add "slideRight" class to items that move right when viewing Nav Drawer -->

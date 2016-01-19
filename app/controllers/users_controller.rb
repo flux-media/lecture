@@ -171,8 +171,10 @@ class UsersController < ApplicationController
     teacher_courses_2 = Array.new
     teacher_courses_3 = Array.new
 
+    index = 0
     unless @user.teacher.nil?
-      @user.teacher.lessons.each_with_index do |teacher_lesson, index|
+      teacher_course_ids = Array.new
+      @user.teacher.lessons.each do |teacher_lesson|
         course = teacher_lesson.course
 
         teachers_array = Array.new
@@ -196,14 +198,20 @@ class UsersController < ApplicationController
 
         course.teachers = teachers_array
 
-        case (index % 3)
-          when 0
-            teacher_courses_1.push(course)
-          when 1
-            teacher_courses_2.push(course)
-          when 2
-            teacher_courses_3.push(course)
-          else
+        unless teacher_course_ids.include? course.id
+          teacher_course_ids.push(course.id)
+
+          case (index % 3)
+            when 0
+              teacher_courses_1.push(course)
+            when 1
+              teacher_courses_2.push(course)
+            when 2
+              teacher_courses_3.push(course)
+            else
+          end
+
+          index += 1
         end
       end
     end
