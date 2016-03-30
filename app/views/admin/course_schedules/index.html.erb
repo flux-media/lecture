@@ -23,10 +23,16 @@
             <td><%= course_schedule.id %></td>
             <td><%= course_schedule.course.name %></td>
             <td><%= course_schedule.order %></td>
+
             <td>
-              <%= course_schedule.lesson_schedules.first.held_at.strftime(t('simple_date')) %> -
-              <%= course_schedule.lesson_schedules.last.held_at.strftime(t('simple_date')) %>
+              <% if course_schedule.lesson_schedules.first %>
+                <%= course_schedule.lesson_schedules.first.held_at.strftime(t('simple_date')) %> -
+              <% end %>
+              <% if course_schedule.lesson_schedules.last %>
+                <%= course_schedule.lesson_schedules.last.held_at.strftime(t('simple_date')) %>
+              <% end %>
             </td>
+
             <td>
               <%= link_to t('update'), edit_admin_course_schedule_path(course_schedule.id),
                           {class: 'pure-button'} %>
