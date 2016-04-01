@@ -12,11 +12,13 @@
  *
  *= require_self
  *= require reset
+ *= require font-awesome
  *= require trunk
  *= require salvattore
  *= require courses
  *= require welcome
  *= require users
  *= require sweetalert/dist/sweetalert
+ *= require bxslider-4/dist/jquery.bxslider.min.css
  *= require ladda/ladda.min.css
  */

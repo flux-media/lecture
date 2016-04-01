@@ -1,6 +1,14 @@
+$break-large: 1620px;
+$break-large-max: 1619px;
+$break-middle: 1200px;
+$break-middle-max: 1199px;
+$break-small: 950px;
+$break-tiny: 600px;
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 body {
-  color: #9aa6af;
-  background-color: #fafafa;
+  background-color: #f0f0f0;
   text-rendering: optimizelegibility;
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -14,6 +22,9 @@ body {
   -ms-tap-highlight-color: rgba(0, 0, 0, 0);
   -ms-text-size-adjust: none;
   -ms-font-smoothing: antialiased;
+
+  font-family: 'Nanum Gothic', sans-serif !important;
+  color: #3d3d47;
 }
 
 a {
@@ -28,26 +39,44 @@ a {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
+
+  margin: 0 auto;
+
+  width: 1000px;
+  @media (min-width: $break-large) {
+    width: 1600px;
+  }
+  @media (max-width: $break-large-max) and (min-width: $break-middle) {
+    width: 1180px;
+  }
+  @media (max-width: $break-small) {
+    width: 100%;
+  }
 }
 
 header {
-  height: 60px;
+  height: 170px;
+  padding: 40px 0 13px;
   background-color: white;
 
   .header-contents {
-    max-width: 1024px;
+    width: 940px;
+    padding: 0 20px;
     margin: 0 auto;
     position: relative;
+
+    @media (min-width: $break-large) {
+      width: 1160px;
+    }
+    @media (max-width: $break-small) {
+      width: 95%;
+    }
   }
 }
 
 header h1 {
-  color: #9aa6af;
-  text-align: left;
-  font-size: 27px;
-  line-height: 60px;
-  font-weight: bold;
-  padding-left: 20px;
+  text-align: right;
+  max-height: 100%;
 }
 
 .burger {
@@ -379,7 +408,7 @@ nav li.current a, nav li a:hover {
 
 }
 
-/* Added by Lee Han Kyeol */
+/* Added by Avengerschool */
 
 @media only screen and (max-width: 780px) {
   .container {
@@ -388,11 +417,7 @@ nav li.current a, nav li a:hover {
 }
 
 .content {
-  background-color: #fafafa;
-}
-
-header.slide {
-  border-bottom: 3px solid #cccccc;
+  background-color: white;
 }
 
 header.slide h1 {
@@ -445,30 +470,97 @@ nav.slide ul {
   text-shadow: 0 1px 1px black;
 }
 
-.body {
-  margin: 0 auto;
-  max-width: 1024px;
-  padding: 2em 1em;
-  background-color: white;
-}
-
 .footer-wrapper {
-  border-top: 1px solid #ccc;
-  background-color: #fafafa;
+  overflow: hidden;
+  padding: 20px;
+  background-color: #3d3d47;
+  line-height: 20px;
 
   .footer {
-    max-width: 1024px;
     margin: 0 auto;
-    padding: 2em;
 
-    .footer-contents {
-      margin: 0 2em;
+    @media (min-width: $break-large) {
+      width: 1200px;
+    }
 
-      span.logo {
-        font-size: 2em;
+    @media (max-width: $break-large-max) and (min-width: $break-middle) {
+      width: 1020px;
+    }
+
+    color: rgba(255, 255, 255, 0.3);
+
+    a {
+      color: white !important;
+      font-size: 16px;
+    }
+
+    .footer-column {
+      position: relative;
+      float: left;
+      width: 21%;
+      margin: 2em 2%;
+
+      @media (max-width: $break-small) and (min-width: $break-tiny) {
+        width: 46%;
+      }
+      @media (max-width: $break-tiny) {
+        width: 95%;
+      }
+
+      img {
+        width: 100%;
+        max-width: 300px;
       }
     }
   }
+}
+
+.copyright-wrapper {
+  border: 1px solid #4b4b54;
+  background-color: #3d3d47;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 20px;
+  padding: 1em;
+
+  .copyright {
+    margin: 0 auto;
+    font-size: 13px;
+
+    @media (min-width: $break-large) {
+      // Without 20px  + 20px padding.
+      width: 1160px;
+      padding: 0 20px;
+
+    }
+    @media (max-width: $break-large-max) and (min-width: $break-middle) {
+      width: 980px;
+      padding: 0 20px;
+    }
+  }
+}
+
+.content-wrapper {
+  margin: 0 auto;
+  @media (min-width: $break-large) {
+    width: 1160px;
+    padding: 0 20px;
+  }
+
+  @media (max-width: $break-large-max) and (min-width: $break-middle) {
+    width: 980px;
+    padding: 0 20px;
+  }
+}
+
+.bx-wrapper {
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+.text-align-center {
+  text-align: center;
 }
 
 // Application-wise styles
@@ -487,4 +579,12 @@ nav.slide ul {
 
 .input-big-2 {
   font-size: 1.2em;
+}
+
+span.bold {
+  font-weight: bold;
+}
+
+span.line-through {
+  text-decoration: line-through;
 }

@@ -14,24 +14,24 @@
   padding: 2em 1em;
 }
 
-#grid[data-columns]::before {
+.grid[data-columns]::before {
   content: '3 .column.size-1of3'
 }
 
 @media screen and (max-width: 480px) {
-  #grid[data-columns]::before {
+  .grid[data-columns]::before {
     content: '1 .column.size-1of1';
   }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  #grid[data-columns]::before {
+  .grid[data-columns]::before {
     content: '2 .column.size-1of2';
   }
 }
 
 @media screen and (min-width: 769px) {
-  #grid[data-columns]::before {
+  .grid[data-columns]::before {
     content: '3 .column.size-1of3';
   }
 }
@@ -53,9 +53,8 @@
 }
 
 .card {
-  margin: 0 1em 2em;
+  margin: -3px 1em 2em;
   text-align: justify;
-  border-top: 5px solid #e9632f;
   background-color: white;
 
   img.card-thumbnail {
@@ -63,19 +62,71 @@
   }
 
   .contents {
-    padding: 1em;
+    border: 1px solid #909195;
+    border-top-width: 0;
+    padding: 15px 15px 25px;
+    margin-top: -3px;
 
-    .category {
-      font-size: 0.8em;
+    h6 {
+      margin: 0 0 10px;
+      min-height: 72px;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 1.25;
+
+      a {
+        color: #3d3d47;
+        -webkit-transition: color 0.3s ease-in-out;
+        -moz-transition: color 0.3s ease-in-out;
+        -ms-transition: color 0.3s ease-in-out;
+        -o-transition: color 0.3s ease-in-out;
+        transition: color 0.3s ease-in-out;
+      }
+
+      a:hover {
+        color: #01a2a6;
+      }
     }
 
-    .program {
-      margin: 0 0 0.5em;
+    .course-author {
+      float: left;
+      margin-bottom: 1em;
+      font-size: 13px;
     }
 
-    .course {
-      min-height: 4em;
-      font-size: 1.5em;
+    .course-date {
+      float: right;
+      font-size: 13px;
+    }
+
+    .course-subtitle {
+      clear: both;
+      margin-bottom: 1em;
+      font-weight: bold;
+      min-height: 40px;
+      font-size: 13px;
+    }
+
+    .course-price {
+      float: right;
+      line-height: 19px;
+      font-weight: bold;
+      padding: 3px 10px;
+      -webkit-border-radius: 13px;
+      border-radius: 13px;
+      background-color: #01a2a6;
+      color: white;
+      font-size: 13px;
+
+      &.original {
+        background-color: white;
+        color: #3d3d47;
+      }
+    }
+
+    .course-category {
+      text-align: left;
+      font-size: 13px;
     }
   }
 }

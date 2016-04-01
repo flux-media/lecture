@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= yield(:meta_title).to_s.size > 0 ?
-                     yield(:meta_title) : @admin_config.meta_title %></title>
+                 yield(:meta_title) : @admin_config.meta_title %></title>
   <%= # noinspection RailsParamDefResolve
       stylesheet_link_tag 'application',
                           media: 'all',
@@ -26,8 +26,8 @@
       <meta name="author" content="<%= yield(:meta_author) %>">
   <% end %>
   <meta name="description" content="<%=
-      yield(:meta_description).to_s.size > 0 ?
-              yield(:meta_description) : @admin_config.meta_description %>">
+    yield(:meta_description).to_s.size > 0 ?
+        yield(:meta_description) : @admin_config.meta_description %>">
 
   <!-- Social: Twitter -->
   <meta name="twitter:card" content="summary_large_image">
@@ -36,14 +36,14 @@
       <meta name="twitter:creator" content="@<%= yield(:meta_twitter_id) %>">
   <% end %>
   <meta name="twitter:title" content="<%=
-      yield(:meta_title).to_s.size > 0 ?
-              yield(:meta_title) : @admin_config.meta_title %>">
+    yield(:meta_title).to_s.size > 0 ?
+        yield(:meta_title) : @admin_config.meta_title %>">
   <meta name="twitter:description" content="<%=
-      yield(:meta_description).to_s.size > 0 ?
-              yield(:meta_description) : @admin_config.meta_description %>">
+    yield(:meta_description).to_s.size > 0 ?
+        yield(:meta_description) : @admin_config.meta_description %>">
   <meta name="twitter:image:src" content="<%=
-      yield(:meta_thumbnail).to_s.size > 0 ?
-              yield(:meta_thumbnail) : @admin_config.meta_thumbnail %>">
+    yield(:meta_thumbnail).to_s.size > 0 ?
+        yield(:meta_thumbnail) : @admin_config.meta_thumbnail %>">
 
   <!-- Social: Facebook / Open Graph -->
   <meta property="fb:admins" content="<%= @admin_config.meta_fb_admins %>">
@@ -53,14 +53,14 @@
       <meta property="og:type" content="<%= yield(:meta_og_type) %>">
   <% end %>
   <meta property="og:title" content="<%=
-      yield(:meta_title).to_s.size > 0 ?
-              yield(:meta_title) : @admin_config.meta_title %>">
+    yield(:meta_title).to_s.size > 0 ?
+        yield(:meta_title) : @admin_config.meta_title %>">
   <meta property="og:image" content="<%=
-      yield(:meta_thumbnail).to_s.size > 0 ?
-              yield(:meta_thumbnail) : @admin_config.meta_thumbnail %>"/>
+    yield(:meta_thumbnail).to_s.size > 0 ?
+        yield(:meta_thumbnail) : @admin_config.meta_thumbnail %>"/>
   <meta property="og:description" content="<%=
-      yield(:meta_description).to_s.size > 0 ?
-              yield(:meta_description) : @admin_config.meta_description %>">
+    yield(:meta_description).to_s.size > 0 ?
+        yield(:meta_description) : @admin_config.meta_description %>">
   <meta property="og:site_name" content="<%= @admin_config.meta_title %>">
   <% if yield(:meta_author_facebook_id).to_s.size > 0 %>
       <meta property="article:author"
@@ -68,7 +68,7 @@
   <% end %>
   <meta property="article:publisher"
         content="https://www.facebook.com/<%=
-            @admin_config.meta_og_article_publisher %>">
+          @admin_config.meta_og_article_publisher %>">
 
   <!-- Social: Google+ / Schema.org  -->
   <% if yield(:meta_google_plus_id).to_s.size > 0 %>
@@ -77,16 +77,16 @@
   <% end %>
   <link rel="publisher"
         href="https://plus.google.com/+<%=
-            @admin_config.meta_publisher %>/">
+          @admin_config.meta_publisher %>/">
   <meta itemprop="name" content="<%=
-      yield(:meta_title).to_s.size > 0 ?
-              yield(:meta_title) : @admin_config.meta_title %>">
+    yield(:meta_title).to_s.size > 0 ?
+        yield(:meta_title) : @admin_config.meta_title %>">
   <meta itemprop="description" content="<%=
-      yield(:meta_description).to_s.size > 0 ?
-              yield(:meta_description) : @admin_config.meta_description %>">
+    yield(:meta_description).to_s.size > 0 ?
+        yield(:meta_description) : @admin_config.meta_description %>">
   <meta itemprop="image" content="<%=
-      yield(:meta_thumbnail).to_s.size > 0 ?
-              yield(:meta_thumbnail) : @admin_config.meta_thumbnail %>">
+    yield(:meta_thumbnail).to_s.size > 0 ?
+        yield(:meta_thumbnail) : @admin_config.meta_thumbnail %>">
 </head>
 <body>
 <%= content_tag 'div', id: 'locales_error',
@@ -100,6 +100,41 @@
                 data: {id: @admin_config.meta_fb_app_id} do %>
 <% end %>
 
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '494648400689612',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+
 <div class="container">
   <!-- Add "slideRight" class to items that move right when viewing Nav Drawer -->
   <header class="slide">
@@ -110,33 +145,33 @@
         <li></li>
         <li></li>
       </ul>
-      <h1><%= link_to @admin_config.meta_title, root_path %></h1>
+      <h1><%= link_to image_tag('logo.png'), root_path %></h1>
     </div>
   </header>
 
   <nav class="slide">
     <ul>
       <li<%= current_page?(controller: 'welcome', action: 'index') ?
-                     ' class=current' : '' %>>
+                 ' class=current' : '' %>>
         <%= link_to t('main'), root_path %>
       </li>
       <li<%= current_page?(controller: 'courses', action: 'index') ?
-                     ' class=current' : '' %>>
+                 ' class=current' : '' %>>
         <%= link_to t('all_courses'), courses_path %>
       </li>
       <li<%= current_page?(controller: 'payments', action: 'new') ?
-                     ' class=current' : '' %>>
+                 ' class=current' : '' %>>
         <%= link_to t('new_payments'), new_payment_path %>
       </li>
       <li<%= current_page?(controller: 'inquiries', action: 'new') ?
-                     ' class=current' : '' %>>
+                 ' class=current' : '' %>>
         <%= link_to t('inquiry'), new_inquiry_path %>
       </li>
       <% if current_user %>
           <li<%= current_page?(controller: 'users',
                                action: 'show',
                                id: current_user.id) ?
-                         ' class=current' : '' %>>
+                     ' class=current' : '' %>>
             <%= link_to t('signed_in_as') % [current_user.name],
                         user_path(current_user.id) %>
           </li>
@@ -148,11 +183,11 @@
           <% end %>
       <% else %>
           <li<%= current_page?(controller: 'users', action: 'new') ?
-                         ' class=current' : '' %>>
+                     ' class=current' : '' %>>
             <%= link_to t('sign_up'), sign_up_path %>
           </li>
           <li<%= current_page?(controller: 'sessions', action: 'new') ?
-                         ' class=current' : '' %>>
+                     ' class=current' : '' %>>
             <%= link_to t('login'), login_path %>
           </li>
       <% end %>
@@ -161,24 +196,36 @@
 
   <!-- Add "slideRight" class to items that move right when viewing Nav Drawer -->
   <div class="content slide">
-    <% if @is_banner_visible %>
-        <div class="banner"
-             style="background-image: url('<%= content_for?(:thumbnail_url) ?
-        content_for(:thumbnail_url) : @admin_config.meta_thumbnail %>')">
-          <%= content_for :banner %>
-        </div>
-    <% end %>
     <div class="body">
       <%= yield %>
     </div>
-    <div class="footer-wrapper">
-      <div class="footer">
-        <div class="footer-contents">
-          <span class="logo"><%= @admin_config.meta_title %></span>
-          <%= @admin_config.copyright %>
-        </div>
+  </div>
+
+  <div class="footer-wrapper">
+    <div class="footer">
+      <div class="footer-column">
+        <a href="mailto:slave@avengerschool.com">slave@avengerschool.com</a>
+        <br>
+        <a href="tel:01024941884">010-2494-1884</a>
+      </div>
+
+      <div class="footer-column">
+        <a href="http://avengerschool.com/privacy/">개인정보취급방침</a><br>
+        <a href="http://avengerschool.com/terms/">이용약관</a><br>
+        <a href="http://avengerschool.com/refund/">취소 및 환불 규정</a>
+      </div>
+
+      <div class="footer-column">
+        결제 시스템 지원: <a href="http://iamport.kr" target="_blank">아임포트</a>
+      </div>
+
+      <div class="footer-column">
+        <%= image_tag('ppss_old_logo.png') %>
       </div>
     </div>
+  </div>
+  <div class="copyright-wrapper">
+    <div class="copyright">© 2016 Avengerschool</div>
   </div>
 </div>
 

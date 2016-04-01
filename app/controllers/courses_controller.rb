@@ -67,10 +67,14 @@ class CoursesController < ApplicationController
     is_course_open = false
     displayable_course_schedule = nil
     @course.course_schedules.each do |course_schedule|
-      if course_schedule.lesson_schedules.last.held_at > DateTime.now
-        is_course_open = true
-        if displayable_course_schedule.nil?
-          displayable_course_schedule = course_schedule
+      if course_schedule.lesson_schedules.last
+        if course_schedule.lesson_schedules.last.held_at > DateTime.now
+          is_course_open = true
+          if displayable_course_schedule.nil?
+            displayable_course_schedule = course_schedule
+          end
+        else
+          is_course_open = false
         end
       else
         is_course_open = false

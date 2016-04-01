@@ -17,6 +17,8 @@
   "dependencies": {
     "autosize": "~3.0.8",
     "jquery.fitvids": "fitvids#~1.1.0",
-    "sweetalert": "~1.1.0"
+    "sweetalert": "~1.1.0",
+    "bxslider-4": "fafnur-bxslider#^4.2.5",
+    "masonry": "^4.0.0"
   }
 }

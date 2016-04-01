@@ -1,22 +1,20 @@
-<div class="user-element-wrapper user-profile">
-  <div class="profile-image-wrapper">
+<div class="user-wrapper">
+  <div class="user-image-wrapper">
     <%= image_tag [true, false].sample ? 'boy.png' : 'girl.png',
-                  {class: 'profile-image'} %>
+                  {class: 'user-image'} %>
   </div>
 
-  <div class="profile-detail-wrapper">
-    <div class="profile-detail">
-      <h2 class="user-name">
-        <%= user.name %>
-        <% if !current_user.nil? && current_user.id === user.id %>
-            <%= link_to t('edit'), edit_user_path(user.id),
-                        {class: 'ladda-button',
-                         data: {size: 'xs'}} %>
-        <% end %>
-      </h2>
+  <div class="user-detail-wrapper">
+    <h2 class="user-name">
+      강연자: <span class="bold"><%= user.name %></span>
+      <div class="user-socials">
+        <a>B</a> <a>F</a> <a>T</a>
+      </div>
+    </h2>
 
+    <div class="user-description">
       <% unless user.teacher.nil? %>
-          <p><%= user.teacher.description %></p>
+          <%= user.teacher.description %>
       <% end %>
     </div>
   </div>

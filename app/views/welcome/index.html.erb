@@ -1,27 +1,155 @@
-<div class="open-courses">
-  <% unless courses_1.nil? %>
-      <section id="grid" class="clear" data-columns>
-        <div class="column">
-          <% courses_1.each do |course| %>
-              <%= render partial: 'card', locals: {course: course} %>
-          <% end %>
-        </div>
-        <div class="column">
-          <% courses_2.each do |course| %>
-              <%= render partial: 'card', locals: {course: course} %>
-          <% end %>
-        </div>
-        <div class="column">
-          <% courses_3.each do |course| %>
-              <%= render partial: 'card', locals: {course: course} %>
-          <% end %>
-        </div>
-      </section>
-  <% end %>
+<div class="main-slider-wrapper">
+  <ul id="main-slider" class="bxslider main-slider">
+    <li><%= image_tag('main_aboutus.jpg') %></li>
+    <li><%= image_tag('main_open.jpg') %></li>
+    <li><%= image_tag('main_package.jpg') %></li>
+    <li><%= image_tag('main_hell.jpg') %></li>
+  </ul>
 </div>
 
-<% content_for :banner do %>
-    <h1 class="banner-head">
-      <%= @admin_config.introduction %>
-    </h1>
-<% end %>
+<div class="content-wrapper">
+  <div class="main-tabs-wrapper">
+    <ul id="main-tabs" class="main-tabs">
+      <li class="main-tab"><a href="#">전체</a></li>
+      <li class="main-tab"><a href="#">패키지</a></li>
+      <li class="main-tab"><a href="#">비즈니스</a></li>
+      <li class="main-tab"><a href="#">경제</a></li>
+      <li class="main-tab"><a href="#">마케팅</a></li>
+      <li class="main-tab"><a href="#">헬조선</a></li>
+    </ul>
+    <div id="main-tab-contents" class="main-tab-contents">
+      <div class="main-tab-content">
+        <% unless courses_1.nil? %>
+            <section id="grid0" class="grid clear" data-columns>
+              <div class="column">
+                <% courses_1.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_2.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_3.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+            </section>
+        <% end %>
+      </div>
+      <div class="main-tab-content">
+        <% unless courses_1.nil? %>
+            <section id="grid1" class="grid clear" data-columns>
+              <div class="column">
+                <% courses_1.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_2.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_3.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+            </section>
+        <% end %>
+      </div>
+      <div class="main-tab-content">
+        <% unless courses_1.nil? %>
+            <section id="grid2" class="grid clear" data-columns>
+              <div class="column">
+                <% courses_1.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_2.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_3.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+            </section>
+        <% end %>
+      </div>
+      <div class="main-tab-content">
+        <% unless courses_1.nil? %>
+            <section id="grid3" class="grid clear" data-columns>
+              <div class="column">
+                <% courses_1.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_2.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_3.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+            </section>
+        <% end %>
+      </div>
+      <div class="main-tab-content">
+        <% unless courses_1.nil? %>
+            <section id="grid4" class="grid clear" data-columns>
+              <div class="column">
+                <% courses_1.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_2.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_3.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+            </section>
+        <% end %>
+      </div>
+      <div class="main-tab-content">
+        <% unless courses_1.nil? %>
+            <section id="grid5" class="grid clear" data-columns>
+              <div class="column">
+                <% courses_1.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_2.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+              <div class="column">
+                <% courses_3.each do |course| %>
+                    <%= render partial: 'card', locals: {course: course} %>
+                <% end %>
+              </div>
+            </section>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% content_for :banner do %>
+      <h1 class="banner-head">
+        <%= @admin_config.introduction %>
+      </h1>
+  <% end %>
+</div>

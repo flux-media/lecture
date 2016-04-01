@@ -1,19 +1,21 @@
-<a href="<%= course_path course.id %>">
-  <div class="card">
+<div class="card">
+  <a href="<%= course_path course.id %>">
     <%= image_tag course.thumbnail, class: 'card-thumbnail' %>
+  </a>
 
-    <div class="contents">
-      <p class="category"><%= course.program.category.name %></p>
-
-      <p class="program"><%= course.program.name %></p>
-
-      <p class="course"><%= course.name %></p>
-
-      <p class="teachers">
+  <div class="contents">
+    <div class="course-header"><h6><a href="<%= course_path course.id %>"><%= course.name %></a></h6></div>
+    <div>
+      <div class="course-author">
         <% course.teachers.each do |teacher| %>
             <%= teacher.user.name %>
         <% end %>
-      </p>
+      </div>
+      <div class="course-date">날짜날짜</div>
+      <div class="course-subtitle">정리정리</div>
     </div>
+    <div class="course-price">₩30,000</div>
+    <div class="course-price original">₩<span class="line-through">300,000</span> →</div>
+    <div class="course-category"><%= course.program.category.name %></div>
   </div>
-</a>
+</div>

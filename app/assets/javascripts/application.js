@@ -17,8 +17,10 @@
 //= require salvattore.min
 //= require sweetalert/dist/sweetalert.min.js
 //= require jquery.fitvids.js
+//= require bxslider-4/dist/jquery.bxslider.min.js
 //= require trunk
 //= require common
+//= require courses
 //= require inquiries
 //= require payments
 //= require sessions
