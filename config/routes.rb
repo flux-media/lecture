@@ -25,39 +25,10 @@ Rails.application.routes.draw do
   get '/admin' => 'admin#index', as: :admin
   get '/admin/logout' => 'admin/sessions#destroy', as: :admin_sessions_destroy
   namespace :admin do
-    resources :categories, :programs, :courses,
-              :lessons, :users, :course_schedules, :lesson_schedules,
-              :registrations, :sessions, :locations, :payments
+    resources :categories, :courses, :teachers, :users, :registrations, :sessions
   end
 
   patch '/admin/update' => 'admin#update', as: :admin_config
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
 
   get '/404', :to => 'welcome#not_found'
   get '/422', :to => 'welcome#unacceptable'

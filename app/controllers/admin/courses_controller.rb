@@ -4,103 +4,53 @@ class Admin::CoursesController < ApplicationController
 
   def create
     course = Course.new(course_params)
-    course.program = Program.find(params[:program])
-
-    if course.save
-      redirect_to edit_admin_course_path course.id
-    end
+    redirect_to edit_admin_course_path course.id if course.save
   end
 
   def destroy
     course = Course.find(params[:id])
-
-    if course != nil && course.destroy
-      redirect_to admin_courses_path
-    end
+    redirect_to admin_courses_path if course != nil && course.destroy
   end
 
   def edit
     @course = Course.find(params[:id])
-    teachers = Teacher.all
-    teachers_options = Array.new
-    orders_array = Array.new
-    (0..@course.lessons.size - 1).each do |i|
-      orders_array.push(i)
-    end
-
-    if @course.lessons.size > 0
-      @course.lessons.each do |lesson|
-        teachers_option = ''
-        teachers.each do |teacher|
-          selected_attribute = ''
-          if lesson.teacher.id === teacher.id
-            selected_attribute = ' selected="selected"'
-          end
-          teachers_option += '<option value="' + teacher.id.to_s + '"' + selected_attribute + '>' +
-              teacher.user.name + '('+ teacher.user.email + ')</option>'
-
-        end
-        teachers_options.push(teachers_option)
-      end
-    else
-      teachers_option = ''
-      teachers.each do |teacher|
-        teachers_option += '<option value="' + teacher.id.to_s + '">' +
-            teacher.user.name + '('+ teacher.user.email + ')</option>'
-      end
-      teachers_options.push(teachers_option)
-    end
-
-    render template: 'admin/courses/new',
-           :locals => {:action => 'update',
-                       :teachers_options => teachers_options,
-                       :orders_array => orders_array,
-                       :programs => Program.all}
+    render template: 'admin/courses/new', :locals => {action: 'update',
+                                                      categories: Category.all}
   end
 
   def index
     @courses = Course.all
-
-    @courses.each do |course|
-      teachers_array = Array.new
-      course.lessons.each do |lesson|
-        is_in_array = false
-        teacher = lesson.teacher
-
-        teachers_array.each do |teacher_in_array|
-          if teacher_in_array.id === teacher.id
-            is_in_array = true
-          end
-        end
-
-        unless is_in_array
-          teachers_array.push(teacher)
-        end
-      end
-
-      course.teachers = teachers_array
-    end
   end
 
   def new
     @course = Course.new
-    render :locals => {:action => 'create',
-                       :programs => Program.all}
+    render :locals => {action: 'create',
+                       categories: Category.all}
   end
 
   def update
     course = Course.find(params[:course][:id])
-    course.name = params[:course][:name]
-    course.program = Program.find(params[:program])
+    course.title = params[:course][:title]
+    course.slug = params[:course][:slug]
+    course.date = params[:course][:date]
+    course.location = params[:course][:location]
+    course.is_public = params[:course][:is_public]
+    course.is_on_sale = params[:course][:is_on_sale]
+    course.is_full = params[:course][:is_full]
+    course.is_past = params[:course][:is_past]
+    course.max_students = params[:course][:max_students]
+    course.students_enrolled = params[:course][:students_enrolled]
+    course.duration = params[:course][:duration]
+    course.original_price = params[:course][:original_price]
+    course.sale_price = params[:course][:sale_price]
+    course.summary = params[:course][:summary]
     course.detail = params[:course][:detail]
 
     if !params[:delete_thumbnail].nil? && params[:delete_thumbnail].to_i === 1
       course.thumbnail = params[:course][:thumbnail]
     end
 
-    if course.save
-      redirect_to edit_admin_course_path course.id
-    end
+    redirect_to edit_admin_course_path course.id if course.save
   end
 
   private

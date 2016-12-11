@@ -1,10 +1,10 @@
-<% meta_title @course.name %>
-<% meta_description @course.detail %>
+<% meta_title @course.title %>
+<% meta_description @course.summary %>
 
 <div class="course-wrapper">
   <div id="course" class="course">
     <div id="course-content" class="course-content">
-      <h2><%= @course.name %></h2>
+      <h2><%= @course.title %></h2>
       <div class="course-detail">
         <%= @course.detail.html_safe %>
       </div>
@@ -13,9 +13,7 @@
         <%= image_tag('twitter.png', :id => 'share-tw') %>
       </div>
       <div class="course-author">
-        <% @course.teachers.each do |teacher| %>
-            <%= render partial: 'users/profile', locals: {user: teacher.user} %>
-        <% end %>
+        <% @course.teacher.name %>
       </div>
     </div>
     <div id="course-sidebar" class="course-sidebar">
@@ -24,7 +22,7 @@
           <i class="fa fa-university"></i> 등록현황
         </div>
         <div class="course-sidebar-item-info">
-          1 / 10
+          <%= @course.students_enrolled %> / <%= @course.max_students %>
         </div>
       </div>
       <div class="course-sidebar-item">
@@ -32,7 +30,7 @@
           <i class="fa fa-calendar"></i> 날짜
         </div>
         <div class="course-sidebar-item-info">
-          2016.04.03 PM 2:00
+          <%= @course.date %>
         </div>
       </div>
       <div class="course-sidebar-item">
@@ -40,7 +38,7 @@
           <i class="fa fa-clock-o"></i> 강연시간
         </div>
         <div class="course-sidebar-item-info">
-          2시간
+          <%= @course.duration %>시간
         </div>
       </div>
       <div class="course-sidebar-item">
@@ -48,7 +46,7 @@
           <i class="fa fa-map-marker"></i> 장소
         </div>
         <div class="course-sidebar-item-info">
-          강남토즈타워점 2층 (약도)
+          <%= @course.location %>
         </div>
       </div>
       <div class="course-sidebar-item">
@@ -68,39 +66,51 @@
           <i class="fa fa-money"></i> 수강료
         </div>
         <div class="course-sidebar-item-info">
-          ₩ <span id="original-price">120,600</span>
+          ₩ <span id="original-price"><%= @course.sale_price %></span>
         </div>
       </div>
       <div class="course-sidebar-item text-align-center">
-        <% if is_course_open %>
-            <% if registration.nil? %>
-                <% if current_user.nil? %>
-                    <%= link_to t('register_course'),
-                                login_path(target: course_path(@course)),
-                                class: 'ladda-button',
-                                data: {color: 'green'} %>
-                <% elsif current_user.credit > 0 %>
-                    <%= form_tag course_registrations_path(@course) do %>
-                        <%= submit_tag t('register_course'),
-                                       class: 'ladda-button',
-                                       data: {color: 'green'} %>
-                    <% end %>
-                <% else %>
-                    <%= link_to t('register_course'), new_payment_path,
-                                class: 'ladda-button',
-                                data: {color: 'green'} %>
-                <% end %>
-            <% else %>
-                <%= form_tag course_registration_path(@course, registration),
-                             method: 'delete' do %>
-                    <%= submit_tag t('cancel_registration'),
-                                   class: 'ladda-button' %>
-                <% end %>
-            <% end %>
-        <% else %>
+        <% if @course.is_full %>
             <%= link_to t('courses_closed'), '#',
                         class: 'ladda-button',
                         disabled: true %>
+            <!-- TODO: Update -->
+            <% if false %>
+                <% registration = nil %>
+                <% if registration.nil? %>
+                    <% if current_user.nil? %>
+                        <%= link_to t('register_course'),
+                                    login_path(target: course_path(@course)),
+                                    class: 'ladda-button',
+                                    data: {color: 'green'} %>
+                    <% elsif current_user.credit > 0 %>
+                        <%= form_tag course_registrations_path(@course) do %>
+                            <%= submit_tag t('register_course'),
+                                           class: 'ladda-button',
+                                           data: {color: 'green'} %>
+                        <% end %>
+                    <% else %>
+                        <%= link_to t('register_course'), new_payment_path,
+                                    class: 'ladda-button',
+                                    data: {color: 'green'} %>
+                    <% end %>
+                <% else %>
+                    <%= form_tag course_registration_path(@course, registration),
+                                 method: 'delete' do %>
+                        <%= submit_tag t('cancel_registration'),
+                                       class: 'ladda-button' %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% elsif @course.is_past %>
+            <%= link_to t('courses_closed'), '#',
+                        class: 'ladda-button',
+                        disabled: true %>
+        <% else %>
+            <%= link_to t('register_course'),
+                        login_path(target: course_path(@course)),
+                        class: 'ladda-button',
+                        data: {color: 'green'} %>
         <% end %>
       </div>
     </div>

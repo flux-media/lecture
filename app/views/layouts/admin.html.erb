@@ -41,33 +41,18 @@
                           {class: 'pure-menu-link'} %>
             </li>
             <li class="pure-menu-item">
+              <%= link_to Teacher.model_name.human,
+                          admin_teachers_path,
+                          {class: 'pure-menu-link'} %>
+            </li>
+            <li class="pure-menu-item">
               <%= link_to Category.model_name.human,
                           admin_categories_path,
                           {class: 'pure-menu-link'} %>
             </li>
             <li class="pure-menu-item">
-              <%= link_to Program.model_name.human,
-                          admin_programs_path,
-                          {class: 'pure-menu-link'} %>
-            </li>
-            <li class="pure-menu-item">
               <%= link_to Course.model_name.human,
                           admin_courses_path,
-                          {class: 'pure-menu-link'} %>
-            </li>
-            <li class="pure-menu-item">
-              <%= link_to CourseSchedule.model_name.human,
-                          admin_course_schedules_path,
-                          {class: 'pure-menu-link'} %>
-            </li>
-            <li class="pure-menu-item">
-              <%= link_to Location.model_name.human,
-                          admin_locations_path,
-                          {class: 'pure-menu-link'} %>
-            </li>
-            <li class="pure-menu-item">
-              <%= link_to Payment.model_name.human,
-                          admin_payments_path,
                           {class: 'pure-menu-link'} %>
             </li>
             <li class="pure-menu-item">
@@ -83,7 +68,6 @@
   <div id="main">
     <div class="header">
       <h1><%= yield(:admin_title) %></h1>
-
       <h2><%= yield(:admin_subtitle) %></h2>
     </div>
 

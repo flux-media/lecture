@@ -66,44 +66,6 @@ class Admin::UsersController < ApplicationController
       user.is_admin = params[:user][:is_admin]
     end
 
-    if params[:user][:is_teacher] == 'true'
-      if user.teacher.nil?
-        user.teacher = Teacher.new
-      end
-
-      user.teacher.description = params[:teacher_description]
-      user.teacher.facebook_id = params[:teacher_facebook_id]
-      user.teacher.google_plus_id = params[:teacher_google_plus_id]
-
-      if user.teacher.save
-        # Good!
-      end
-    else
-      unless user.teacher.nil?
-        if user.teacher.destroy
-          # Good!
-        end
-      end
-    end
-
-    if params[:user][:is_student] == 'true'
-      if user.student.nil?
-        user.student = Student.new
-      end
-
-      if user.student.save
-        # Good!
-      end
-    else
-      unless user.student.nil?
-        if user.student.destroy
-          # Good!
-        end
-      end
-    end
-
-    if user.save
-      redirect_to admin_users_path
-    end
+    redirect_to admin_users_path if user.save
   end
 end

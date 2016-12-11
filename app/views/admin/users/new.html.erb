@@ -1,4 +1,4 @@
-<% admin_title(t('users')) %>
+<% admin_title(User.model_name.human) %>
 <% admin_subtitle(t(action)) %>
 
 <%= form_for @user,
@@ -25,57 +25,6 @@
             <%= f.check_box :is_admin, {}, 'true', 'false' %>
             <%= User.human_attribute_name('is_admin') %>
           </label>
-        </div>
-
-        <div class="pure-u-1">
-          <div class="pure-u-1 pure-u-md-1-3">
-            <label class="pure-checkbox">
-              <%= f.check_box :is_teacher, {}, 'true', 'false' %>
-              <%= User.human_attribute_name('is_teacher') %>
-            </label>
-          </div>
-
-          <div class="pure-u-1 pure-u-md-1-3">
-            <%= Teacher.human_attribute_name('description') %>:
-            <%= text_area_tag :teacher_description,
-                              !@user.nil? && !@user.teacher.nil? ?
-                                      @user.teacher.description : '' %>
-          </div>
-        </div>
-
-        <div class="pure-u-1">
-          <div class="pure-u-1 pure-u-md-1-3">
-            <%= f.label :teacher_facebook_id,
-                        Teacher.human_attribute_name('facebook_id') %>
-            <%= text_area_tag :teacher_facebook_id,
-                              !@user.nil? && !@user.teacher.nil? ?
-                                      @user.teacher.facebook_id : '' %>
-          </div>
-
-          <div class="pure-u-1 pure-u-md-1-3">
-            <%= f.label :teacher_google_plus_id,
-                        Teacher.human_attribute_name('google_plus_id') %>:
-            <%= text_area_tag :teacher_google_plus_id,
-                              !@user.nil? && !@user.teacher.nil? ?
-                                      @user.teacher.google_plus_id : '' %>
-          </div>
-
-          <div class="pure-u-1 pure-u-md-1-3">
-            <%= f.label :teacher_twitter_id,
-                        Teacher.human_attribute_name('twitter_id') %>:
-            <%= text_area_tag :teacher_twitter_id,
-                              !@user.nil? && !@user.teacher.nil? ?
-                                      @user.teacher.twitter_id : '' %>
-          </div>
-        </div>
-
-        <div class="pure-u-1">
-          <div class="pure-u-1 pure-u-md-1-3">
-            <label class="pure-checkbox">
-              <%= f.check_box :is_student, {}, 'true', 'false' %>
-              <%= User.human_attribute_name('is_student') %>
-            </label>
-          </div>
         </div>
       </div>
     </fieldset>

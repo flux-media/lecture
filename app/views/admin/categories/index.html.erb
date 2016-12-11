@@ -10,6 +10,7 @@
   <tr>
     <th>#</th>
     <th><%= Category.human_attribute_name('name') %></th>
+    <th><%= Category.human_attribute_name('slug') %></th>
     <th><%= t('manage') %></th>
   </tr>
   </thead>
@@ -19,6 +20,7 @@
       <tr>
         <td><%= category.id %></td>
         <td><%= category.name %></td>
+        <td><%= category.slug %></td>
         <td>
           <%= link_to t('update'), admin_category_path(category.id),
                       {class: 'pure-button'} %>

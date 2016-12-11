@@ -11,7 +11,7 @@
     <th>#</th>
     <th><%= Course.human_attribute_name('name') %></th>
     <th><%= Teacher.model_name.human %></th>
-    <th><%= Program.model_name.human %></th>
+    <th><%= Category.model_name.human %></th>
     <th><%= t('manage') %></th>
   </tr>
   </thead>
@@ -20,15 +20,13 @@
   <% @courses.each do |course| %>
       <tr>
         <td><%= course.id %></td>
-        <td><%= course.name %></td>
+        <td><%= course.title %></td>
+        <td><%= course.teacher.name %></td>
         <td>
-          <% unless course.teachers.nil? %>
-              <% course.teachers.each do |teacher| %>
-                  <%= teacher.user.name %>
-              <% end %>
+          <% course.categories.each do |category| %>
+              <%= category.name %>
           <% end %>
         </td>
-        <td><%= course.program.name %></td>
         <td>
           <%= link_to t('update'),
                       edit_admin_course_path(course.id),

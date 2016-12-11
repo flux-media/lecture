@@ -11,6 +11,9 @@
         <div class="pure-u-1 pure-u-md-1-3">
           <%= Category.human_attribute_name('name') %>: <%= f.text_field :name %>
         </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+          <%= Category.human_attribute_name('slug') %>: <%= f.text_field :slug, :required => true %>
+        </div>
       </div>
     </fieldset>
     <%= submit_tag t('submit'), class: 'pure-button pure-button-primary' %>

@@ -1,5 +1,4 @@
 class Category < ActiveRecord::Base
-  attr_accessor :courses_count
-
-  has_many :programs
+  has_many :categories_courses
+  has_many :courses, through: :categories_courses
 end

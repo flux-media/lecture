@@ -1,11 +1,9 @@
 class Course < ActiveRecord::Base
-  attr_accessor :teachers
+  has_many :categories_courses
+  has_many :categories, through: :categories_courses
+  belongs_to :teacher
 
-  belongs_to :program
-  has_many :course_schedules
-  has_many :lessons, -> { order(:order) }
-
-  has_attached_file :thumbnail, styles: {medium: '300x300>', thumb: '100x100>'},
+  has_attached_file :thumbnail, styles: {medium: '600x600>', thumb: '300x300>'},
                     default_url: 'lecture.jpg'
   validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\Z/
 end

@@ -1,0 +1,40 @@
+<% admin_title(Teacher.model_name.human) %>
+<% admin_subtitle(t('list')) %>
+
+<div class="new-entry-wrapper">
+  <%= link_to t('add_new_teacher'), new_admin_teacher_path, {class: 'pure-button'} %>
+</div>
+
+<table class="pure-table">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th><%= Teacher.human_attribute_name('name') %></th>
+    <th><%= Teacher.human_attribute_name('facebook_url') %></th>
+    <th><%= Teacher.human_attribute_name('blog_url') %></th>
+    <th><%= Teacher.human_attribute_name('twitter_id') %></th>
+    <th><%= Teacher.human_attribute_name('thumbnail') %></th>
+    <th><%= t('manage') %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= teacher.id %></td>
+        <td><%= teacher.name %></td>
+        <td><%= teacher.facebook_url %></td>
+        <td><%= teacher.blog_url %></td>
+        <td><%= teacher.twitter_id %></td>
+        <td><%= image_tag teacher.thumbnail.url(:thumb), class: 'thumbnail' %></td>
+        <td>
+          <%= link_to t('update'), edit_admin_teacher_path(teacher.id), {class: 'pure-button'} %>
+          <!-- TODO: Ask if it's real. -->
+          <%= form_tag admin_teacher_path(teacher.id), {method: 'delete', class: 'inline-form'} do %>
+              <%= submit_tag t('delete'), {class: 'pure-button'} %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

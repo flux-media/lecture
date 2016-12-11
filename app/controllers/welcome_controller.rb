@@ -8,27 +8,6 @@ class WelcomeController < ApplicationController
     courses_3 = Array.new
 
     courses.each_with_index do |course, index|
-      teachers_array = Array.new
-
-      course.lessons.each do |lesson|
-        teacher = lesson.teacher
-
-        is_in_array = false
-
-        teachers_array.each do |teacher_in_array|
-          if teacher_in_array.id === teacher.id
-            is_in_array = true
-          end
-        end
-
-        unless is_in_array
-          teachers_array.push(teacher)
-        end
-
-      end
-
-      course.teachers = teachers_array
-
       case (index % 3)
         when 0
           courses_1.push(course)
@@ -40,10 +19,7 @@ class WelcomeController < ApplicationController
       end
     end
 
-    render :locals => {
-               courses_1: courses_1,
-               courses_2: courses_2,
-               courses_3: courses_3}
+    render :locals => {courses_1: courses_1, courses_2: courses_2, courses_3: courses_3}
   end
 
   def not_found

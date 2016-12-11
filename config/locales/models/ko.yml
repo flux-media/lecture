@@ -3,7 +3,7 @@ ko:
     models:
       admin_config: '어드민 설정'
       category: '카테고리'
-      course: '소주제'
+      course: '강연'
       course_schedule: '강연일정'
       lesson: '강연'
       location: '장소'
@@ -27,6 +27,7 @@ ko:
 
       category:
         name: '제목'
+        slug: '슬러그'
 
       course:
         name: '제목'
@@ -80,3 +81,4 @@ ko:
         is_teacher: '강사'
         created_at: '가입일'
         deleted_at: '탈퇴신청일'
+  add_new_teacher: "새 강사 추가"
